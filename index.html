@@ -2,8 +2,8 @@
 <html lang="fr" class="scroll-smooth"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulateur Salaire Brut Net 2025 | Calcul Impôt & Reste à Vivre</title>
-    <meta name="description" content="Calculez votre salaire net à partir du brut, estimez votre impôt sur le revenu et votre reste à vivre. Simulateur gratuit et précis pour la France.">
+    <title>Simulateur Impôt 2025 avec PER | Calcul & Optimisation Fiscale</title>
+    <meta name="description" content="Simulateur d'impôt sur le revenu avec intégration PER. Calculez votre économie fiscale, optimisez votre épargne retraite. Gratuit et instantané.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://salairebrutonet.com/">
@@ -14,16 +14,16 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://salairebrutonet.com/">
-    <meta property="og:title" content="Simulateur Salaire Brut Net 2025 | Calcul Impôt">
-    <meta property="og:description" content="Calculez votre salaire net à partir du brut, estimez votre impôt sur le revenu et votre reste à vivre. Simulateur gratuit.">
+    <meta property="og:title" content="Simulateur Impôt 2025 avec PER | Optimisation Fiscale">
+    <meta property="og:description" content="Calculez votre impôt et votre économie grâce au PER. Simulateur gratuit et instantané.">
     <meta property="og:image" content="https://salairebrutonet.com/og-image.png">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:site_name" content="SalaireBrutNet">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Simulateur Salaire Brut Net 2025">
-    <meta name="twitter:description" content="Calculez votre salaire net et estimez votre impôt sur le revenu. Gratuit et précis.">
+    <meta name="twitter:title" content="Simulateur Impôt 2025 avec PER">
+    <meta name="twitter:description" content="Calculez votre impôt et optimisez avec le PER. Gratuit et instantané.">
     <meta name="twitter:image" content="https://salairebrutonet.com/og-image.png">
 
     <!-- Google Search Console -->
@@ -32,20 +32,20 @@
     <!-- Extra SEO -->
     <meta name="robots" content="index, follow">
     <meta name="author" content="SalaireBrutNet">
-    <meta name="keywords" content="salaire brut net, simulateur impôt, calcul impôt 2025, reste à vivre, convertisseur salaire, France">
-    
+    <meta name="keywords" content="simulateur impôt 2025, PER déduction fiscale, calcul impôt France, optimisation fiscale, plan épargne retraite">
+
     <!-- Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Iconify / Lucide -->
+
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Custom Config for Fonts/Colors -->
+    <!-- Custom Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -57,12 +57,19 @@
                         brand: {
                             50: '#f0f9ff',
                             100: '#e0f2fe',
-                            500: '#0ea5e9', // Sky/Blue tone for fintech
+                            200: '#bae6fd',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
                             600: '#0284c7',
+                            700: '#0369a1',
                             900: '#0c4a6e',
                         },
-                        slate: {
-                            850: '#1e293b', // Custom dark
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
                         }
                     }
                 }
@@ -71,40 +78,66 @@
     </script>
 
     <style>
-        /* Custom UI Elements that are tricky with utility classes alone */
-        input[type=range] {
-            -webkit-appearance: none; 
-            background: transparent; 
-        }
+        /* Range slider styling */
+        input[type=range] { -webkit-appearance: none; background: transparent; }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 20px;
-            width: 20px;
+            height: 20px; width: 20px;
             border-radius: 50%;
             background: #ffffff;
             border: 2px solid #0ea5e9;
             cursor: pointer;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-top: -8px; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            margin-top: -8px;
         }
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
+            width: 100%; height: 4px;
             cursor: pointer;
-            background: #e2e8f0;
+            background: linear-gradient(to right, #0ea5e9 0%, #0ea5e9 var(--progress, 0%), #e2e8f0 var(--progress, 0%), #e2e8f0 100%);
             border-radius: 9999px;
         }
-        
-        /* Smooth transitions for chart */
-        .chart-transition {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+        /* Animations */
+        .animate-in { animation: fadeSlideIn 0.3s ease-out; }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hide scrollbar for number inputs */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
+        .chart-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Number input arrows hidden */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+
+        /* Tooltip */
+        .tooltip { position: relative; }
+        .tooltip:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 50;
+            margin-bottom: 6px;
+        }
+
+        /* Mobile sticky results */
+        @media (max-width: 1023px) {
+            .mobile-sticky-btn {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 40;
+            }
         }
     </style>
 
@@ -113,126 +146,133 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "SalaireBrutNet - Simulateur Salaire et Impôt",
+        "name": "SalaireBrutNet - Simulateur Impôt avec PER",
         "url": "https://salairebrutonet.com",
-        "description": "Calculez votre salaire net à partir du brut et estimez votre impôt sur le revenu en France.",
+        "description": "Simulateur d'impôt sur le revenu avec optimisation PER. Calcul instantané et gratuit.",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "EUR"
-        },
-        "author": {
-            "@type": "Organization",
-            "name": "SalaireBrutNet"
-        }
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@type": "Organization", "name": "SalaireBrutNet" }
     }
     </script>
 </head>
 <body class="bg-slate-50 text-slate-600 antialiased selection:bg-brand-100 selection:text-brand-900 flex flex-col min-h-screen">
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+    <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md">
         <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-2">
+            <a href="/" class="flex items-center gap-2">
                 <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
                     <i data-lucide="calculator" class="h-5 w-5"></i>
                 </div>
                 <span class="text-base font-semibold tracking-tight text-slate-900">SalaireBrutNet</span>
-            </div>
+            </a>
             <nav class="hidden md:flex gap-8">
-                <a href="#" class="text-sm font-medium text-slate-900">Simulateur</a>
+                <a href="#simulateur" class="text-sm font-medium text-slate-900">Simulateur</a>
                 <a href="#how-it-works" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Comment ça marche</a>
                 <a href="#faq" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">FAQ</a>
                 <a href="equipe.html" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Équipe</a>
             </nav>
-                    </div>
+            <button id="btn-share" class="hidden sm:inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-slate-800 transition-colors">
+                <i data-lucide="share-2" class="h-4 w-4"></i>
+                Partager
+            </button>
+        </div>
     </header>
 
     <main class="flex-grow">
         <!-- Hero Section -->
-        <section class="pt-16 pb-8 md:pt-24 md:pb-12 text-center px-4">
-            <h1 class="mx-auto max-w-4xl text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                Estimez vos impôts <span class="text-brand-600">en temps réel</span>
+        <section class="pt-12 pb-6 md:pt-20 md:pb-10 text-center px-4">
+            <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1.5 mb-6">
+                <i data-lucide="sparkles" class="h-4 w-4 text-emerald-600"></i>
+                <span class="text-sm font-medium text-emerald-700">Nouveau : Simulation PER intégrée</span>
+            </div>
+            <h1 class="mx-auto max-w-4xl text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                Calculez vos impôts <span class="text-brand-600">et optimisez</span> avec le PER
             </h1>
             <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-500">
-                Un outil simple, rapide et gratuit pour calculer votre impôt sur le revenu 2024. Optimisez votre budget grâce à une vision claire de votre reste à vivre.
+                Simulateur complet et gratuit. Estimez votre impôt 2025, découvrez votre économie fiscale grâce au Plan d'Épargne Retraite.
             </p>
         </section>
 
         <!-- Simulator Container -->
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-24">
-            <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
-                
+        <div id="simulateur" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
+            <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
+
                 <!-- Left Column: Form -->
-                <div class="lg:col-span-7 space-y-6">
-                    
+                <div class="lg:col-span-7 space-y-5">
+
                     <!-- Card: Situation -->
                     <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-                                <i data-lucide="users" class="h-5 w-5"></i>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
+                                    <i data-lucide="users" class="h-5 w-5"></i>
+                                </div>
+                                <h2 class="text-lg font-semibold text-slate-900">Votre situation</h2>
                             </div>
-                            <h2 class="text-lg font-semibold text-slate-900">Votre situation</h2>
+                            <div class="text-right">
+                                <span class="text-xs text-slate-400">Parts fiscales</span>
+                                <p class="text-lg font-bold text-brand-600" id="display-parts">1</p>
+                            </div>
                         </div>
 
                         <!-- Statut Marital -->
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-slate-700 mb-3">Statut marital</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                <label class="cursor-pointer relative">
-                                    <input type="radio" name="status" value="single" class="peer sr-only" checked="">
-                                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center hover:bg-slate-50 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-900 transition-all">
-                                        <div class="mx-auto mb-2 w-max text-slate-400 peer-checked:text-brand-600"><i data-lucide="user" class="h-5 w-5"></i></div>
-                                        <span class="block text-sm font-medium">Célibataire</span>
+                            <div class="grid grid-cols-3 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="status" value="single" class="peer sr-only" checked>
+                                    <div class="rounded-xl border-2 border-slate-200 bg-white p-3 text-center hover:border-slate-300 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
+                                        <i data-lucide="user" class="h-5 w-5 mx-auto mb-1 text-slate-400 peer-checked:text-brand-600"></i>
+                                        <span class="block text-sm font-medium text-slate-700">Célibataire</span>
                                     </div>
                                 </label>
-                                <label class="cursor-pointer relative">
-                                    <input type="radio" name="status" value="couple" class="peer sr-only">
-                                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center hover:bg-slate-50 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-900 transition-all">
-                                        <div class="mx-auto mb-2 w-max text-slate-400 peer-checked:text-brand-600"><i data-lucide="heart" class="h-5 w-5"></i></div>
-                                        <span class="block text-sm font-medium">Marié / PACS</span>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="status" value="married" class="peer sr-only">
+                                    <div class="rounded-xl border-2 border-slate-200 bg-white p-3 text-center hover:border-slate-300 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
+                                        <i data-lucide="heart" class="h-5 w-5 mx-auto mb-1 text-slate-400 peer-checked:text-brand-600"></i>
+                                        <span class="block text-sm font-medium text-slate-700">Marié/PACS</span>
                                     </div>
                                 </label>
-                                <label class="cursor-pointer relative">
+                                <label class="cursor-pointer">
                                     <input type="radio" name="status" value="divorced" class="peer sr-only">
-                                    <div class="rounded-xl border border-slate-200 bg-white p-4 text-center hover:bg-slate-50 peer-checked:border-brand-600 peer-checked:bg-brand-50 peer-checked:text-brand-900 transition-all">
-                                        <div class="mx-auto mb-2 w-max text-slate-400 peer-checked:text-brand-600"><i data-lucide="divide" class="h-5 w-5"></i></div>
-                                        <span class="block text-sm font-medium">Divorcé(e)</span>
+                                    <div class="rounded-xl border-2 border-slate-200 bg-white p-3 text-center hover:border-slate-300 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
+                                        <i data-lucide="user-x" class="h-5 w-5 mx-auto mb-1 text-slate-400 peer-checked:text-brand-600"></i>
+                                        <span class="block text-sm font-medium text-slate-700">Divorcé(e)</span>
                                     </div>
                                 </label>
                             </div>
                         </div>
 
                         <!-- Enfants -->
-                        <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="mb-5 flex items-center justify-between">
                             <div>
                                 <label class="block text-sm font-medium text-slate-700">Enfants à charge</label>
-                                <p class="text-xs text-slate-500 mt-1">Mineurs ou rattachés</p>
+                                <p class="text-xs text-slate-400 mt-0.5">Mineurs ou rattachés au foyer</p>
                             </div>
-                            <div class="flex items-center gap-4 rounded-lg border border-slate-200 bg-slate-50 p-1">
-                                <button id="btn-child-minus" class="h-8 w-8 rounded-md bg-white text-slate-500 shadow-sm hover:text-brand-600 flex items-center justify-center transition-colors">
+                            <div class="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 p-1">
+                                <button id="btn-child-minus" type="button" class="h-9 w-9 rounded-md bg-white text-slate-500 shadow-sm hover:text-brand-600 hover:bg-slate-50 flex items-center justify-center transition-all active:scale-95">
                                     <i data-lucide="minus" class="h-4 w-4"></i>
                                 </button>
-                                <span id="child-count-display" class="w-6 text-center text-lg font-semibold text-slate-900">0</span>
-                                <button id="btn-child-plus" class="h-8 w-8 rounded-md bg-white text-slate-500 shadow-sm hover:text-brand-600 flex items-center justify-center transition-colors">
+                                <span id="child-count" class="w-8 text-center text-xl font-bold text-slate-900">0</span>
+                                <button id="btn-child-plus" type="button" class="h-9 w-9 rounded-md bg-white text-slate-500 shadow-sm hover:text-brand-600 hover:bg-slate-50 flex items-center justify-center transition-all active:scale-95">
                                     <i data-lucide="plus" class="h-4 w-4"></i>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Parent Isolé (Conditional) -->
+                        <!-- Parent Isolé -->
                         <div id="parent-isole-container" class="flex items-center justify-between border-t border-slate-100 pt-4">
-                            <div>
-                                <label class="text-sm font-medium text-slate-700 flex items-center gap-2">
-                                    Parent isolé
-                                    <i data-lucide="info" class="h-4 w-4 text-slate-400 cursor-help" title="Cochez cette case si vous élevez seul(e) vos enfants (case T)."></i>
-                                </label>
+                            <div class="flex items-center gap-2">
+                                <label class="text-sm font-medium text-slate-700">Parent isolé</label>
+                                <span class="tooltip cursor-help" data-tip="Vous élevez seul(e) vos enfants (case T de la déclaration)">
+                                    <i data-lucide="help-circle" class="h-4 w-4 text-slate-400"></i>
+                                </span>
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="parent-isole" class="sr-only peer">
-                                <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand-600"></div>
+                                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-brand-600 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all after:shadow-sm"></div>
                             </label>
                         </div>
                     </div>
@@ -241,138 +281,259 @@
                     <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-                                <i data-lucide="banknote" class="h-5 w-5"></i>
+                                <i data-lucide="wallet" class="h-5 w-5"></i>
                             </div>
-                            <h2 class="text-lg font-semibold text-slate-900">Vos Revenus Annuels</h2>
+                            <h2 class="text-lg font-semibold text-slate-900">Vos revenus annuels</h2>
                         </div>
 
-                        <!-- Parameters -->
-                        <div class="flex flex-col sm:flex-row gap-4 mb-6">
-                             <div class="w-full sm:w-1/2">
-                                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Année Fiscale</label>
-                                <select class="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 px-3 text-sm font-medium text-slate-900 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none">
-                                    <option value="2024">2024 (Revenus 2023)</option>
-                                    <option value="2025" selected="">2025 (Revenus 2024)</option>
+                        <!-- Année fiscale -->
+                        <div class="flex gap-4 mb-6">
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Année fiscale</label>
+                                <select id="select-year" class="w-full rounded-lg border border-slate-200 bg-white py-2.5 px-3 text-sm font-medium text-slate-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition-all">
+                                    <option value="2024">2024 (revenus 2023)</option>
+                                    <option value="2025" selected>2025 (revenus 2024)</option>
                                 </select>
-                             </div>
-                             <div class="w-full sm:w-1/2">
+                            </div>
+                            <div class="flex-1">
                                 <label class="block text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">Pays</label>
-                                <div class="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 py-2.5 px-3 text-sm font-medium text-slate-900 cursor-not-allowed opacity-75">
-                                    <span class="text-base">🇫🇷</span> France
+                                <div class="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 py-2.5 px-3 text-sm font-medium text-slate-500">
+                                    <span>🇫🇷</span> France
                                 </div>
-                             </div>
+                            </div>
                         </div>
 
                         <!-- Revenu Principal -->
-                        <div class="mb-6">
+                        <div class="mb-5">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="block text-sm font-medium text-slate-700">Revenu Net Imposable <span class="text-slate-400 font-normal">(Déclarant 1)</span></label>
+                                <label class="text-sm font-medium text-slate-700">
+                                    Revenu net imposable
+                                    <span class="text-slate-400 font-normal" id="label-declarant1">(vous)</span>
+                                </label>
                                 <div class="relative">
-                                    <input type="number" id="income-input" value="40000" class="block w-32 text-right rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-brand-600 sm:text-sm sm:leading-6 font-semibold" placeholder="0">
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <span class="text-slate-500 sm:text-sm">€</span>
-                                    </div>
+                                    <input type="number" id="income1-input" value="40000" min="0" max="500000" class="block w-28 text-right rounded-lg border-0 py-2 pl-3 pr-7 text-slate-900 ring-1 ring-slate-200 focus:ring-2 focus:ring-brand-500 text-sm font-semibold transition-all">
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">€</span>
                                 </div>
                             </div>
-                            <input type="range" id="income-slider" min="0" max="150000" step="500" value="40000" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                            <input type="range" id="income1-slider" min="0" max="200000" step="500" value="40000" class="w-full h-2 rounded-lg cursor-pointer">
                             <div class="flex justify-between mt-1">
                                 <span class="text-xs text-slate-400">0 €</span>
-                                <span class="text-xs text-slate-400">150k € +</span>
+                                <span class="text-xs text-slate-400">200 000 €+</span>
                             </div>
                         </div>
 
-                        <!-- Revenu Conjoint (Hidden by default) -->
-                        <div id="spouse-income-container" class="mb-6 hidden">
+                        <!-- Toggle 2 revenus (pour couples) -->
+                        <div id="two-incomes-toggle" class="hidden mb-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                            <div class="flex items-center gap-2">
+                                <label class="text-sm font-medium text-slate-700">Deux revenus dans le foyer</label>
+                                <span class="tooltip cursor-help" data-tip="Activez si votre conjoint a aussi des revenus">
+                                    <i data-lucide="help-circle" class="h-4 w-4 text-slate-400"></i>
+                                </span>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="has-two-incomes" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-brand-600 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all after:shadow-sm"></div>
+                            </label>
+                        </div>
+
+                        <!-- Revenu Conjoint -->
+                        <div id="income2-container" class="hidden mb-5 animate-in">
                             <div class="flex justify-between items-center mb-2">
-                                <label class="block text-sm font-medium text-slate-700">Revenu Net Imposable <span class="text-slate-400 font-normal">(Conjoint)</span></label>
+                                <label class="text-sm font-medium text-slate-700">Revenu net imposable <span class="text-slate-400 font-normal">(conjoint)</span></label>
                                 <div class="relative">
-                                    <input type="number" id="spouse-income-input" value="0" class="block w-32 text-right rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-brand-600 sm:text-sm sm:leading-6 font-semibold">
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                        <span class="text-slate-500 sm:text-sm">€</span>
+                                    <input type="number" id="income2-input" value="0" min="0" max="500000" class="block w-28 text-right rounded-lg border-0 py-2 pl-3 pr-7 text-slate-900 ring-1 ring-slate-200 focus:ring-2 focus:ring-brand-500 text-sm font-semibold transition-all">
+                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">€</span>
+                                </div>
+                            </div>
+                            <input type="range" id="income2-slider" min="0" max="200000" step="500" value="0" class="w-full h-2 rounded-lg cursor-pointer">
+                        </div>
+
+                        <!-- Autres revenus -->
+                        <details class="border-t border-slate-100 pt-4 group">
+                            <summary class="flex cursor-pointer items-center justify-between text-sm font-medium text-brand-600 hover:text-brand-700">
+                                <span class="flex items-center gap-2">
+                                    <i data-lucide="plus-circle" class="h-4 w-4"></i>
+                                    Autres revenus (fonciers, etc.)
+                                </span>
+                                <i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-open:rotate-180"></i>
+                            </summary>
+                            <div class="mt-4 space-y-4 animate-in">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-500 mb-2">Revenus fonciers nets</label>
+                                    <div class="relative">
+                                        <input type="number" id="income-foncier" value="0" min="0" class="block w-full rounded-lg border-0 py-2 pl-3 pr-7 text-slate-900 ring-1 ring-slate-200 focus:ring-2 focus:ring-brand-500 text-sm transition-all">
+                                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">€</span>
                                     </div>
                                 </div>
                             </div>
-                            <input type="range" id="spouse-income-slider" min="0" max="150000" step="500" value="0" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+                        </details>
+                    </div>
+
+                    <!-- Card: PER -->
+                    <div class="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-emerald-100 rounded-lg text-emerald-600">
+                                    <i data-lucide="piggy-bank" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-lg font-semibold text-slate-900">Plan d'Épargne Retraite (PER)</h2>
+                                    <p class="text-xs text-slate-500">Déduisez vos versements de votre revenu imposable</p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-medium text-emerald-700">
+                                Optimisation
+                            </span>
                         </div>
 
-                        <!-- Autres revenus (Accordion) -->
-                        <div class="border-t border-slate-100 pt-4">
-                            <button type="button" onclick="document.getElementById('other-incomes').classList.toggle('hidden')" class="flex w-full items-center justify-between text-left text-sm font-medium text-brand-600 hover:text-brand-700">
-                                <span>+ Ajouter d'autres revenus (fonciers, etc.)</span>
-                                <i data-lucide="chevron-down" class="h-4 w-4"></i>
-                            </button>
-                            <div id="other-incomes" class="hidden mt-4 space-y-4">
-                                <div>
-                                    <label class="block text-xs font-medium text-slate-500 mb-1">Revenus Fonciers (Net)</label>
+                        <!-- Toggle PER -->
+                        <div class="flex items-center justify-between mb-5">
+                            <label class="text-sm font-medium text-slate-700">As-tu versé sur un PER cette année ?</label>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="has-per" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-emerald-500 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all after:shadow-sm"></div>
+                            </label>
+                        </div>
+
+                        <!-- PER Details (hidden by default) -->
+                        <div id="per-details" class="hidden space-y-4 animate-in">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <label class="text-sm font-medium text-slate-700">Montant versé sur le PER</label>
                                     <div class="relative">
-                                        <input type="number" id="other-income-input" value="0" class="block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-brand-600 sm:text-sm sm:leading-6">
-                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                                            <span class="text-slate-500 sm:text-sm">€</span>
-                                        </div>
+                                        <input type="number" id="per-amount" value="0" min="0" class="block w-28 text-right rounded-lg border-0 py-2 pl-3 pr-7 text-slate-900 ring-1 ring-slate-200 focus:ring-2 focus:ring-emerald-500 text-sm font-semibold transition-all">
+                                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">€</span>
                                     </div>
+                                </div>
+                                <input type="range" id="per-slider" min="0" max="30000" step="100" value="0" class="w-full h-2 rounded-lg cursor-pointer">
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-xs text-slate-400">0 €</span>
+                                    <span class="text-xs text-slate-400">30 000 €</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" id="per-plafond-unknown" class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
+                                <label for="per-plafond-unknown" class="text-sm text-slate-600">Je ne connais pas mon plafond de déduction</label>
+                            </div>
+
+                            <div id="per-plafond-container">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <label class="text-sm font-medium text-slate-700">Plafond de déduction disponible</label>
+                                        <span class="tooltip cursor-help" data-tip="Visible sur votre dernier avis d'imposition">
+                                            <i data-lucide="help-circle" class="h-4 w-4 text-slate-400"></i>
+                                        </span>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="number" id="per-plafond" value="0" min="0" class="block w-28 text-right rounded-lg border-0 py-2 pl-3 pr-7 text-slate-900 ring-1 ring-slate-200 focus:ring-2 focus:ring-emerald-500 text-sm font-semibold transition-all">
+                                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">€</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PER Summary -->
+                            <div class="rounded-xl bg-white border border-emerald-200 p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-slate-600">Déduction retenue</span>
+                                    <span class="text-sm font-bold text-emerald-600" id="per-deduction-display">0 €</span>
+                                </div>
+                                <div class="flex justify-between items-center mt-2 pt-2 border-t border-slate-100">
+                                    <span class="text-sm text-slate-600">Revenu imposable après PER</span>
+                                    <span class="text-sm font-bold text-slate-900" id="income-after-per-display">0 €</span>
+                                </div>
+                            </div>
+
+                            <div id="per-warning" class="hidden rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
+                                <div class="flex gap-2">
+                                    <i data-lucide="alert-triangle" class="h-4 w-4 text-amber-500 flex-shrink-0 mt-0.5"></i>
+                                    <span>Plafond non renseigné : la déduction est estimée au montant versé. Vérifiez votre plafond sur votre avis d'imposition.</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
+                    <!-- Actions -->
                     <div class="flex items-center justify-between pt-2">
-                        <button onclick="window.location.reload()" class="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-1">
+                        <button id="btn-reset" type="button" class="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-1.5 transition-colors">
                             <i data-lucide="rotate-ccw" class="h-4 w-4"></i> Réinitialiser
                         </button>
-                        <span class="text-xs text-slate-400">Dernière mise à jour des barèmes : Jan 2025</span>
+                        <span class="text-xs text-slate-400">Barème 2025 · Mis à jour en janvier 2025</span>
                     </div>
-
                 </div>
 
                 <!-- Right Column: Results -->
                 <div class="lg:col-span-5 relative">
-                    <div class="lg:sticky lg:top-24 space-y-6">
-                        
+                    <div class="lg:sticky lg:top-24 space-y-5">
+
                         <!-- Main Result Card -->
-                        <div class="rounded-2xl bg-slate-900 text-white p-6 shadow-xl overflow-hidden relative">
-                            <!-- Background decoration -->
-                            <div class="absolute top-0 right-0 -mt-4 -mr-4 h-24 w-24 rounded-full bg-brand-500 opacity-20 blur-xl"></div>
-                            
-                            <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-6">Estimation d'impôt 2025</h3>
-                            
-                            <div class="flex items-end gap-2 mb-2">
-                                <span class="text-4xl font-bold tracking-tight text-white" id="result-tax">0 €</span>
-                            </div>
-                            <div class="h-1 w-full bg-slate-800 rounded-full mb-6 overflow-hidden">
-                                <div id="tax-progress-bar" class="h-full bg-brand-500 chart-transition" style="width: 0%"></div>
+                        <div class="rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 shadow-xl overflow-hidden relative">
+                            <div class="absolute top-0 right-0 -mt-8 -mr-8 h-32 w-32 rounded-full bg-brand-500 opacity-20 blur-2xl"></div>
+                            <div class="absolute bottom-0 left-0 -mb-8 -ml-8 h-24 w-24 rounded-full bg-emerald-500 opacity-10 blur-xl"></div>
+
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider">Estimation impôt <span id="result-year">2025</span></h3>
+                                <span class="inline-flex items-center rounded-full bg-white/10 px-2.5 py-1 text-xs font-medium text-white/80">
+                                    <i data-lucide="zap" class="h-3 w-3 mr-1"></i> Temps réel
+                                </span>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-4 border-t border-slate-800 pt-4">
+                            <div class="flex items-end gap-2 mb-1">
+                                <span class="text-5xl font-bold tracking-tight" id="result-tax">0 €</span>
+                            </div>
+                            <p class="text-sm text-slate-400 mb-4">Impôt sur le revenu estimé</p>
+
+                            <div class="h-1.5 w-full bg-slate-700 rounded-full mb-6 overflow-hidden">
+                                <div id="tax-progress-bar" class="h-full bg-gradient-to-r from-brand-400 to-brand-500 chart-transition rounded-full" style="width: 0%"></div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 border-t border-slate-700/50 pt-4">
                                 <div>
                                     <p class="text-xs text-slate-400 mb-1">Taux moyen</p>
-                                    <p class="text-lg font-semibold text-brand-400" id="result-average-rate">0%</p>
+                                    <p class="text-2xl font-bold text-brand-400" id="result-avg-rate">0%</p>
                                 </div>
                                 <div>
                                     <p class="text-xs text-slate-400 mb-1">Taux marginal</p>
-                                    <p class="text-lg font-semibold text-white" id="result-marginal-rate">0%</p>
+                                    <p class="text-2xl font-bold text-white" id="result-marginal-rate">0%</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Net & Graph Card -->
+                        <!-- PER Savings Card -->
+                        <div id="per-savings-card" class="hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-5 shadow-lg animate-in">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-emerald-100 mb-1">Économie grâce au PER</p>
+                                    <p class="text-3xl font-bold" id="result-per-savings">0 €</p>
+                                </div>
+                                <div class="h-14 w-14 rounded-full bg-white/20 flex items-center justify-center">
+                                    <i data-lucide="trending-down" class="h-7 w-7"></i>
+                                </div>
+                            </div>
+                            <p class="text-sm text-emerald-100 mt-3" id="per-savings-explanation">
+                                Chaque € versé réduit votre impôt de <span id="per-efficiency">0</span> centimes.
+                            </p>
+                        </div>
+
+                        <!-- Net Result Card -->
                         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                             <h3 class="text-sm font-semibold text-slate-900 mb-4">Votre reste à vivre</h3>
-                            
-                            <div class="flex flex-col sm:flex-row items-center gap-6 mb-6">
-                                <!-- Custom CSS Donut Chart -->
-                                <div class="relative h-32 w-32 flex-shrink-0">
+
+                            <div class="flex items-center gap-6 mb-6">
+                                <!-- Donut Chart -->
+                                <div class="relative h-28 w-28 flex-shrink-0">
                                     <div id="chart-donut" class="absolute inset-0 rounded-full chart-transition" style="background: conic-gradient(#0ea5e9 0% 10%, #f1f5f9 10% 100%);"></div>
-                                    <div class="absolute inset-4 rounded-full bg-white flex items-center justify-center flex-col">
+                                    <div class="absolute inset-3 rounded-full bg-white flex items-center justify-center flex-col shadow-inner">
                                         <span class="text-xs text-slate-400">Net</span>
-                                        <span id="chart-percent" class="text-sm font-bold text-slate-900">90%</span>
+                                        <span id="chart-percent" class="text-lg font-bold text-slate-900">90%</span>
                                     </div>
                                 </div>
-                                
-                                <div class="flex-grow space-y-3 w-full">
-                                    <div class="flex justify-between items-center border-b border-slate-50 pb-2">
+
+                                <div class="flex-grow space-y-3">
+                                    <div class="flex justify-between items-center">
                                         <div class="flex items-center gap-2">
-                                            <span class="h-3 w-3 rounded-full bg-slate-100"></span>
-                                            <span class="text-sm text-slate-600">Revenu Net Annuel</span>
+                                            <span class="h-3 w-3 rounded-full bg-slate-200"></span>
+                                            <span class="text-sm text-slate-600">Revenu net annuel</span>
                                         </div>
                                         <span class="text-sm font-semibold text-slate-900" id="result-net-annual">0 €</span>
                                     </div>
@@ -381,41 +542,57 @@
                                             <span class="h-3 w-3 rounded-full bg-brand-500"></span>
                                             <span class="text-sm text-slate-600">Impôt</span>
                                         </div>
-                                        <span class="text-sm font-medium text-slate-500" id="result-tax-small">0 €</span>
+                                        <span class="text-sm font-medium text-slate-500" id="result-tax-small">- 0 €</span>
                                     </div>
-                                    <div class="pt-2">
-                                         <div class="flex justify-between items-baseline">
-                                            <span class="text-sm font-medium text-slate-900">Mensuel après impôt</span>
-                                            <span class="text-xl font-bold text-brand-600 tracking-tight" id="result-monthly">0 €</span>
-                                         </div>
+                                    <div class="pt-2 border-t border-slate-100">
+                                        <div class="flex justify-between items-baseline">
+                                            <span class="text-sm font-medium text-slate-900">Mensuel net</span>
+                                            <span class="text-xl font-bold text-brand-600" id="result-monthly">0 €</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Details Collapsible -->
-                            <div class="mt-4">
-                                <details class="group">
-                                    <summary class="flex cursor-pointer items-center justify-between rounded-lg bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">
-                                        <span>Détails du calcul</span>
-                                        <span class="transition group-open:rotate-180">
-                                            <i data-lucide="chevron-down" class="h-4 w-4"></i>
-                                        </span>
-                                    </summary>
-                                    <div class="mt-3 px-3 text-sm text-slate-600 space-y-2">
-                                        <div class="flex justify-between">
-                                            <span>Nombre de parts</span>
-                                            <span class="font-medium" id="detail-parts">1</span>
-                                        </div>
-                                        <div class="flex justify-between">
-                                            <span>Revenu par part</span>
-                                            <span class="font-medium" id="detail-qf">0 €</span>
-                                        </div>
-                                        <div class="p-3 bg-blue-50 text-blue-800 rounded text-xs mt-2 border border-blue-100">
-                                            <span class="font-semibold">Info :</span> Calcul basé sur l'abattement forfaitaire de 10% (max 14 171 €).
-                                        </div>
+                            <!-- Calculation Details -->
+                            <details class="group">
+                                <summary class="flex cursor-pointer items-center justify-between rounded-lg bg-slate-50 p-3 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">
+                                    <span class="flex items-center gap-2">
+                                        <i data-lucide="file-text" class="h-4 w-4"></i>
+                                        Détails du calcul
+                                    </span>
+                                    <i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-open:rotate-180"></i>
+                                </summary>
+                                <div class="mt-3 px-1 text-sm text-slate-600 space-y-2" id="calc-details">
+                                    <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                        <span>Revenu brut du foyer</span>
+                                        <span class="font-medium text-slate-900" id="detail-gross">0 €</span>
                                     </div>
-                                </details>
-                            </div>
+                                    <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                        <span>Abattement 10%</span>
+                                        <span class="font-medium text-slate-900" id="detail-abattement">- 0 €</span>
+                                    </div>
+                                    <div id="detail-per-row" class="hidden flex justify-between py-1.5 border-b border-slate-100">
+                                        <span>Déduction PER</span>
+                                        <span class="font-medium text-emerald-600" id="detail-per">- 0 €</span>
+                                    </div>
+                                    <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                        <span>Revenu imposable</span>
+                                        <span class="font-medium text-slate-900" id="detail-taxable">0 €</span>
+                                    </div>
+                                    <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                        <span>Nombre de parts</span>
+                                        <span class="font-medium text-slate-900" id="detail-parts">1</span>
+                                    </div>
+                                    <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                        <span>Quotient familial</span>
+                                        <span class="font-medium text-slate-900" id="detail-qf">0 €</span>
+                                    </div>
+                                    <div class="mt-3 p-3 bg-slate-50 rounded-lg">
+                                        <p class="text-xs font-medium text-slate-700 mb-2">Tranches appliquées :</p>
+                                        <div id="detail-tranches" class="space-y-1 text-xs"></div>
+                                    </div>
+                                </div>
+                            </details>
                         </div>
 
                         <!-- Tips Card -->
@@ -425,10 +602,16 @@
                                 <div>
                                     <h4 class="text-sm font-semibold text-indigo-900">Conseil personnalisé</h4>
                                     <p class="text-sm text-indigo-700 mt-1 leading-relaxed" id="dynamic-tip">
-                                        Vos revenus sont dans la tranche à 30%. Pensez au PER pour réduire votre impôt.
+                                        Analysez votre situation pour obtenir un conseil adapté.
                                     </p>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Disclaimer -->
+                        <div class="text-center text-xs text-slate-400 px-4">
+                            <i data-lucide="info" class="h-3 w-3 inline mr-1"></i>
+                            Estimation indicative basée sur le barème officiel. Ne remplace pas l'avis de l'administration fiscale.
                         </div>
                     </div>
                 </div>
@@ -439,49 +622,68 @@
         <section id="how-it-works" class="bg-white border-t border-slate-200 py-16">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl font-semibold tracking-tight text-slate-900">Comment ça marche ?</h2>
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-900">Comment ça marche ?</h2>
+                    <p class="mt-3 text-slate-500">En 3 étapes simples</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="flex flex-col items-center text-center">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-900 mb-4 font-bold text-lg">1</div>
-                        <h3 class="text-lg font-medium text-slate-900 mb-2">Renseignez votre profil</h3>
-                        <p class="text-slate-500 text-sm">Indiquez votre situation familiale et vos revenus annuels nets.</p>
+                        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-100 text-brand-700 mb-4 font-bold text-xl">1</div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-2">Renseignez votre profil</h3>
+                        <p class="text-slate-500 text-sm">Situation familiale, revenus annuels, versements PER...</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-brand-700 mb-4 font-bold text-lg">2</div>
-                        <h3 class="text-lg font-medium text-slate-900 mb-2">Calcul automatique</h3>
-                        <p class="text-slate-500 text-sm">Notre algorithme applique le barème progressif et le quotient familial.</p>
+                        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-700 mb-4 font-bold text-xl">2</div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-2">Calcul instantané</h3>
+                        <p class="text-slate-500 text-sm">Barème progressif, quotient familial, déductions PER appliqués automatiquement.</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-900 mb-4 font-bold text-lg">3</div>
-                        <h3 class="text-lg font-medium text-slate-900 mb-2">Optimisez</h3>
-                        <p class="text-slate-500 text-sm">Visualisez l'impact d'une augmentation ou d'un changement de situation.</p>
+                        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700 mb-4 font-bold text-xl">3</div>
+                        <h3 class="text-lg font-semibold text-slate-900 mb-2">Optimisez</h3>
+                        <p class="text-slate-500 text-sm">Visualisez l'impact de chaque levier fiscal et partagez votre simulation.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FAQ Mini -->
+        <!-- FAQ Section -->
         <section id="faq" class="py-16 bg-slate-50">
             <div class="mx-auto max-w-3xl px-4">
-                <h2 class="text-2xl font-semibold tracking-tight text-slate-900 mb-8 text-center">Questions fréquentes</h2>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 mb-8 text-center">Questions fréquentes</h2>
                 <div class="space-y-4">
-                    <details class="group rounded-xl bg-white border border-slate-200 p-4 open:ring-1 open:ring-brand-500">
+                    <details class="group rounded-xl bg-white border border-slate-200 p-4 open:ring-1 open:ring-brand-500 open:border-brand-500">
                         <summary class="flex cursor-pointer items-center justify-between font-medium text-slate-900">
-                            Le résultat est-il 100% garanti ?
-                            <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="h-4 w-4"></i></span>
+                            Comment fonctionne la déduction PER ?
+                            <i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-open:rotate-180"></i>
                         </summary>
                         <p class="mt-3 text-sm text-slate-600 leading-relaxed">
-                            Non, il s'agit d'une estimation basée sur le barème général. Certains crédits d'impôts, réductions spécifiques ou situations complexes ne sont pas pris en compte dans ce simulateur simplifié.
+                            Les versements sur un PER (Plan d'Épargne Retraite) sont déductibles de votre revenu imposable, dans la limite d'un plafond annuel. Ce plafond est indiqué sur votre avis d'imposition. Plus votre taux marginal est élevé, plus l'économie d'impôt est importante.
                         </p>
                     </details>
                     <details class="group rounded-xl bg-white border border-slate-200 p-4">
                         <summary class="flex cursor-pointer items-center justify-between font-medium text-slate-900">
-                            Quel montant déclarer ?
-                            <span class="transition group-open:rotate-180"><i data-lucide="chevron-down" class="h-4 w-4"></i></span>
+                            Où trouver mon plafond de déduction PER ?
+                            <i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-open:rotate-180"></i>
                         </summary>
                         <p class="mt-3 text-sm text-slate-600 leading-relaxed">
-                            Utilisez le "Net Imposable" qui figure généralement en bas de votre bulletin de salaire de décembre (cumul annuel) ou sur vos relevés de pension.
+                            Votre plafond de déduction est indiqué sur votre dernier avis d'imposition, dans la rubrique "Plafond épargne retraite". Il correspond à 10% de vos revenus professionnels de l'année précédente, avec un minimum et un maximum fixés par la loi.
+                        </p>
+                    </details>
+                    <details class="group rounded-xl bg-white border border-slate-200 p-4">
+                        <summary class="flex cursor-pointer items-center justify-between font-medium text-slate-900">
+                            Le résultat est-il garanti ?
+                            <i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+                            Non, il s'agit d'une estimation basée sur le barème général. Certains crédits d'impôts, réductions spécifiques ou situations complexes ne sont pas pris en compte. Pour une simulation officielle, consultez le site impots.gouv.fr.
+                        </p>
+                    </details>
+                    <details class="group rounded-xl bg-white border border-slate-200 p-4">
+                        <summary class="flex cursor-pointer items-center justify-between font-medium text-slate-900">
+                            Comment sont calculées les parts fiscales ?
+                            <i data-lucide="chevron-down" class="h-4 w-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+                            Célibataire = 1 part, Couple marié/PACS = 2 parts. Les 2 premiers enfants ajoutent 0,5 part chacun, les suivants 1 part. Le statut de parent isolé ajoute 0,5 part supplémentaire.
                         </p>
                     </details>
                 </div>
@@ -490,17 +692,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 py-12">
+    <footer class="bg-white border-t border-slate-200 py-10">
         <div class="mx-auto max-w-7xl px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
+            <a href="/" class="flex items-center gap-2">
                 <div class="flex h-6 w-6 items-center justify-center rounded bg-slate-900 text-white">
                     <i data-lucide="calculator" class="h-3 w-3"></i>
                 </div>
                 <span class="text-sm font-semibold text-slate-900">SalaireBrutNet</span>
-            </div>
-            <p class="text-xs text-slate-500">
-                © 2025 SalaireBrutNet. Données à titre indicatif. Ne remplace pas l'avis officiel de la DGFiP.
-            </p>
+            </a>
+            <p class="text-xs text-slate-500">© 2025 SalaireBrutNet · Estimation indicative · Ne remplace pas l'avis de la DGFiP</p>
             <div class="flex gap-4">
                 <a href="mentions-legales.html" class="text-xs text-slate-500 hover:text-slate-900">Mentions légales</a>
                 <a href="equipe.html" class="text-xs text-slate-500 hover:text-slate-900">Équipe</a>
@@ -508,258 +708,657 @@
         </div>
     </footer>
 
-    <!-- Logic Script -->
-    <script>
-        // Init Icons
-        lucide.createIcons();
+    <!-- Mobile Sticky Button -->
+    <button id="mobile-results-btn" class="lg:hidden mobile-sticky-btn inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:bg-brand-700 transition-all">
+        <i data-lucide="calculator" class="h-4 w-4"></i>
+        Voir mes résultats
+    </button>
 
-        // --- Data & State ---
+    <!-- Share Modal -->
+    <div id="share-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+        <div class="bg-white rounded-2xl p-6 max-w-md w-full shadow-xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-slate-900">Partager cette simulation</h3>
+                <button id="close-modal" class="text-slate-400 hover:text-slate-600">
+                    <i data-lucide="x" class="h-5 w-5"></i>
+                </button>
+            </div>
+            <p class="text-sm text-slate-500 mb-4">Copiez ce lien pour partager votre simulation avec les mêmes paramètres :</p>
+            <div class="flex gap-2">
+                <input type="text" id="share-url" readonly class="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-600 bg-slate-50">
+                <button id="copy-url" class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 transition-colors">
+                    Copier
+                </button>
+            </div>
+            <p id="copy-success" class="hidden text-sm text-emerald-600 mt-2">Lien copié !</p>
+        </div>
+    </div>
+
+    <!-- Calculator Engine -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ============================================
+        // CONFIGURATION - Barèmes paramétrables
+        // ============================================
+        const TAX_BRACKETS = {
+            2024: [
+                { limit: 11294, rate: 0 },
+                { limit: 28797, rate: 0.11 },
+                { limit: 82341, rate: 0.30 },
+                { limit: 177106, rate: 0.41 },
+                { limit: Infinity, rate: 0.45 }
+            ],
+            2025: [
+                { limit: 11497, rate: 0 },
+                { limit: 29315, rate: 0.11 },
+                { limit: 83823, rate: 0.30 },
+                { limit: 180294, rate: 0.41 },
+                { limit: Infinity, rate: 0.45 }
+            ]
+        };
+
+        const ABATTEMENT_RATE = 0.10;
+        const ABATTEMENT_MAX = 14171;
+        const ABATTEMENT_MIN = 495;
+
+        // ============================================
+        // STATE
+        // ============================================
         const state = {
-            status: 'single', // single, couple, divorced
+            status: 'single',
             children: 0,
             parentIsole: false,
             income1: 40000,
             income2: 0,
-            incomeOther: 0,
-            year: 2025
+            hasTwoIncomes: false,
+            incomeFoncier: 0,
+            year: 2025,
+            hasPer: false,
+            perAmount: 0,
+            perPlafond: 0,
+            perPlafondUnknown: false
         };
 
-        // --- Brackets 2024 for 2023 income (Simplified for Demo, slightly adjusted for 2025 inflation projection) ---
-        const BRACKETS = [
-            { limit: 11294, rate: 0 },
-            { limit: 28797, rate: 0.11 },
-            { limit: 82341, rate: 0.30 },
-            { limit: 177106, rate: 0.41 },
-            { limit: Infinity, rate: 0.45 }
-        ];
+        // ============================================
+        // DOM ELEMENTS
+        // ============================================
+        const $ = (sel) => document.querySelector(sel);
+        const $$ = (sel) => document.querySelectorAll(sel);
 
-        // --- DOM Elements ---
         const els = {
-            radiosStatus: document.querySelectorAll('input[name="status"]'),
-            btnChildMinus: document.getElementById('btn-child-minus'),
-            btnChildPlus: document.getElementById('btn-child-plus'),
-            childCountDisplay: document.getElementById('child-count-display'),
-            parentIsoleContainer: document.getElementById('parent-isole-container'),
-            parentIsoleCheckbox: document.getElementById('parent-isole'),
-            incomeInput: document.getElementById('income-input'),
-            incomeSlider: document.getElementById('income-slider'),
-            spouseContainer: document.getElementById('spouse-income-container'),
-            spouseInput: document.getElementById('spouse-income-input'),
-            spouseSlider: document.getElementById('spouse-income-slider'),
-            otherIncomeInput: document.getElementById('other-income-input'),
-            
+            // Inputs
+            statusRadios: $$('input[name="status"]'),
+            childCount: $('#child-count'),
+            btnChildMinus: $('#btn-child-minus'),
+            btnChildPlus: $('#btn-child-plus'),
+            parentIsoleContainer: $('#parent-isole-container'),
+            parentIsole: $('#parent-isole'),
+            selectYear: $('#select-year'),
+            income1Input: $('#income1-input'),
+            income1Slider: $('#income1-slider'),
+            twoIncomesToggle: $('#two-incomes-toggle'),
+            hasTwoIncomes: $('#has-two-incomes'),
+            income2Container: $('#income2-container'),
+            income2Input: $('#income2-input'),
+            income2Slider: $('#income2-slider'),
+            incomeFoncier: $('#income-foncier'),
+            hasPer: $('#has-per'),
+            perDetails: $('#per-details'),
+            perAmount: $('#per-amount'),
+            perSlider: $('#per-slider'),
+            perPlafond: $('#per-plafond'),
+            perPlafondUnknown: $('#per-plafond-unknown'),
+            perPlafondContainer: $('#per-plafond-container'),
+            perWarning: $('#per-warning'),
+            btnReset: $('#btn-reset'),
+            btnShare: $('#btn-share'),
+
+            // Displays
+            displayParts: $('#display-parts'),
+            perDeductionDisplay: $('#per-deduction-display'),
+            incomeAfterPerDisplay: $('#income-after-per-display'),
+
             // Results
-            resTax: document.getElementById('result-tax'),
-            resTaxSmall: document.getElementById('result-tax-small'),
-            resNetAnnual: document.getElementById('result-net-annual'),
-            resAvgRate: document.getElementById('result-average-rate'),
-            resMarginalRate: document.getElementById('result-marginal-rate'),
-            resMonthly: document.getElementById('result-monthly'),
-            taxProgressBar: document.getElementById('tax-progress-bar'),
-            
-            // Chart
-            chartDonut: document.getElementById('chart-donut'),
-            chartPercent: document.getElementById('chart-percent'),
-            
+            resultYear: $('#result-year'),
+            resultTax: $('#result-tax'),
+            resultAvgRate: $('#result-avg-rate'),
+            resultMarginalRate: $('#result-marginal-rate'),
+            taxProgressBar: $('#tax-progress-bar'),
+            perSavingsCard: $('#per-savings-card'),
+            resultPerSavings: $('#result-per-savings'),
+            perEfficiency: $('#per-efficiency'),
+            chartDonut: $('#chart-donut'),
+            chartPercent: $('#chart-percent'),
+            resultNetAnnual: $('#result-net-annual'),
+            resultTaxSmall: $('#result-tax-small'),
+            resultMonthly: $('#result-monthly'),
+            dynamicTip: $('#dynamic-tip'),
+
             // Details
-            detailParts: document.getElementById('detail-parts'),
-            detailQf: document.getElementById('detail-qf'),
-            dynamicTip: document.getElementById('dynamic-tip')
+            detailGross: $('#detail-gross'),
+            detailAbattement: $('#detail-abattement'),
+            detailPerRow: $('#detail-per-row'),
+            detailPer: $('#detail-per'),
+            detailTaxable: $('#detail-taxable'),
+            detailParts: $('#detail-parts'),
+            detailQf: $('#detail-qf'),
+            detailTranches: $('#detail-tranches'),
+
+            // Modal
+            shareModal: $('#share-modal'),
+            shareUrl: $('#share-url'),
+            copyUrl: $('#copy-url'),
+            copySuccess: $('#copy-success'),
+            closeModal: $('#close-modal'),
+
+            // Mobile
+            mobileResultsBtn: $('#mobile-results-btn')
         };
 
-        // --- Utils ---
-        const formatMoney = (val) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(val);
-        const parseMoney = (val) => parseFloat(val) || 0;
+        // ============================================
+        // UTILITIES
+        // ============================================
+        const formatMoney = (val) => new Intl.NumberFormat('fr-FR', {
+            style: 'currency',
+            currency: 'EUR',
+            maximumFractionDigits: 0
+        }).format(val);
 
-        // --- Calculation Core ---
-        function calculate() {
-            // 1. Determine Parts
-            let parts = 1;
-            if (state.status === 'couple') parts = 2;
+        const formatPercent = (val) => val.toFixed(1) + '%';
 
-            // Children Logic
-            // First 2 children = 0.5 each. 3rd+ = 1 each.
-            if (state.children > 0) {
-                if (state.children === 1) parts += 0.5;
-                else if (state.children === 2) parts += 1; // 0.5 + 0.5
-                else parts += 1 + (state.children - 2); // 2 first (1) + rest (1 each)
-            }
+        const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 
-            // Parent isolé logic (Simplified: +0.5 part total boost if single & children > 0)
-            if (state.parentIsole && state.children > 0 && state.status !== 'couple') {
+        // ============================================
+        // CALCULATION ENGINE
+        // ============================================
+        function calculateParts() {
+            let parts = state.status === 'married' ? 2 : 1;
+
+            // Children: 0.5 for first two, 1 for each additional
+            if (state.children >= 1) parts += 0.5;
+            if (state.children >= 2) parts += 0.5;
+            if (state.children >= 3) parts += (state.children - 2);
+
+            // Parent isolé: +0.5 if single/divorced with children
+            if (state.parentIsole && state.children > 0 && state.status !== 'married') {
                 parts += 0.5;
             }
 
-            // 2. Total Income
-            let totalIncome = state.income1 + state.incomeOther;
-            if (state.status === 'couple') totalIncome += state.income2;
+            return parts;
+        }
 
-            // 3. Apply 10% deduction (Capped approx 14k - keeping simple logic here)
-            // Deduction min ~470, max ~14171 per person.
-            const deductionRate = 0.10;
-            const maxDeduction = 14171; 
-            
-            // Calculate deduction per earner roughly
-            let deduction = Math.min(state.income1 * deductionRate, maxDeduction);
-            if(state.status === 'couple') {
-                deduction += Math.min(state.income2 * deductionRate, maxDeduction);
-            }
-            
-            // Other incomes might not have 10% (like foncier), but we assume global simplified for UX
-            let taxableBase = Math.max(0, totalIncome - deduction);
+        function calculateAbattement(income) {
+            const abattement = income * ABATTEMENT_RATE;
+            return clamp(abattement, income > 0 ? ABATTEMENT_MIN : 0, ABATTEMENT_MAX);
+        }
 
-            // 4. Quotient Familial
-            let qf = taxableBase / parts;
-
-            // 5. Calculate Tax per Part
+        function calculateTax(taxableIncome, parts, brackets) {
+            const qf = taxableIncome / parts;
             let taxPerPart = 0;
             let marginalRate = 0;
+            const tranchesApplied = [];
 
-            for (let i = 0; i < BRACKETS.length; i++) {
-                const b = BRACKETS[i];
-                const prevLimit = i === 0 ? 0 : BRACKETS[i-1].limit;
-                
+            for (let i = 0; i < brackets.length; i++) {
+                const bracket = brackets[i];
+                const prevLimit = i === 0 ? 0 : brackets[i - 1].limit;
+
                 if (qf > prevLimit) {
-                    const base = Math.min(qf, b.limit) - prevLimit;
-                    taxPerPart += base * b.rate;
-                    if (qf > prevLimit) marginalRate = b.rate; // Track highest bracket hit
+                    const taxableInBracket = Math.min(qf, bracket.limit) - prevLimit;
+                    const taxInBracket = taxableInBracket * bracket.rate;
+                    taxPerPart += taxInBracket;
+                    marginalRate = bracket.rate;
+
+                    if (taxInBracket > 0) {
+                        tranchesApplied.push({
+                            from: prevLimit,
+                            to: Math.min(qf, bracket.limit),
+                            rate: bracket.rate,
+                            tax: taxInBracket
+                        });
+                    }
                 }
             }
 
-            // 6. Total Tax
-            let totalTax = Math.floor(taxPerPart * parts);
-            
-            // Decote (Simplified placeholder logic - decote reduces tax for low income)
-            // Not implemented fully to keep code compact, but ensured no negative tax
-            if (totalTax < 0) totalTax = 0;
+            return {
+                tax: Math.floor(taxPerPart * parts),
+                marginalRate,
+                qf,
+                tranchesApplied
+            };
+        }
 
-            // 7. Results
-            const netAfterStr = totalIncome - totalTax;
-            const monthly = netAfterStr / 12;
-            const avgRate = totalIncome > 0 ? (totalTax / totalIncome) * 100 : 0;
-            const taxPercentOfTotal = totalIncome > 0 ? (totalTax / totalIncome) * 100 : 0;
+        function calculate() {
+            const brackets = TAX_BRACKETS[state.year] || TAX_BRACKETS[2025];
+            const parts = calculateParts();
 
-            // --- Update UI ---
-            els.resTax.innerText = formatMoney(totalTax);
-            els.resTaxSmall.innerText = "- " + formatMoney(totalTax);
-            els.resNetAnnual.innerText = formatMoney(netAfterStr);
-            els.resMonthly.innerText = formatMoney(monthly) + "/mois";
-            els.resAvgRate.innerText = avgRate.toFixed(1) + "%";
-            els.resMarginalRate.innerText = (marginalRate * 100).toFixed(0) + "%";
+            // Total gross income
+            let grossIncome = state.income1 + state.incomeFoncier;
+            if (state.status === 'married' && state.hasTwoIncomes) {
+                grossIncome += state.income2;
+            }
+
+            // Abattement 10%
+            let totalAbattement = calculateAbattement(state.income1);
+            if (state.status === 'married' && state.hasTwoIncomes) {
+                totalAbattement += calculateAbattement(state.income2);
+            }
+
+            // PER deduction
+            let perDeduction = 0;
+            if (state.hasPer && state.perAmount > 0) {
+                if (state.perPlafondUnknown || state.perPlafond === 0) {
+                    perDeduction = state.perAmount;
+                } else {
+                    perDeduction = Math.min(state.perAmount, state.perPlafond);
+                }
+            }
+
+            // Taxable income
+            const incomeAfterAbattement = Math.max(0, grossIncome - totalAbattement);
+            const taxableIncome = Math.max(0, incomeAfterAbattement - perDeduction);
+
+            // Calculate tax WITH PER
+            const result = calculateTax(taxableIncome, parts, brackets);
+
+            // Calculate tax WITHOUT PER (for comparison)
+            const resultWithoutPer = calculateTax(incomeAfterAbattement, parts, brackets);
+            const perSavings = resultWithoutPer.tax - result.tax;
+
+            // Net after tax
+            const netAfterTax = grossIncome - result.tax;
+            const monthly = netAfterTax / 12;
+            const avgRate = grossIncome > 0 ? (result.tax / grossIncome) * 100 : 0;
+            const taxPercent = grossIncome > 0 ? (result.tax / grossIncome) * 100 : 0;
+
+            // Update UI
+            updateUI({
+                parts,
+                grossIncome,
+                totalAbattement,
+                perDeduction,
+                incomeAfterAbattement,
+                taxableIncome,
+                tax: result.tax,
+                marginalRate: result.marginalRate,
+                qf: result.qf,
+                tranchesApplied: result.tranchesApplied,
+                netAfterTax,
+                monthly,
+                avgRate,
+                taxPercent,
+                perSavings
+            });
+
+            // Update URL
+            updateURL();
+        }
+
+        function updateUI(data) {
+            // Parts display
+            els.displayParts.textContent = data.parts;
+
+            // PER displays
+            if (state.hasPer) {
+                els.perDeductionDisplay.textContent = formatMoney(data.perDeduction);
+                els.incomeAfterPerDisplay.textContent = formatMoney(data.taxableIncome);
+
+                // Warning if plafond unknown
+                if (state.perPlafondUnknown || state.perPlafond === 0) {
+                    els.perWarning.classList.remove('hidden');
+                } else {
+                    els.perWarning.classList.add('hidden');
+                }
+            }
+
+            // Main results
+            els.resultYear.textContent = state.year;
+            els.resultTax.textContent = formatMoney(data.tax);
+            els.resultAvgRate.textContent = formatPercent(data.avgRate);
+            els.resultMarginalRate.textContent = (data.marginalRate * 100).toFixed(0) + '%';
+            els.taxProgressBar.style.width = Math.min(data.avgRate * 2.5, 100) + '%';
+
+            // PER savings card
+            if (state.hasPer && data.perSavings > 0) {
+                els.perSavingsCard.classList.remove('hidden');
+                els.resultPerSavings.textContent = formatMoney(data.perSavings);
+                const efficiency = data.perDeduction > 0 ? Math.round((data.perSavings / data.perDeduction) * 100) : 0;
+                els.perEfficiency.textContent = efficiency;
+            } else {
+                els.perSavingsCard.classList.add('hidden');
+            }
+
+            // Net results
+            els.chartPercent.textContent = (100 - data.taxPercent).toFixed(0) + '%';
+            els.chartDonut.style.background = `conic-gradient(#0ea5e9 0% ${data.taxPercent}%, #f1f5f9 ${data.taxPercent}% 100%)`;
+            els.resultNetAnnual.textContent = formatMoney(data.netAfterTax);
+            els.resultTaxSmall.textContent = '- ' + formatMoney(data.tax);
+            els.resultMonthly.textContent = formatMoney(data.monthly);
 
             // Details
-            els.detailParts.innerText = parts;
-            els.detailQf.innerText = formatMoney(qf);
+            els.detailGross.textContent = formatMoney(data.grossIncome);
+            els.detailAbattement.textContent = '- ' + formatMoney(data.totalAbattement);
 
-            // Graphics
-            els.taxProgressBar.style.width = Math.min(avgRate * 2, 100) + "%"; // Visual scale
-            
-            // Donut Gradient
-            const pTax = Math.max(0, Math.min(taxPercentOfTotal, 100));
-            const pNet = 100 - pTax;
-            els.chartDonut.style.background = `conic-gradient(#0ea5e9 0% ${pTax}%, #f1f5f9 ${pTax}% 100%)`;
-            els.chartPercent.innerText = pNet.toFixed(0) + "%";
-
-            // Dynamic Tips
-            updateTips(marginalRate, parts, totalTax);
-        }
-
-        function updateTips(marginalRate, parts, tax) {
-            let msg = "";
-            if (tax === 0) {
-                msg = "Vous n'êtes pas imposable. Profitez-en pour épargner via un LEP ou Livret A.";
-            } else if (marginalRate >= 0.30) {
-                msg = `Votre taux marginal est de ${(marginalRate*100).toFixed(0)}%. Réduire votre revenu imposable (PER, dons) est très efficace fiscalement.`;
-            } else if (state.children === 0 && state.status !== 'couple') {
-                msg = "Le mariage ou PACS permettrait de partager l'imposition si votre conjoint a des revenus très différents.";
+            if (state.hasPer && data.perDeduction > 0) {
+                els.detailPerRow.classList.remove('hidden');
+                els.detailPer.textContent = '- ' + formatMoney(data.perDeduction);
             } else {
-                msg = "Pensez aux crédits d'impôt (garde d'enfants, emploi à domicile) pour réduire la facture finale.";
+                els.detailPerRow.classList.add('hidden');
             }
-            els.dynamicTip.innerText = msg;
+
+            els.detailTaxable.textContent = formatMoney(data.taxableIncome);
+            els.detailParts.textContent = data.parts;
+            els.detailQf.textContent = formatMoney(data.qf);
+
+            // Tranches
+            els.detailTranches.innerHTML = data.tranchesApplied.map(t => `
+                <div class="flex justify-between text-slate-600">
+                    <span>${(t.rate * 100).toFixed(0)}% sur ${formatMoney(t.to - t.from)}</span>
+                    <span class="font-medium">${formatMoney(t.tax * data.parts)}</span>
+                </div>
+            `).join('');
+
+            // Dynamic tip
+            updateTip(data);
         }
 
-        // --- Event Listeners ---
-        
-        // Status
-        els.radiosStatus.forEach(r => {
-            r.addEventListener('change', (e) => {
-                state.status = e.target.value;
-                // Show/Hide Spouse
-                if (state.status === 'couple') {
-                    els.spouseContainer.classList.remove('hidden');
-                } else {
-                    els.spouseContainer.classList.add('hidden');
-                    state.income2 = 0; // Reset
-                    els.spouseInput.value = 0;
-                    els.spouseSlider.value = 0;
-                }
-                
-                // Show/Hide Single Parent
-                if (state.status === 'single' || state.status === 'divorced') {
-                   // parent isole stays visible logic
-                } else {
-                   state.parentIsole = false;
-                   els.parentIsoleCheckbox.checked = false;
-                }
-                
-                // Visibility toggle for parent isole based on status logic simplified
-                if(state.status === 'couple') {
-                    els.parentIsoleContainer.classList.add('hidden');
-                } else {
-                    els.parentIsoleContainer.classList.remove('hidden');
-                }
+        function updateTip(data) {
+            let tip = '';
 
-                calculate();
-            });
-        });
-
-        // Children
-        els.btnChildPlus.addEventListener('click', () => {
-            state.children++;
-            els.childCountDisplay.innerText = state.children;
-            calculate();
-        });
-        els.btnChildMinus.addEventListener('click', () => {
-            if (state.children > 0) {
-                state.children--;
-                els.childCountDisplay.innerText = state.children;
-                calculate();
+            if (data.tax === 0) {
+                tip = "Vous n'êtes pas imposable. Pensez à épargner via un Livret A ou LEP pour faire fructifier votre épargne.";
+            } else if (!state.hasPer && data.marginalRate >= 0.30) {
+                tip = `Avec un taux marginal de ${(data.marginalRate * 100).toFixed(0)}%, le PER serait très efficace pour vous. Chaque € versé vous ferait économiser ${(data.marginalRate * 100).toFixed(0)} centimes d'impôt.`;
+            } else if (state.hasPer && data.perSavings > 0) {
+                tip = `Excellent ! Votre PER vous fait économiser ${formatMoney(data.perSavings)} d'impôt. Vérifiez votre plafond pour optimiser encore plus.`;
+            } else if (data.marginalRate >= 0.30) {
+                tip = `Votre taux marginal est de ${(data.marginalRate * 100).toFixed(0)}%. Pensez aux déductions (PER, dons) pour réduire efficacement votre impôt.`;
+            } else {
+                tip = "Pensez aux crédits d'impôt (garde d'enfants, emploi à domicile) pour réduire votre facture fiscale.";
             }
-        });
 
-        // Parent Isole
-        els.parentIsoleCheckbox.addEventListener('change', (e) => {
-            state.parentIsole = e.target.checked;
-            calculate();
-        });
+            els.dynamicTip.textContent = tip;
+        }
 
-        // Incomes Sync (Input <-> Slider)
-        const syncIncome = (input, slider, key) => {
-            input.addEventListener('input', (e) => {
-                const val = parseMoney(e.target.value);
-                state[key] = val;
-                if(val <= 150000) slider.value = val;
+        // ============================================
+        // URL MANAGEMENT
+        // ============================================
+        function updateURL() {
+            const params = new URLSearchParams();
+            params.set('status', state.status);
+            params.set('children', state.children);
+            if (state.parentIsole) params.set('isole', '1');
+            params.set('income1', state.income1);
+            if (state.status === 'married' && state.hasTwoIncomes) {
+                params.set('income2', state.income2);
+            }
+            if (state.incomeFoncier > 0) params.set('foncier', state.incomeFoncier);
+            params.set('year', state.year);
+            if (state.hasPer) {
+                params.set('per', state.perAmount);
+                if (!state.perPlafondUnknown && state.perPlafond > 0) {
+                    params.set('plafond', state.perPlafond);
+                }
+            }
+
+            const newUrl = window.location.pathname + '?' + params.toString();
+            history.replaceState(null, '', newUrl);
+        }
+
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.has('status')) {
+                state.status = params.get('status');
+                const radio = document.querySelector(`input[name="status"][value="${state.status}"]`);
+                if (radio) radio.checked = true;
+            }
+
+            if (params.has('children')) {
+                state.children = parseInt(params.get('children')) || 0;
+                els.childCount.textContent = state.children;
+            }
+
+            if (params.has('isole')) {
+                state.parentIsole = params.get('isole') === '1';
+                els.parentIsole.checked = state.parentIsole;
+            }
+
+            if (params.has('income1')) {
+                state.income1 = parseInt(params.get('income1')) || 40000;
+                els.income1Input.value = state.income1;
+                els.income1Slider.value = Math.min(state.income1, 200000);
+            }
+
+            if (params.has('income2')) {
+                state.income2 = parseInt(params.get('income2')) || 0;
+                state.hasTwoIncomes = true;
+                els.hasTwoIncomes.checked = true;
+                els.income2Input.value = state.income2;
+                els.income2Slider.value = Math.min(state.income2, 200000);
+            }
+
+            if (params.has('foncier')) {
+                state.incomeFoncier = parseInt(params.get('foncier')) || 0;
+                els.incomeFoncier.value = state.incomeFoncier;
+            }
+
+            if (params.has('year')) {
+                state.year = parseInt(params.get('year')) || 2025;
+                els.selectYear.value = state.year;
+            }
+
+            if (params.has('per')) {
+                state.hasPer = true;
+                state.perAmount = parseInt(params.get('per')) || 0;
+                els.hasPer.checked = true;
+                els.perAmount.value = state.perAmount;
+                els.perSlider.value = Math.min(state.perAmount, 30000);
+                els.perDetails.classList.remove('hidden');
+
+                if (params.has('plafond')) {
+                    state.perPlafond = parseInt(params.get('plafond')) || 0;
+                    els.perPlafond.value = state.perPlafond;
+                }
+            }
+
+            updateVisibility();
+        }
+
+        // ============================================
+        // VISIBILITY
+        // ============================================
+        function updateVisibility() {
+            // Two incomes toggle (only for married)
+            if (state.status === 'married') {
+                els.twoIncomesToggle.classList.remove('hidden');
+                els.twoIncomesToggle.classList.add('flex');
+            } else {
+                els.twoIncomesToggle.classList.add('hidden');
+                els.twoIncomesToggle.classList.remove('flex');
+                state.hasTwoIncomes = false;
+                els.hasTwoIncomes.checked = false;
+            }
+
+            // Income 2 container
+            if (state.status === 'married' && state.hasTwoIncomes) {
+                els.income2Container.classList.remove('hidden');
+            } else {
+                els.income2Container.classList.add('hidden');
+            }
+
+            // Parent isolé (only for single/divorced)
+            if (state.status === 'married') {
+                els.parentIsoleContainer.classList.add('hidden');
+                state.parentIsole = false;
+                els.parentIsole.checked = false;
+            } else {
+                els.parentIsoleContainer.classList.remove('hidden');
+            }
+
+            // PER details
+            if (state.hasPer) {
+                els.perDetails.classList.remove('hidden');
+            } else {
+                els.perDetails.classList.add('hidden');
+            }
+
+            // PER plafond container
+            if (state.perPlafondUnknown) {
+                els.perPlafondContainer.classList.add('hidden');
+            } else {
+                els.perPlafondContainer.classList.remove('hidden');
+            }
+        }
+
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        function setupEventListeners() {
+            // Status
+            els.statusRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    state.status = e.target.value;
+                    updateVisibility();
+                    calculate();
+                });
+            });
+
+            // Children
+            els.btnChildPlus.addEventListener('click', () => {
+                if (state.children < 10) {
+                    state.children++;
+                    els.childCount.textContent = state.children;
+                    calculate();
+                }
+            });
+
+            els.btnChildMinus.addEventListener('click', () => {
+                if (state.children > 0) {
+                    state.children--;
+                    els.childCount.textContent = state.children;
+                    calculate();
+                }
+            });
+
+            // Parent isolé
+            els.parentIsole.addEventListener('change', (e) => {
+                state.parentIsole = e.target.checked;
                 calculate();
             });
-            slider.addEventListener('input', (e) => {
-                const val = parseInt(e.target.value);
-                state[key] = val;
-                input.value = val;
+
+            // Year
+            els.selectYear.addEventListener('change', (e) => {
+                state.year = parseInt(e.target.value);
                 calculate();
             });
-        };
 
-        syncIncome(els.incomeInput, els.incomeSlider, 'income1');
-        syncIncome(els.spouseInput, els.spouseSlider, 'income2');
-        
-        els.otherIncomeInput.addEventListener('input', (e) => {
-            state.incomeOther = parseMoney(e.target.value);
+            // Income 1
+            const syncSlider = (input, slider, key, max = 200000) => {
+                input.addEventListener('input', (e) => {
+                    state[key] = parseInt(e.target.value) || 0;
+                    slider.value = Math.min(state[key], max);
+                    calculate();
+                });
+                slider.addEventListener('input', (e) => {
+                    state[key] = parseInt(e.target.value);
+                    input.value = state[key];
+                    calculate();
+                });
+            };
+
+            syncSlider(els.income1Input, els.income1Slider, 'income1');
+            syncSlider(els.income2Input, els.income2Slider, 'income2');
+            syncSlider(els.perAmount, els.perSlider, 'perAmount', 30000);
+
+            // Two incomes toggle
+            els.hasTwoIncomes.addEventListener('change', (e) => {
+                state.hasTwoIncomes = e.target.checked;
+                updateVisibility();
+                calculate();
+            });
+
+            // Foncier
+            els.incomeFoncier.addEventListener('input', (e) => {
+                state.incomeFoncier = parseInt(e.target.value) || 0;
+                calculate();
+            });
+
+            // PER toggle
+            els.hasPer.addEventListener('change', (e) => {
+                state.hasPer = e.target.checked;
+                updateVisibility();
+                calculate();
+            });
+
+            // PER plafond
+            els.perPlafond.addEventListener('input', (e) => {
+                state.perPlafond = parseInt(e.target.value) || 0;
+                calculate();
+            });
+
+            // PER plafond unknown
+            els.perPlafondUnknown.addEventListener('change', (e) => {
+                state.perPlafondUnknown = e.target.checked;
+                updateVisibility();
+                calculate();
+            });
+
+            // Reset
+            els.btnReset.addEventListener('click', () => {
+                window.location.href = window.location.pathname;
+            });
+
+            // Share
+            els.btnShare.addEventListener('click', () => {
+                els.shareUrl.value = window.location.href;
+                els.shareModal.classList.remove('hidden');
+            });
+
+            els.closeModal.addEventListener('click', () => {
+                els.shareModal.classList.add('hidden');
+            });
+
+            els.shareModal.addEventListener('click', (e) => {
+                if (e.target === els.shareModal) {
+                    els.shareModal.classList.add('hidden');
+                }
+            });
+
+            els.copyUrl.addEventListener('click', () => {
+                els.shareUrl.select();
+                document.execCommand('copy');
+                els.copySuccess.classList.remove('hidden');
+                setTimeout(() => els.copySuccess.classList.add('hidden'), 2000);
+            });
+
+            // Mobile results button
+            els.mobileResultsBtn.addEventListener('click', () => {
+                document.querySelector('#simulateur').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    document.querySelector('.lg\\:col-span-5').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            });
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        function init() {
+            lucide.createIcons();
+            loadFromURL();
+            setupEventListeners();
             calculate();
-        });
+        }
 
-        // Initialize
-        calculate();
-
+        // Run
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
     </script>
 
 </body></html>
