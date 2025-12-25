@@ -453,6 +453,83 @@
                         </div>
                     </div>
 
+                    <!-- Card: Dons et Réductions -->
+                    <div class="rounded-2xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-white p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-violet-100 rounded-lg text-violet-600">
+                                    <i data-lucide="heart-handshake" class="h-5 w-5"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-lg font-semibold text-slate-900">Dons & Réductions d'impôt</h2>
+                                    <p class="text-xs text-slate-500">Réduisez directement votre impôt (66% à 75%)</p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center rounded-full bg-violet-100 px-2.5 py-1 text-xs font-medium text-violet-700">
+                                Réduction
+                            </span>
+                        </div>
+
+                        <!-- Toggle Dons -->
+                        <div class="flex items-center justify-between mb-5">
+                            <label class="text-sm font-medium text-slate-700">As-tu fait des dons cette année ?</label>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="has-dons" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:bg-violet-500 peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all after:shadow-sm"></div>
+                            </label>
+                        </div>
+
+                        <!-- Dons Details -->
+                        <div id="dons-details" class="hidden space-y-4 animate-in">
+                            <!-- Dons 66% -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <label class="text-sm font-medium text-slate-700">Dons associations (66%)</label>
+                                        <span class="tooltip cursor-help" data-tip="Associations d'intérêt général, fondations, partis politiques...">
+                                            <i data-lucide="help-circle" class="h-4 w-4 text-slate-400"></i>
+                                        </span>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="number" id="dons-66" value="0" min="0" class="block w-28 text-right rounded-lg border-0 py-2 pl-3 pr-7 text-slate-900 ring-1 ring-slate-200 focus:ring-2 focus:ring-violet-500 text-sm font-semibold transition-all">
+                                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">€</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="dons-66-slider" min="0" max="10000" step="50" value="0" class="w-full h-2 rounded-lg cursor-pointer">
+                            </div>
+
+                            <!-- Dons 75% -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <label class="text-sm font-medium text-slate-700">Dons aide aux personnes (75%)</label>
+                                        <span class="tooltip cursor-help" data-tip="Restos du Cœur, Secours Populaire, Croix-Rouge... (plafonné à 1000€)">
+                                            <i data-lucide="help-circle" class="h-4 w-4 text-slate-400"></i>
+                                        </span>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="number" id="dons-75" value="0" min="0" class="block w-28 text-right rounded-lg border-0 py-2 pl-3 pr-7 text-slate-900 ring-1 ring-slate-200 focus:ring-2 focus:ring-violet-500 text-sm font-semibold transition-all">
+                                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">€</span>
+                                    </div>
+                                </div>
+                                <input type="range" id="dons-75-slider" min="0" max="2000" step="50" value="0" class="w-full h-2 rounded-lg cursor-pointer">
+                                <p class="text-xs text-slate-400 mt-1">75% jusqu'à 1000€, puis 66% au-delà</p>
+                            </div>
+
+                            <!-- Dons Summary -->
+                            <div class="rounded-xl bg-white border border-violet-200 p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-slate-600">Total des dons</span>
+                                    <span class="text-sm font-bold text-slate-900" id="dons-total-display">0 €</span>
+                                </div>
+                                <div class="flex justify-between items-center mt-2 pt-2 border-t border-slate-100">
+                                    <span class="text-sm text-slate-600">Réduction d'impôt</span>
+                                    <span class="text-sm font-bold text-violet-600" id="dons-reduction-display">0 €</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Actions -->
                     <div class="flex items-center justify-between pt-2">
                         <button id="btn-reset" type="button" class="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-1.5 transition-colors">
@@ -499,20 +576,39 @@
                             </div>
                         </div>
 
-                        <!-- PER Savings Card -->
-                        <div id="per-savings-card" class="hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-5 shadow-lg animate-in">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <p class="text-sm text-emerald-100 mb-1">Économie grâce au PER</p>
-                                    <p class="text-3xl font-bold" id="result-per-savings">0 €</p>
+                        <!-- Savings Cards Container -->
+                        <div class="space-y-3">
+                            <!-- PER Savings Card -->
+                            <div id="per-savings-card" class="hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-5 shadow-lg animate-in">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-emerald-100 mb-1">Économie grâce au PER</p>
+                                        <p class="text-3xl font-bold" id="result-per-savings">0 €</p>
+                                    </div>
+                                    <div class="h-14 w-14 rounded-full bg-white/20 flex items-center justify-center">
+                                        <i data-lucide="piggy-bank" class="h-7 w-7"></i>
+                                    </div>
                                 </div>
-                                <div class="h-14 w-14 rounded-full bg-white/20 flex items-center justify-center">
-                                    <i data-lucide="trending-down" class="h-7 w-7"></i>
-                                </div>
+                                <p class="text-sm text-emerald-100 mt-3" id="per-savings-explanation">
+                                    Chaque € versé réduit votre impôt de <span id="per-efficiency">0</span> centimes.
+                                </p>
                             </div>
-                            <p class="text-sm text-emerald-100 mt-3" id="per-savings-explanation">
-                                Chaque € versé réduit votre impôt de <span id="per-efficiency">0</span> centimes.
-                            </p>
+
+                            <!-- Dons Savings Card -->
+                            <div id="dons-savings-card" class="hidden rounded-2xl bg-gradient-to-br from-violet-500 to-violet-600 text-white p-5 shadow-lg animate-in">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-violet-100 mb-1">Réduction grâce aux dons</p>
+                                        <p class="text-3xl font-bold" id="result-dons-savings">0 €</p>
+                                    </div>
+                                    <div class="h-14 w-14 rounded-full bg-white/20 flex items-center justify-center">
+                                        <i data-lucide="heart" class="h-7 w-7"></i>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-violet-100 mt-3">
+                                    Vos dons de <span id="dons-total-result">0 €</span> réduisent directement votre impôt.
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Net Result Card -->
@@ -578,6 +674,10 @@
                                     <div class="flex justify-between py-1.5 border-b border-slate-100">
                                         <span>Revenu imposable</span>
                                         <span class="font-medium text-slate-900" id="detail-taxable">0 €</span>
+                                    </div>
+                                    <div id="detail-dons-row" class="hidden flex justify-between py-1.5 border-b border-slate-100">
+                                        <span>Réduction dons</span>
+                                        <span class="font-medium text-violet-600" id="detail-dons">- 0 €</span>
                                     </div>
                                     <div class="flex justify-between py-1.5 border-b border-slate-100">
                                         <span>Nombre de parts</span>
@@ -778,7 +878,10 @@
             hasPer: false,
             perAmount: 0,
             perPlafond: 0,
-            perPlafondUnknown: false
+            perPlafondUnknown: false,
+            hasDons: false,
+            dons66: 0,
+            dons75: 0
         };
 
         // ============================================
@@ -812,6 +915,14 @@
             perPlafondUnknown: $('#per-plafond-unknown'),
             perPlafondContainer: $('#per-plafond-container'),
             perWarning: $('#per-warning'),
+            hasDons: $('#has-dons'),
+            donsDetails: $('#dons-details'),
+            dons66: $('#dons-66'),
+            dons66Slider: $('#dons-66-slider'),
+            dons75: $('#dons-75'),
+            dons75Slider: $('#dons-75-slider'),
+            donsTotalDisplay: $('#dons-total-display'),
+            donsReductionDisplay: $('#dons-reduction-display'),
             btnReset: $('#btn-reset'),
             btnShare: $('#btn-share'),
 
@@ -829,6 +940,9 @@
             perSavingsCard: $('#per-savings-card'),
             resultPerSavings: $('#result-per-savings'),
             perEfficiency: $('#per-efficiency'),
+            donsSavingsCard: $('#dons-savings-card'),
+            resultDonsSavings: $('#result-dons-savings'),
+            donsTotalResult: $('#dons-total-result'),
             chartDonut: $('#chart-donut'),
             chartPercent: $('#chart-percent'),
             resultNetAnnual: $('#result-net-annual'),
@@ -842,6 +956,8 @@
             detailPerRow: $('#detail-per-row'),
             detailPer: $('#detail-per'),
             detailTaxable: $('#detail-taxable'),
+            detailDonsRow: $('#detail-dons-row'),
+            detailDons: $('#detail-dons'),
             detailParts: $('#detail-parts'),
             detailQf: $('#detail-qf'),
             detailTranches: $('#detail-tranches'),
@@ -966,11 +1082,32 @@
             const resultWithoutPer = calculateTax(incomeAfterAbattement, parts, brackets);
             const perSavings = resultWithoutPer.tax - result.tax;
 
+            // Calculate donation reduction
+            let donsReduction = 0;
+            let donsTotal = 0;
+            if (state.hasDons) {
+                donsTotal = state.dons66 + state.dons75;
+                // 75% reduction for dons75 up to 1000€, then 66%
+                const dons75Capped = Math.min(state.dons75, 1000);
+                const dons75Excess = Math.max(0, state.dons75 - 1000);
+                donsReduction = Math.floor(
+                    (state.dons66 * 0.66) +
+                    (dons75Capped * 0.75) +
+                    (dons75Excess * 0.66)
+                );
+                // Cap at 20% of taxable income (simplified)
+                const maxDonsReduction = Math.floor(taxableIncome * 0.20);
+                donsReduction = Math.min(donsReduction, maxDonsReduction);
+            }
+
+            // Final tax after dons reduction
+            const finalTax = Math.max(0, result.tax - donsReduction);
+
             // Net after tax
-            const netAfterTax = grossIncome - result.tax;
+            const netAfterTax = grossIncome - finalTax;
             const monthly = netAfterTax / 12;
-            const avgRate = grossIncome > 0 ? (result.tax / grossIncome) * 100 : 0;
-            const taxPercent = grossIncome > 0 ? (result.tax / grossIncome) * 100 : 0;
+            const avgRate = grossIncome > 0 ? (finalTax / grossIncome) * 100 : 0;
+            const taxPercent = grossIncome > 0 ? (finalTax / grossIncome) * 100 : 0;
 
             // Update UI
             updateUI({
@@ -980,7 +1117,8 @@
                 perDeduction,
                 incomeAfterAbattement,
                 taxableIncome,
-                tax: result.tax,
+                tax: finalTax,
+                taxBeforeDons: result.tax,
                 marginalRate: result.marginalRate,
                 qf: result.qf,
                 tranchesApplied: result.tranchesApplied,
@@ -988,7 +1126,9 @@
                 monthly,
                 avgRate,
                 taxPercent,
-                perSavings
+                perSavings,
+                donsTotal,
+                donsReduction
             });
 
             // Update URL
@@ -1029,6 +1169,21 @@
                 els.perSavingsCard.classList.add('hidden');
             }
 
+            // Dons savings card
+            if (state.hasDons && data.donsReduction > 0) {
+                els.donsSavingsCard.classList.remove('hidden');
+                els.resultDonsSavings.textContent = formatMoney(data.donsReduction);
+                els.donsTotalResult.textContent = formatMoney(data.donsTotal);
+            } else {
+                els.donsSavingsCard.classList.add('hidden');
+            }
+
+            // Dons display in form
+            if (state.hasDons) {
+                els.donsTotalDisplay.textContent = formatMoney(data.donsTotal);
+                els.donsReductionDisplay.textContent = formatMoney(data.donsReduction);
+            }
+
             // Net results
             els.chartPercent.textContent = (100 - data.taxPercent).toFixed(0) + '%';
             els.chartDonut.style.background = `conic-gradient(#0ea5e9 0% ${data.taxPercent}%, #f1f5f9 ${data.taxPercent}% 100%)`;
@@ -1048,6 +1203,14 @@
             }
 
             els.detailTaxable.textContent = formatMoney(data.taxableIncome);
+
+            if (state.hasDons && data.donsReduction > 0) {
+                els.detailDonsRow.classList.remove('hidden');
+                els.detailDons.textContent = '- ' + formatMoney(data.donsReduction);
+            } else {
+                els.detailDonsRow.classList.add('hidden');
+            }
+
             els.detailParts.textContent = data.parts;
             els.detailQf.textContent = formatMoney(data.qf);
 
@@ -1100,6 +1263,10 @@
                 if (!state.perPlafondUnknown && state.perPlafond > 0) {
                     params.set('plafond', state.perPlafond);
                 }
+            }
+            if (state.hasDons) {
+                if (state.dons66 > 0) params.set('dons66', state.dons66);
+                if (state.dons75 > 0) params.set('dons75', state.dons75);
             }
 
             const newUrl = window.location.pathname + '?' + params.toString();
@@ -1163,6 +1330,24 @@
                 }
             }
 
+            if (params.has('dons66') || params.has('dons75')) {
+                state.hasDons = true;
+                els.hasDons.checked = true;
+                els.donsDetails.classList.remove('hidden');
+
+                if (params.has('dons66')) {
+                    state.dons66 = parseInt(params.get('dons66')) || 0;
+                    els.dons66.value = state.dons66;
+                    els.dons66Slider.value = Math.min(state.dons66, 10000);
+                }
+
+                if (params.has('dons75')) {
+                    state.dons75 = parseInt(params.get('dons75')) || 0;
+                    els.dons75.value = state.dons75;
+                    els.dons75Slider.value = Math.min(state.dons75, 2000);
+                }
+            }
+
             updateVisibility();
         }
 
@@ -1209,6 +1394,13 @@
                 els.perPlafondContainer.classList.add('hidden');
             } else {
                 els.perPlafondContainer.classList.remove('hidden');
+            }
+
+            // Dons details
+            if (state.hasDons) {
+                els.donsDetails.classList.remove('hidden');
+            } else {
+                els.donsDetails.classList.add('hidden');
             }
         }
 
@@ -1304,6 +1496,19 @@
                 updateVisibility();
                 calculate();
             });
+
+            // Dons toggle
+            els.hasDons.addEventListener('change', (e) => {
+                state.hasDons = e.target.checked;
+                updateVisibility();
+                calculate();
+            });
+
+            // Dons 66%
+            syncSlider(els.dons66, els.dons66Slider, 'dons66', 10000);
+
+            // Dons 75%
+            syncSlider(els.dons75, els.dons75Slider, 'dons75', 2000);
 
             // Reset
             els.btnReset.addEventListener('click', () => {
