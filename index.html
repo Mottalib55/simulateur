@@ -197,13 +197,10 @@
 
         <!-- Simulator Container -->
         <div id="simulateur" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">
-            <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
+            <div class="grid grid-cols-1 gap-5 lg:grid-cols-12 items-start">
 
-                <!-- Left Column: Form -->
-                <div class="lg:col-span-7 space-y-5">
-
-                    <!-- Card: Situation -->
-                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <!-- Card: Situation (Order 1 mobile) -->
+                    <div class="order-1 lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
                                 <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
@@ -277,8 +274,8 @@
                         </div>
                     </div>
 
-                    <!-- Card: Revenus -->
-                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <!-- Card: Revenus (Order 2 mobile) -->
+                    <div class="order-2 lg:col-span-7 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
                                 <i data-lucide="wallet" class="h-5 w-5"></i>
@@ -369,8 +366,8 @@
                         </details>
                     </div>
 
-                    <!-- Card: PER -->
-                    <div class="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 shadow-sm">
+                    <!-- Card: PER (Order 4 mobile) -->
+                    <div class="order-4 lg:col-span-7 rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 shadow-sm">
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
                                 <div class="p-2 bg-emerald-100 rounded-lg text-emerald-600">
@@ -453,8 +450,8 @@
                         </div>
                     </div>
 
-                    <!-- Card: Dons et Réductions -->
-                    <div class="rounded-2xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-white p-6 shadow-sm">
+                    <!-- Card: Dons et Réductions (Order 5 mobile) -->
+                    <div class="order-5 lg:col-span-7 rounded-2xl border-2 border-violet-200 bg-gradient-to-br from-violet-50 to-white p-6 shadow-sm">
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
                                 <div class="p-2 bg-violet-100 rounded-lg text-violet-600">
@@ -530,17 +527,16 @@
                         </div>
                     </div>
 
-                    <!-- Actions -->
-                    <div class="flex items-center justify-between pt-2">
+                    <!-- Actions (Order 6 mobile) -->
+                    <div class="order-6 lg:col-span-7 flex items-center justify-between pt-2">
                         <button id="btn-reset" type="button" class="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-1.5 transition-colors">
                             <i data-lucide="rotate-ccw" class="h-4 w-4"></i> Réinitialiser
                         </button>
                         <span class="text-xs text-slate-400">Barème 2025 · Mis à jour en janvier 2025</span>
                     </div>
-                </div>
 
-                <!-- Right Column: Results -->
-                <div class="lg:col-span-5 relative">
+                <!-- Results Column (Order 3 mobile, sticky right on desktop) -->
+                <div class="order-3 lg:col-span-5 lg:row-span-6 lg:row-start-1 lg:col-start-8 relative">
                     <div class="lg:sticky lg:top-24 space-y-5">
 
                         <!-- Main Result Card -->
