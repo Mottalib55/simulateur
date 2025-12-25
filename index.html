@@ -683,9 +683,19 @@
                                         <span>Quotient familial</span>
                                         <span class="font-medium text-slate-900" id="detail-qf">0 €</span>
                                     </div>
-                                    <div class="mt-3 p-3 bg-slate-50 rounded-lg">
-                                        <p class="text-xs font-medium text-slate-700 mb-2">Tranches appliquées :</p>
-                                        <div id="detail-tranches" class="space-y-1 text-xs"></div>
+                                    <div class="mt-3 p-3 bg-slate-50 rounded-lg overflow-x-auto">
+                                        <p class="text-xs font-medium text-slate-700 mb-3">Tranches appliquées (par part) :</p>
+                                        <table class="w-full text-xs">
+                                            <thead>
+                                                <tr class="text-left text-slate-500 border-b border-slate-200">
+                                                    <th class="pb-2 font-medium">Tranche</th>
+                                                    <th class="pb-2 font-medium text-right">Montant</th>
+                                                    <th class="pb-2 font-medium text-right">Taux</th>
+                                                    <th class="pb-2 font-medium text-right">Impôt</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="detail-tranches" class="text-slate-600"></tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </details>
@@ -1016,21 +1026,25 @@
                 const bracket = brackets[i];
                 const prevLimit = i === 0 ? 0 : brackets[i - 1].limit;
 
+                // Calculate amount in this bracket
+                let amountInBracket = 0;
+                let taxInBracket = 0;
+
                 if (qf > prevLimit) {
-                    const taxableInBracket = Math.min(qf, bracket.limit) - prevLimit;
-                    const taxInBracket = taxableInBracket * bracket.rate;
+                    amountInBracket = Math.min(qf, bracket.limit) - prevLimit;
+                    taxInBracket = amountInBracket * bracket.rate;
                     taxPerPart += taxInBracket;
                     marginalRate = bracket.rate;
-
-                    if (taxInBracket > 0) {
-                        tranchesApplied.push({
-                            from: prevLimit,
-                            to: Math.min(qf, bracket.limit),
-                            rate: bracket.rate,
-                            tax: taxInBracket
-                        });
-                    }
                 }
+
+                // Add all tranches to show complete picture
+                tranchesApplied.push({
+                    from: prevLimit,
+                    to: bracket.limit,
+                    rate: bracket.rate,
+                    amount: amountInBracket,
+                    tax: taxInBracket
+                });
             }
 
             return {
@@ -1210,13 +1224,44 @@
             els.detailParts.textContent = data.parts;
             els.detailQf.textContent = formatMoney(data.qf);
 
-            // Tranches
-            els.detailTranches.innerHTML = data.tranchesApplied.map(t => `
-                <div class="flex justify-between text-slate-600">
-                    <span>${(t.rate * 100).toFixed(0)}% sur ${formatMoney(t.to - t.from)}</span>
-                    <span class="font-medium">${formatMoney(t.tax * data.parts)}</span>
-                </div>
-            `).join('');
+            // Tranches - table format
+            els.detailTranches.innerHTML = data.tranchesApplied.map((t, i) => {
+                const isActive = t.amount > 0;
+                const rowClass = isActive ? 'text-slate-900 font-medium' : 'text-slate-400';
+                const bgClass = isActive ? 'bg-brand-50/50' : '';
+
+                // Format tranche label
+                let trancheLabel;
+                if (i === 0) {
+                    trancheLabel = `Jusqu'à ${formatMoney(t.to)}`;
+                } else if (t.to === Infinity) {
+                    trancheLabel = `Au-delà de ${formatMoney(t.from)}`;
+                } else {
+                    trancheLabel = `De ${formatMoney(t.from + 1)} à ${formatMoney(t.to)}`;
+                }
+
+                return `
+                    <tr class="${bgClass}">
+                        <td class="py-1.5 pr-2 ${rowClass}">${trancheLabel}</td>
+                        <td class="py-1.5 text-right ${rowClass}">${formatMoney(t.amount)}</td>
+                        <td class="py-1.5 text-right ${rowClass}">${(t.rate * 100).toFixed(0)}%</td>
+                        <td class="py-1.5 text-right ${isActive ? 'text-brand-600 font-semibold' : 'text-slate-400'}">${formatMoney(t.tax)}</td>
+                    </tr>
+                `;
+            }).join('') + `
+                <tr class="border-t border-slate-200 font-semibold text-slate-900">
+                    <td class="pt-2">Total par part</td>
+                    <td class="pt-2 text-right">${formatMoney(data.qf)}</td>
+                    <td class="pt-2 text-right"></td>
+                    <td class="pt-2 text-right text-brand-600">${formatMoney(data.tranchesApplied.reduce((sum, t) => sum + t.tax, 0))}</td>
+                </tr>
+                <tr class="font-semibold text-slate-900 bg-slate-100">
+                    <td class="py-2 rounded-l-lg">Total (× ${data.parts} part${data.parts > 1 ? 's' : ''})</td>
+                    <td class="py-2 text-right"></td>
+                    <td class="py-2 text-right"></td>
+                    <td class="py-2 text-right text-brand-600 rounded-r-lg">${formatMoney(data.taxBeforeDons)}</td>
+                </tr>
+            `;
 
             // Dynamic tip
             updateTip(data);
