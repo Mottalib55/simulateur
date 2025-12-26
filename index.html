@@ -859,6 +859,55 @@
         </section>
     </main>
 
+    <!-- Rating Section -->
+    <section class="bg-gradient-to-b from-slate-50 to-white border-t border-slate-200 py-12">
+        <div class="mx-auto max-w-7xl px-4">
+            <div class="flex flex-col items-center gap-6">
+                <p class="text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
+                    Votre avis compte
+                </p>
+
+                <!-- Emoji Rating -->
+                <div id="emoji-rating" class="flex flex-col items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <button data-rating="1" class="emoji-btn group relative focus:outline-none" aria-label="Note 1: Terrible">
+                            <span class="text-3xl transition-all duration-300 ease-out grayscale opacity-40 group-hover:opacity-70 group-hover:grayscale-[0.3] select-none">😔</span>
+                        </button>
+                        <button data-rating="2" class="emoji-btn group relative focus:outline-none" aria-label="Note 2: Bof">
+                            <span class="text-3xl transition-all duration-300 ease-out grayscale opacity-40 group-hover:opacity-70 group-hover:grayscale-[0.3] select-none">😕</span>
+                        </button>
+                        <button data-rating="3" class="emoji-btn group relative focus:outline-none" aria-label="Note 3: Correct">
+                            <span class="text-3xl transition-all duration-300 ease-out grayscale opacity-40 group-hover:opacity-70 group-hover:grayscale-[0.3] select-none">😐</span>
+                        </button>
+                        <button data-rating="4" class="emoji-btn group relative focus:outline-none" aria-label="Note 4: Bien">
+                            <span class="text-3xl transition-all duration-300 ease-out grayscale opacity-40 group-hover:opacity-70 group-hover:grayscale-[0.3] select-none">🙂</span>
+                        </button>
+                        <button data-rating="5" class="emoji-btn group relative focus:outline-none" aria-label="Note 5: Excellent">
+                            <span class="text-3xl transition-all duration-300 ease-out grayscale opacity-40 group-hover:opacity-70 group-hover:grayscale-[0.3] select-none">😍</span>
+                        </button>
+                    </div>
+
+                    <!-- Rating Label -->
+                    <div class="relative h-7 w-40">
+                        <span id="rating-label" class="absolute inset-0 flex items-center justify-center text-sm font-medium text-slate-400 transition-all duration-300">
+                            Notez-nous
+                        </span>
+                    </div>
+
+                    <!-- Thank you message (hidden by default) -->
+                    <div id="rating-thanks" class="hidden text-center animate-in">
+                        <p class="text-sm font-medium text-emerald-600 flex items-center gap-2">
+                            <i data-lucide="check-circle" class="h-4 w-4"></i>
+                            Merci pour votre avis !
+                        </p>
+                    </div>
+                </div>
+
+                <div class="h-px w-24 bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-10">
         <div class="mx-auto max-w-7xl px-4 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -1665,6 +1714,84 @@
             document.addEventListener('DOMContentLoaded', init);
         } else {
             init();
+        }
+    })();
+
+    // ============================================
+    // EMOJI RATING
+    // ============================================
+    (function() {
+        const labels = ['Terrible', 'Bof', 'Correct', 'Bien', 'Excellent !'];
+        const emojiButtons = document.querySelectorAll('.emoji-btn');
+        const ratingLabel = document.getElementById('rating-label');
+        const ratingThanks = document.getElementById('rating-thanks');
+        let currentRating = 0;
+        let hasRated = false;
+
+        emojiButtons.forEach((btn, index) => {
+            const emoji = btn.querySelector('span');
+
+            btn.addEventListener('mouseenter', () => {
+                if (hasRated) return;
+                updateDisplay(index + 1);
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                if (hasRated) return;
+                updateDisplay(currentRating);
+            });
+
+            btn.addEventListener('click', () => {
+                if (hasRated) return;
+                currentRating = index + 1;
+                hasRated = true;
+                updateDisplay(currentRating);
+
+                // Show thank you message
+                setTimeout(() => {
+                    ratingLabel.style.opacity = '0';
+                    setTimeout(() => {
+                        ratingThanks.classList.remove('hidden');
+                        lucide.createIcons();
+                    }, 200);
+                }, 300);
+
+                // Save to localStorage
+                localStorage.setItem('site-rating', currentRating);
+            });
+        });
+
+        function updateDisplay(rating) {
+            emojiButtons.forEach((btn, i) => {
+                const emoji = btn.querySelector('span');
+                if (i < rating) {
+                    emoji.classList.remove('grayscale', 'opacity-40');
+                    emoji.classList.add('grayscale-0', 'drop-shadow-lg', 'scale-110');
+                } else {
+                    emoji.classList.add('grayscale', 'opacity-40');
+                    emoji.classList.remove('grayscale-0', 'drop-shadow-lg', 'scale-110');
+                }
+            });
+
+            if (rating > 0) {
+                ratingLabel.textContent = labels[rating - 1];
+                ratingLabel.classList.remove('text-slate-400');
+                ratingLabel.classList.add('text-slate-900', 'font-semibold');
+            } else {
+                ratingLabel.textContent = 'Notez-nous';
+                ratingLabel.classList.add('text-slate-400');
+                ratingLabel.classList.remove('text-slate-900', 'font-semibold');
+            }
+        }
+
+        // Check if already rated
+        const savedRating = localStorage.getItem('site-rating');
+        if (savedRating) {
+            currentRating = parseInt(savedRating);
+            hasRated = true;
+            updateDisplay(currentRating);
+            ratingLabel.style.display = 'none';
+            ratingThanks.classList.remove('hidden');
         }
     })();
     </script>
