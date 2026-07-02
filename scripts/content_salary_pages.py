@@ -29,6 +29,14 @@ def select_variant(montant):
     return h % 5
 
 
+def _phrase_variant(montant, key, options):
+    """Select a phrase deterministically among options based on montant and key."""
+    h = _djb2_hash(f"v_{montant}_{key}")
+    # Mix with Fibonacci hashing to reduce correlations between keys
+    h = (h ^ (montant * 2654435761) ^ (_djb2_hash(key) * 1103515245)) & 0xFFFFFFFF
+    return options[h % len(options)]
+
+
 # ── Classification en tranches ────────────────────────────────────────────────
 
 def _get_tranche(montant):
@@ -294,20 +302,36 @@ def _section_positionnement(montant, tranche, direction):
     label = _get_tranche_label(tranche)
 
     if direction == "brut-en-net":
-        intro = (
+        intro = _phrase_variant(montant, "pos_bn", [
             f"Avec un salaire brut mensuel de {_fmt(montant)}\u202f\u20ac, votre remuneration se situe dans "
-            f"la categorie \u00ab\u202f{label}\u202f\u00bb en France. "
-        )
+            f"la categorie \u00ab\u202f{label}\u202f\u00bb en France. ",
+            f"Un salaire de {_fmt(montant)}\u202f\u20ac brut par mois vous place dans la categorie "
+            f"\u00ab\u202f{label}\u202f\u00bb sur le marche du travail français. ",
+            f"Percevoir {_fmt(montant)}\u202f\u20ac brut chaque mois correspond a la tranche "
+            f"\u00ab\u202f{label}\u202f\u00bb des remunerations en France. ",
+            f"A hauteur de {_fmt(montant)}\u202f\u20ac brut mensuel, vous vous inscrivez dans la categorie "
+            f"\u00ab\u202f{label}\u202f\u00bb des salaires français. ",
+        ])
     else:
-        intro = (
+        intro = _phrase_variant(montant, "pos_nb", [
             f"Pour atteindre un salaire net de {_fmt(montant)}\u202f\u20ac par mois, le brut necessaire vous place "
-            f"dans la categorie \u00ab\u202f{label}\u202f\u00bb du marche français. "
-        )
+            f"dans la categorie \u00ab\u202f{label}\u202f\u00bb du marche français. ",
+            f"Viser {_fmt(montant)}\u202f\u20ac net mensuel implique un salaire brut situe dans la tranche "
+            f"\u00ab\u202f{label}\u202f\u00bb des remunerations en France. ",
+            f"Un objectif de {_fmt(montant)}\u202f\u20ac net par mois requiert un brut correspondant "
+            f"a la categorie \u00ab\u202f{label}\u202f\u00bb du marche de l'emploi français. ",
+            f"Toucher {_fmt(montant)}\u202f\u20ac net mensuellement necessite un brut qui vous positionne "
+            f"dans la categorie \u00ab\u202f{label}\u202f\u00bb en France. ",
+        ])
 
-    body = (
+    body = _phrase_variant(montant, "pos_body", [
         f"Ce niveau de remuneration est {d['vs_median']}. "
-        f"Statistiquement, ce montant vous situe parmi {d['percentile']} des salaries du secteur prive en France. "
-    )
+        f"Statistiquement, ce montant vous situe parmi {d['percentile']} des salaries du secteur prive en France. ",
+        f"Cette remuneration est {d['vs_median']}. "
+        f"En termes de distribution salariale, vous vous situez parmi {d['percentile']} des salaries du prive. ",
+        f"Ce montant est {d['vs_median']}. "
+        f"D'apres les statistiques de l'emploi, ce salaire vous positionne parmi {d['percentile']} des salaries du secteur prive. ",
+    ])
 
     if tranche == "smic":
         body += (
@@ -360,26 +384,49 @@ def _section_positionnement(montant, tranche, direction):
 
     # Add fiscal detail paragraph
     if direction == "brut-en-net":
-        fiscal = (
+        fiscal = _phrase_variant(montant, "pos_fisc_bn", [
             f"En termes de cotisations, un salaire brut de {_fmt(montant)}\u202f\u20ac genere environ "
             f"{_fmt(round(montant * 0.22))}\u202f\u20ac a {_fmt(round(montant * 0.25))}\u202f\u20ac de prelevements "
             "salariaux selon que vous etes non-cadre ou cadre. Ces cotisations financent votre protection sociale\u202f: "
             "retraite de base et complementaire (AGIRC-ARRCO), assurance maladie, chomage et prevoyance. "
             "La CSG (Contribution Sociale Generalisee) a elle seule represente 9,2 % de 98,25 % du salaire brut, "
-            "dont 6,8 % sont deductibles de votre revenu imposable."
-        )
+            "dont 6,8 % sont deductibles de votre revenu imposable.",
+            f"Les cotisations salariales prelevees sur {_fmt(montant)}\u202f\u20ac brut representent entre "
+            f"{_fmt(round(montant * 0.22))}\u202f\u20ac et {_fmt(round(montant * 0.25))}\u202f\u20ac selon votre statut. "
+            "Elles couvrent la retraite de base, la complementaire AGIRC-ARRCO, l'assurance maladie et la prevoyance. "
+            "La CSG, prelevee a 9,2 % sur 98,25 % du brut, constitue le poste le plus important, "
+            "avec une part deductible de 6,8 % qui reduit votre base imposable.",
+            f"Sur un brut mensuel de {_fmt(montant)}\u202f\u20ac, les prelevements salariaux oscillent entre "
+            f"{_fmt(round(montant * 0.22))}\u202f\u20ac (non-cadre) et {_fmt(round(montant * 0.25))}\u202f\u20ac (cadre). "
+            "Ces cotisations alimentent votre protection sociale\u202f: retraite, maladie, chomage et prevoyance. "
+            "La CSG-CRDS, calculee sur 98,25 % du salaire brut, represente a elle seule pres de 10 % du brut.",
+        ])
     else:
-        fiscal = (
+        fiscal = _phrase_variant(montant, "pos_fisc_nb", [
             f"Pour percevoir {_fmt(montant)}\u202f\u20ac net chaque mois, le salaire brut necessaire integre "
             "l'ensemble des cotisations salariales obligatoires\u202f: la part salariale pour la retraite de base "
             "(vieillesse plafonnee a 6,90 % et deplafonnee a 0,40 %), la retraite complementaire AGIRC-ARRCO "
             "(3,15 % en tranche 1), la CSG-CRDS (9,7 % sur 98,25 % du brut) et la CEG (0,86 % en tranche 1). "
             "Pour un cadre, il faut ajouter la CET de 0,14 %, ce qui explique qu'un brut legerement superieur "
-            "est necessaire pour atteindre le meme montant net."
-        )
+            "est necessaire pour atteindre le meme montant net.",
+            f"Atteindre {_fmt(montant)}\u202f\u20ac net par mois necessite un brut integrant toutes les cotisations "
+            "obligatoires\u202f: vieillesse plafonnee (6,90 %) et deplafonnee (0,40 %), complementaire AGIRC-ARRCO "
+            "(3,15 % sur la tranche 1), CSG-CRDS (9,7 % sur 98,25 % du brut) et CEG (0,86 %). "
+            "Le statut cadre ajoute une CET de 0,14 %, augmentant legerement le brut requis.",
+            f"Le brut necessaire pour obtenir {_fmt(montant)}\u202f\u20ac net inclut l'ensemble des prelevements "
+            "salariaux\u202f: retraite de base (6,90 % + 0,40 %), AGIRC-ARRCO (3,15 % en T1), "
+            "CSG-CRDS (9,7 % sur 98,25 % du brut) et CEG (0,86 % en T1). "
+            "Un cadre doit negocier un brut legerement superieur en raison de la CET additionnelle de 0,14 %.",
+        ])
+
+    h2 = _phrase_variant(montant, "pos_h2", [
+        f'Ce que represente un salaire de {_fmt(montant)}\u202f\u20ac en France',
+        f'Salaire de {_fmt(montant)}\u202f\u20ac\u202f: positionnement en France',
+        f'{_fmt(montant)}\u202f\u20ac par mois\u202f: ou se situe ce salaire\u202f?',
+    ])
 
     return (
-        f'<h2>Ce que represente un salaire de {_fmt(montant)}\u202f\u20ac en France</h2>\n'
+        f'<h2>{h2}</h2>\n'
         f'<p>{intro}{body}</p>\n<p>{fiscal}</p>'
     )
 
@@ -389,15 +436,23 @@ def _section_metiers(montant, tranche, direction):
     d = _TRANCHE_DATA[tranche]
 
     if direction == "brut-en-net":
-        intro = (
+        intro = _phrase_variant(montant, "met_bn", [
             f"Un salaire brut de {_fmt(montant)}\u202f\u20ac par mois est typiquement associe "
-            f"a des postes dans les secteurs suivants\u202f: {d['secteurs']}. "
-        )
+            f"a des postes dans les secteurs suivants\u202f: {d['secteurs']}. ",
+            f"Avec {_fmt(montant)}\u202f\u20ac brut mensuel, vous exercez probablement dans l'un de ces "
+            f"secteurs\u202f: {d['secteurs']}. ",
+            f"Les emplois remuneres {_fmt(montant)}\u202f\u20ac brut par mois se concentrent principalement "
+            f"dans\u202f: {d['secteurs']}. ",
+        ])
     else:
-        intro = (
+        intro = _phrase_variant(montant, "met_nb", [
             f"Pour negocier un salaire net de {_fmt(montant)}\u202f\u20ac par mois, vous visez "
-            f"des postes que l'on retrouve principalement dans\u202f: {d['secteurs']}. "
-        )
+            f"des postes que l'on retrouve principalement dans\u202f: {d['secteurs']}. ",
+            f"Atteindre {_fmt(montant)}\u202f\u20ac net mensuel passe par des postes concentres "
+            f"dans les secteurs suivants\u202f: {d['secteurs']}. ",
+            f"Un salaire net de {_fmt(montant)}\u202f\u20ac par mois est accessible dans ces "
+            f"domaines d'activite\u202f: {d['secteurs']}. ",
+        ])
 
     metiers_list = ", ".join(d["metiers"][:5])
     metiers_extra = ", ".join(d["metiers"][5:])
@@ -456,8 +511,14 @@ def _section_metiers(montant, tranche, direction):
             "et le travail hybride offrent de nouvelles opportunites geographiques a ces niveaux de salaire."
         )
 
+    h2 = _phrase_variant(montant, "met_h2", [
+        f'Metiers et profils types pour {_fmt(montant)}\u202f\u20ac',
+        f'Quels metiers pour {_fmt(montant)}\u202f\u20ac brut par mois\u202f?',
+        f'Profils et secteurs associes a {_fmt(montant)}\u202f\u20ac',
+    ])
+
     return (
-        f'<h2>Metiers et profils types pour {_fmt(montant)}\u202f\u20ac</h2>\n'
+        f'<h2>{h2}</h2>\n'
         f'<p>{intro}{body}</p>\n<p>{regional}</p>'
     )
 
@@ -481,11 +542,17 @@ def _section_budget(montant, tranche, direction):
     loisirs = round(net_approx * d["loisirs_pct"] / 100)
     charges = round(net_approx * d["charges_pct"] / 100)
 
-    body = (
+    body = _phrase_variant(montant, "bud_body", [
         f"{intro_budget}, voici une repartition budgetaire type adaptee a ce niveau de revenus. "
         f"Le logement represente le poste le plus important avec environ {d['loyer_pct']}\u202f% du budget, "
-        f"soit {_fmt(loyer)}\u202f\u20ac par mois. Ce montant correspond "
-    )
+        f"soit {_fmt(loyer)}\u202f\u20ac par mois. Ce montant correspond ",
+        f"{intro_budget}, la repartition de vos depenses suit un schema classique pour cette tranche. "
+        f"Le poste logement absorbe environ {d['loyer_pct']}\u202f% de vos revenus, "
+        f"soit {_fmt(loyer)}\u202f\u20ac mensuels. Ce budget logement correspond ",
+        f"{intro_budget}, voici comment se repartit un budget type a ce niveau de salaire. "
+        f"Le logement, premier poste de depense, represente {d['loyer_pct']}\u202f% du revenu net, "
+        f"soit environ {_fmt(loyer)}\u202f\u20ac par mois. Cette enveloppe correspond ",
+    ])
 
     if tranche in ("smic", "modeste"):
         body += (
@@ -532,7 +599,13 @@ def _section_budget(montant, tranche, direction):
             "Un conseil en gestion de patrimoine peut s'averer rentable pour optimiser l'allocation de vos actifs."
         )
 
-    return f'<h2>Budget mensuel type avec {_fmt(montant)}\u202f\u20ac</h2>\n<p>{body}</p>'
+    h2 = _phrase_variant(montant, "bud_h2", [
+        f'Budget mensuel type avec {_fmt(montant)}\u202f\u20ac',
+        f'Comment gerer un budget de {_fmt(net_approx)}\u202f\u20ac net par mois',
+        f'Repartition budgetaire pour {_fmt(montant)}\u202f\u20ac',
+    ])
+
+    return f'<h2>{h2}</h2>\n<p>{body}</p>'
 
 
 def _section_optimisation(montant, tranche, direction):
@@ -540,15 +613,23 @@ def _section_optimisation(montant, tranche, direction):
     d = _TRANCHE_DATA[tranche]
 
     if direction == "brut-en-net":
-        intro = (
+        intro = _phrase_variant(montant, "opt_bn", [
             f"Avec un salaire brut de {_fmt(montant)}\u202f\u20ac, plusieurs leviers permettent "
-            "d'optimiser votre remuneration nette et votre fiscalite. "
-        )
+            "d'optimiser votre remuneration nette et votre fiscalite. ",
+            f"A {_fmt(montant)}\u202f\u20ac brut mensuel, des dispositifs existent pour augmenter "
+            "votre pouvoir d'achat reel sans changer de poste. ",
+            f"Pour un salaire brut de {_fmt(montant)}\u202f\u20ac, voici les strategies "
+            "d'optimisation fiscale et sociale les plus pertinentes. ",
+        ])
     else:
-        intro = (
+        intro = _phrase_variant(montant, "opt_nb", [
             f"En ciblant un net de {_fmt(montant)}\u202f\u20ac par mois, il est utile de connaitre "
-            "les dispositifs qui peuvent ameliorer votre pouvoir d'achat reel au-dela du simple salaire. "
-        )
+            "les dispositifs qui peuvent ameliorer votre pouvoir d'achat reel au-dela du simple salaire. ",
+            f"Avec un objectif de {_fmt(montant)}\u202f\u20ac net mensuel, plusieurs leviers permettent "
+            "d'accroitre votre revenu disponible effectif. ",
+            f"Si vous visez {_fmt(montant)}\u202f\u20ac net par mois, des mecanismes fiscaux et sociaux "
+            "peuvent renforcer significativement votre pouvoir d'achat. ",
+        ])
 
     conseils = d["aides"]
     body = "Voici les principaux dispositifs et conseils adaptes a votre tranche de revenus\u202f: "
@@ -583,7 +664,13 @@ def _section_optimisation(montant, tranche, direction):
             "Consultez un conseiller en gestion de patrimoine agree (CGP ou CGPI) pour une strategie sur mesure."
         )
 
-    return f'<h2>Conseils d\'optimisation pour {_fmt(montant)}\u202f\u20ac</h2>\n<p>{intro}{body}</p>'
+    h2 = _phrase_variant(montant, "opt_h2", [
+        f"Conseils d'optimisation pour {_fmt(montant)}\u202f\u20ac",
+        f"Comment optimiser un salaire de {_fmt(montant)}\u202f\u20ac",
+        f"Maximiser son pouvoir d'achat avec {_fmt(montant)}\u202f\u20ac",
+    ])
+
+    return f'<h2>{h2}</h2>\n<p>{intro}{body}</p>'
 
 
 def _section_evolution(montant, tranche, direction):
@@ -591,15 +678,23 @@ def _section_evolution(montant, tranche, direction):
     d = _TRANCHE_DATA[tranche]
 
     if direction == "brut-en-net":
-        intro = (
+        intro = _phrase_variant(montant, "evo_bn", [
             f"Si vous percevez actuellement {_fmt(montant)}\u202f\u20ac brut par mois, "
-            "voici comment envisager une progression salariale. "
-        )
+            "voici comment envisager une progression salariale. ",
+            f"Avec {_fmt(montant)}\u202f\u20ac brut mensuel, des perspectives d'evolution existent "
+            "pour faire progresser votre remuneration. ",
+            f"A {_fmt(montant)}\u202f\u20ac brut par mois, comment accelerer "
+            "votre progression salariale\u202f? Voici les pistes concretes. ",
+        ])
     else:
-        intro = (
+        intro = _phrase_variant(montant, "evo_nb", [
             f"Si votre objectif est d'atteindre {_fmt(montant)}\u202f\u20ac net par mois, "
-            "voici les pistes pour y parvenir ou pour progresser au-dela. "
-        )
+            "voici les pistes pour y parvenir ou pour progresser au-dela. ",
+            f"Viser {_fmt(montant)}\u202f\u20ac net mensuel est un objectif atteignable "
+            "avec les bonnes strategies d'evolution professionnelle. ",
+            f"Pour atteindre ou depasser {_fmt(montant)}\u202f\u20ac net par mois, "
+            "plusieurs leviers de progression s'offrent a vous. ",
+        ])
 
     body = f"Pour evoluer, la strategie recommandee est de {d['evolution']}. "
 
@@ -669,7 +764,13 @@ def _section_evolution(montant, tranche, direction):
             "sont les voies privilegiees pour une creation de valeur exponentielle."
         )
 
-    return f'<h2>Perspectives d\'evolution salariale depuis {_fmt(montant)}\u202f\u20ac</h2>\n<p>{intro}{body}</p>'
+    h2 = _phrase_variant(montant, "evo_h2", [
+        f"Perspectives d'evolution salariale depuis {_fmt(montant)}\u202f\u20ac",
+        f"Comment evoluer au-dela de {_fmt(montant)}\u202f\u20ac",
+        f"Progresser depuis un salaire de {_fmt(montant)}\u202f\u20ac",
+    ])
+
+    return f'<h2>{h2}</h2>\n<p>{intro}{body}</p>'
 
 
 # ── Variantes de structure ────────────────────────────────────────────────────

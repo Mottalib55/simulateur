@@ -8,6 +8,7 @@ Usage : python generate.py
 
 import os
 import sys
+import re
 import math
 from datetime import date
 
@@ -160,6 +161,77 @@ def fmt2(val):
     return f"{val:,.2f}".replace(",", " ").replace(".", ",")
 
 
+# ── Liens internes contextuels ────────────────────────────────────────────────
+
+_INTERNAL_LINKS = [
+    ("cotisations sociales salariales", "/cotisations-sociales-salariales/"),
+    ("cotisations salariales", "/cotisations-sociales-salariales/"),
+    ("cotisations sociales", "/cotisations-sociales-salariales/"),
+    ("cotisations patronales", "/cout-employeur/"),
+    ("pr\u00e9l\u00e8vement \u00e0 la source", "/salaire-net-avant-apres-impot/"),
+    ("prelevement a la source", "/salaire-net-avant-apres-impot/"),
+    ("salaire m\u00e9dian fran\u00e7ais", "/salaire-moyen-france/"),
+    ("salaire m\u00e9dian", "/salaire-moyen-france/"),
+    ("salaire median", "/salaire-moyen-france/"),
+    ("net imposable", "/salaire-net-imposable/"),
+    ("fiche de paie", "/lire-fiche-de-paie/"),
+    ("co\u00fbt total pour votre employeur", "/cout-employeur/"),
+    ("co\u00fbt employeur", "/cout-employeur/"),
+    ("cout employeur", "/cout-employeur/"),
+    ("AGIRC-ARRCO", "/salaire-brut-net-cadre/"),
+    ("n\u00e9gociation salariale", "/negocier-salaire/"),
+    ("negociation salariale", "/negocier-salaire/"),
+    ("negocier", "/negocier-salaire/"),
+    ("Alsace-Moselle", "/salaire-brut-net-alsace-moselle/"),
+    ("SMIC", "/smic-brut-net-2026/"),
+]
+
+_MAX_INTERNAL_LINKS = 5
+
+
+def inject_internal_links(html):
+    """Inject contextual <a> links into description HTML.
+
+    Each destination URL is linked at most once.
+    Maximum _MAX_INTERNAL_LINKS total links injected.
+    """
+    used_urls = set()
+    link_count = 0
+
+    for term, url in _INTERNAL_LINKS:
+        if url in used_urls or link_count >= _MAX_INTERNAL_LINKS:
+            continue
+
+        parts = re.split(r'(<[^>]+>)', html)
+        replaced = False
+        in_anchor = False
+        new_parts = []
+
+        for part in parts:
+            if part.startswith('<'):
+                if re.match(r'<a[\s>]', part, re.IGNORECASE):
+                    in_anchor = True
+                elif re.match(r'</a', part, re.IGNORECASE):
+                    in_anchor = False
+                new_parts.append(part)
+            elif not replaced and not in_anchor:
+                pattern = r'(?<!\w)' + re.escape(term) + r'(?!\w)'
+                match = re.search(pattern, part, re.IGNORECASE)
+                if match:
+                    linked = f'<a href="{url}">{match.group()}</a>'
+                    part = part[:match.start()] + linked + part[match.end():]
+                    replaced = True
+                    used_urls.add(url)
+                    link_count += 1
+                new_parts.append(part)
+            else:
+                new_parts.append(part)
+
+        html = ''.join(new_parts)
+
+    return html
+
+
 # ── Génération HTML ────────────────────────────────────────────────────────────
 
 def build_cotisations_table_html(cotisations, total):
@@ -242,7 +314,7 @@ def build_description_brut_net(montant, nc, c):
 <p>Le coût total pour votre employeur est d'environ <strong>{fmt(nc['cout_employeur'])} € par mois</strong>, soit {fmt(round(nc['cout_employeur'] * 12))} € par an, en incluant les cotisations patronales.</p>
 <p>Après prélèvement à la source (estimation pour un célibataire sans enfant), votre salaire net mensuel serait d'environ <strong>{fmt(nc['net_apres_impot'])} €</strong> (non-cadre) ou <strong>{fmt(c['net_apres_impot'])} €</strong> (cadre).</p>"""
     contextual = generate_contextual_content(montant, "brut-en-net")
-    return base + "\n" + contextual
+    return inject_internal_links(base + "\n" + contextual)
 
 
 def build_description_net_brut(montant, nc, c):
@@ -253,7 +325,7 @@ def build_description_net_brut(montant, nc, c):
 <p>Sur une base annuelle, cela correspond à un salaire brut de <strong>{fmt(nc['brut_annuel'])} €</strong> (non-cadre) ou <strong>{fmt(c['brut_annuel'])} €</strong> (cadre).</p>
 <p>Le coût total pour l'employeur serait d'environ <strong>{fmt(nc['cout_employeur'])} € par mois</strong> (non-cadre), soit le brut majoré d'environ 45% de cotisations patronales.</p>"""
     contextual = generate_contextual_content(montant, "net-en-brut")
-    return base + "\n" + contextual
+    return inject_internal_links(base + "\n" + contextual)
 
 
 # ── Génération des pages ───────────────────────────────────────────────────────
