@@ -1,0 +1,40 @@
+name: Notify Search Engines
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ping Google Sitemap
+        run: |
+          echo "Pinging Google sitemap..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "https://www.google.com/ping?sitemap=https://salairebrutonet.com/sitemap.xml")
+          echo "Google ping response: HTTP $RESPONSE"
+
+      - name: Submit all URLs to IndexNow
+        run: |
+          echo "Extracting URLs from sitemap.xml..."
+          URLS=$(grep -o '<loc>[^<]*</loc>' sitemap.xml | sed 's/<loc>//g;s/<\/loc>//g')
+          URL_COUNT=$(echo "$URLS" | wc -l | tr -d ' ')
+          echo "Found $URL_COUNT URLs to submit."
+
+          URL_JSON=$(echo "$URLS" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          echo "Submitting to IndexNow..."
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+              \"host\": \"salairebrutonet.com\",
+              \"key\": \"dc6156f9d98f4267ab490ed4b6606c7a\",
+              \"keyLocation\": \"https://salairebrutonet.com/dc6156f9d98f4267ab490ed4b6606c7a.txt\",
+              \"urlList\": $URL_JSON
+            }")
+
+          echo "IndexNow response: HTTP $HTTP_CODE ($URL_COUNT URLs submitted)"
