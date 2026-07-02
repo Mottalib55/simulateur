@@ -12,12 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Ping Google Sitemap
-        run: |
-          echo "Pinging Google sitemap..."
-          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "https://www.google.com/ping?sitemap=https://salairebrutonet.com/sitemap.xml")
-          echo "Google ping response: HTTP $RESPONSE"
-
       - name: Submit all URLs to IndexNow
         run: |
           echo "Extracting URLs from sitemap.xml..."
