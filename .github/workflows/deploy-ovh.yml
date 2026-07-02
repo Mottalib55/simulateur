@@ -35,6 +35,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/__pycache__/**
+            **/scripts/**
             .gitignore
             generate.py
             generate-pages.py
@@ -44,6 +45,8 @@ jobs:
             enrich_period_content.py
             customize_widgets.py
             build-admin.py
+            patch_seo.py
+            patch_eeat.py
             icons.py
             calcul.py
             template-brut-net.html
@@ -54,19 +57,31 @@ jobs:
             css/input.css
             submit-bing.sh
 
-      - name: Submit to Bing IndexNow
+      - name: Ping Google Sitemap
         if: success()
         run: |
-          curl -s -X POST "https://api.indexnow.org/indexnow" \
+          echo "Pinging Google sitemap..."
+          curl -s "https://www.google.com/ping?sitemap=https://salairebrutonet.com/sitemap.xml"
+          echo ""
+
+      - name: Submit all URLs to IndexNow
+        if: success()
+        run: |
+          echo "Extracting URLs from sitemap.xml..."
+          URLS=$(grep -o '<loc>[^<]*</loc>' sitemap.xml | sed 's/<loc>//g;s/<\/loc>//g')
+          URL_COUNT=$(echo "$URLS" | wc -l | tr -d ' ')
+          echo "Found $URL_COUNT URLs to submit."
+
+          URL_JSON=$(echo "$URLS" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          echo "Submitting to IndexNow..."
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            -d '{
-              "host": "salairebrutonet.com",
-              "key": "dc6156f9d98f4267ab490ed4b6606c7a",
-              "keyLocation": "https://salairebrutonet.com/dc6156f9d98f4267ab490ed4b6606c7a.txt",
-              "urlList": [
-                "https://salairebrutonet.com/",
-                "https://salairebrutonet.com/glossaire/",
-                "https://salairebrutonet.com/a-propos/",
-                "https://salairebrutonet.com/sitemap.xml"
-              ]
-            }'
+            -d "{
+              \"host\": \"salairebrutonet.com\",
+              \"key\": \"dc6156f9d98f4267ab490ed4b6606c7a\",
+              \"keyLocation\": \"https://salairebrutonet.com/dc6156f9d98f4267ab490ed4b6606c7a.txt\",
+              \"urlList\": $URL_JSON
+            }")
+
+          echo "IndexNow response: HTTP $HTTP_CODE ($URL_COUNT URLs submitted)"

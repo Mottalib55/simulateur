@@ -186,9 +186,9 @@ def build_cotisations_table_html(cotisations, total):
 
 
 def build_liens_proches(montant, direction="brut-en-net"):
-    """Build HTML for nearby amount links."""
+    """Build HTML for nearby amount links (X00 steps only)."""
     liens = []
-    all_m = get_all_montants()
+    all_m = get_main_montants()
     idx = all_m.index(montant) if montant in all_m else -1
     offsets_idx = [-2, -1, 1, 2]
     for oi in offsets_idx:
@@ -258,16 +258,24 @@ def build_description_net_brut(montant, nc, c):
 
 # ── Génération des pages ───────────────────────────────────────────────────────
 
+def get_main_montants():
+    """Get main montants: 100€ steps only (1000-10000)."""
+    return list(range(MONTANT_MIN, MONTANT_MAX + 1, MONTANT_STEP))
+
+
+def get_redirect_montants():
+    """Get X50 montants that should be redirect pages (1050, 1150, ..., 4950)."""
+    return [m for m in range(MONTANT_50_MIN + MONTANT_50_STEP, MONTANT_50_MAX + 1, MONTANT_50_STEP) if m % 100 != 0]
+
+
 def get_all_montants():
     """Get all montants: 100€ steps (1000-10000) + 50€ steps (1050-4950)."""
-    montants_100 = list(range(MONTANT_MIN, MONTANT_MAX + 1, MONTANT_STEP))
-    montants_50 = [m for m in range(MONTANT_50_MIN + MONTANT_50_STEP, MONTANT_50_MAX + 1, MONTANT_50_STEP) if m % 100 != 0]
-    return sorted(set(montants_100 + montants_50))
+    return sorted(set(get_main_montants() + get_redirect_montants()))
 
 
 def generate_brut_net_pages(template):
-    """Generate all brut→net pages."""
-    montants = get_all_montants()
+    """Generate all brut→net pages (X00 steps only)."""
+    montants = get_main_montants()
     for montant in montants:
         nc = calculer_brut_vers_net(montant, "non-cadre")
         c = calculer_brut_vers_net(montant, "cadre")
@@ -323,8 +331,8 @@ def generate_brut_net_pages(template):
 
 
 def generate_net_brut_pages(template):
-    """Generate all net→brut pages."""
-    montants = get_all_montants()
+    """Generate all net→brut pages (X00 steps only)."""
+    montants = get_main_montants()
     for montant in montants:
         nc = calculer_net_vers_brut(montant, "non-cadre")
         c = calculer_net_vers_brut(montant, "cadre")
@@ -366,9 +374,9 @@ def generate_net_brut_pages(template):
 # ── Sitemap ────────────────────────────────────────────────────────────────────
 
 def generate_sitemap():
-    """Generate sitemap.xml with all URLs."""
+    """Generate sitemap.xml with X00 URLs only (no X50 redirects)."""
     today = date.today().isoformat()
-    montants = get_all_montants()
+    montants = get_main_montants()
 
     urls = [
         {"loc": f"{BASE_URL}/", "priority": "1.0", "changefreq": "monthly"},
@@ -378,9 +386,8 @@ def generate_sitemap():
     ]
 
     for m in montants:
-        prio = "0.7" if m % 100 == 0 else "0.6"
-        urls.append({"loc": f"{BASE_URL}/{m}-euros-brut-en-net/", "priority": prio, "changefreq": "monthly"})
-        urls.append({"loc": f"{BASE_URL}/{m}-euros-net-en-brut/", "priority": prio, "changefreq": "monthly"})
+        urls.append({"loc": f"{BASE_URL}/{m}-euros-brut-en-net/", "priority": "0.7", "changefreq": "monthly"})
+        urls.append({"loc": f"{BASE_URL}/{m}-euros-net-en-brut/", "priority": "0.7", "changefreq": "monthly"})
 
     # Pages supplémentaires (Phase 2 + pages spéciales)
     extra_pages = [
@@ -426,7 +433,6 @@ def generate_sitemap():
         # Info pages
         ("a-propos", "0.5"),
         ("glossaire", "0.6"),
-        ("widget", "0.4"),
     ]
     for slug, prio in extra_pages:
         urls.append({"loc": f"{BASE_URL}/{slug}/", "priority": prio, "changefreq": "monthly"})
@@ -449,6 +455,47 @@ def generate_sitemap():
     print(f"  ✓ sitemap.xml ({len(urls)} URLs)")
 
 
+# ── Redirect pages for X50 ────────────────────────────────────────────────────
+
+REDIRECT_TEMPLATE = """<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Redirection — {montant_fmt} € {direction_label}</title>
+<link rel="canonical" href="{BASE_URL}/{target}-euros-{direction}/">
+<meta http-equiv="refresh" content="0; url=/{target}-euros-{direction}/">
+<meta name="robots" content="noindex, follow">
+</head>
+<body>
+<p>Cette page a été déplacée vers <a href="/{target}-euros-{direction}/">{target_fmt} € {direction_label}</a>.</p>
+</body>
+</html>"""
+
+
+def generate_redirect_pages():
+    """Generate noindex redirect pages for X50 montants → nearest X00."""
+    montants_x50 = get_redirect_montants()
+    count = 0
+    for montant in montants_x50:
+        target = ((montant + 50) // 100) * 100  # Round up to nearest X00
+        for direction in ["brut-en-net", "net-en-brut"]:
+            direction_label = direction.replace("-", " ")
+            html = REDIRECT_TEMPLATE.format(
+                montant_fmt=fmt(montant),
+                direction_label=direction_label,
+                BASE_URL=BASE_URL,
+                target=target,
+                direction=direction,
+                target_fmt=fmt(target),
+            )
+            folder = os.path.join(BASE_DIR, f"{montant}-euros-{direction}")
+            os.makedirs(folder, exist_ok=True)
+            with open(os.path.join(folder, "index.html"), "w", encoding="utf-8") as f:
+                f.write(html)
+            count += 1
+    print(f"  ✓ {count} redirect pages (X50 → X00)")
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main():
@@ -460,18 +507,22 @@ def main():
     with open(os.path.join(BASE_DIR, "template-net-brut.html"), "r", encoding="utf-8") as f:
         template_net_brut = f.read()
 
-    print("Génération pages brut→net...")
+    print("Génération pages brut→net (X00)...")
     generate_brut_net_pages(template_brut_net)
 
-    print("\nGénération pages net→brut...")
+    print("\nGénération pages net→brut (X00)...")
     generate_net_brut_pages(template_net_brut)
+
+    print("\nGénération redirects X50...")
+    generate_redirect_pages()
 
     print("\nGénération sitemap.xml...")
     generate_sitemap()
 
-    print("\n=== Terminé ! ===")
-    total = len(get_all_montants()) * 2
-    print(f"{total} pages générées + sitemap.xml")
+    main_count = len(get_main_montants()) * 2
+    redirect_count = len(get_redirect_montants()) * 2
+    print(f"\n=== Terminé ! ===")
+    print(f"{main_count} pages principales + {redirect_count} redirects + sitemap.xml")
 
 
 if __name__ == "__main__":
