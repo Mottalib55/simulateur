@@ -55,7 +55,9 @@ total += cotisations[key].montant;
 }
 return { detail: cotisations, total };
 }
-function estimerImpotRevenu(netImposableAnnuel) {
+function estimerImpotRevenu(netImposableAnnuel, nbParts, partsBase) {
+nbParts = nbParts || 1;
+partsBase = partsBase || 1;
 const tranches = [
 { min: 0, max: 11497, taux: 0 },
 { min: 11497, max: 29315, taux: 0.11 },
@@ -63,18 +65,54 @@ const tranches = [
 { min: 83823, max: 180294, taux: 0.41 },
 { min: 180294, max: Infinity, taux: 0.45 },
 ];
-let impot = 0;
-for (const tranche of tranches) {
-if (netImposableAnnuel <= tranche.min) break;
-const base = Math.min(netImposableAnnuel, tranche.max) - tranche.min;
-impot += base * tranche.taux;
+var revenuParPart = netImposableAnnuel / nbParts;
+var impotParPart = 0;
+for (var i = 0; i < tranches.length; i++) {
+var tranche = tranches[i];
+if (revenuParPart <= tranche.min) break;
+var base = Math.min(revenuParPart, tranche.max) - tranche.min;
+impotParPart += base * tranche.taux;
 }
-return Math.round(impot);
+var impotQF = impotParPart * nbParts;
+// Plafonnement du quotient familial : calcul sans QF (avec partsBase seulement)
+var demiPartsSupp = nbParts - partsBase;
+if (demiPartsSupp > 0) {
+var revenuParPartBase = netImposableAnnuel / partsBase;
+var impotSansQF = 0;
+for (var j = 0; j < tranches.length; j++) {
+var tr = tranches[j];
+if (revenuParPartBase <= tr.min) break;
+var b = Math.min(revenuParPartBase, tr.max) - tr.min;
+impotSansQF += b * tr.taux;
+}
+impotSansQF = impotSansQF * partsBase;
+// Plafond : 1 759 EUR par demi-part supplementaire
+var plafondReduction = 1759 * (demiPartsSupp / 0.5);
+var reductionQF = impotSansQF - impotQF;
+if (reductionQF > plafondReduction) {
+impotQF = impotSansQF - plafondReduction;
+}
+}
+return Math.max(0, Math.round(impotQF));
+}
+function calculerNbParts(situation, nbEnfants) {
+situation = situation || 'single';
+nbEnfants = nbEnfants || 0;
+var partsBase = situation === 'couple' ? 2 : 1;
+var partsEnfants = 0;
+if (nbEnfants <= 2) {
+partsEnfants = nbEnfants * 0.5;
+} else {
+partsEnfants = 1 + (nbEnfants - 2) * 1;
+}
+return { nbParts: partsBase + partsEnfants, partsBase: partsBase };
 }
 function calculerBrutVersNet(brutMensuel, statut, tempsTravail, options) {
 statut = statut || 'non-cadre';
 tempsTravail = tempsTravail != null ? tempsTravail : 1;
 options = options || {};
+var nbParts = options.nbParts || 1;
+var partsBase = options.partsBase || 1;
 const brutEffectif = brutMensuel * tempsTravail;
 const salariales = calculerCotisationsSalariales(brutEffectif, statut, options);
 const patronales = calculerCotisationsPatronales(brutEffectif);
@@ -85,7 +123,7 @@ const netImposableMensuel = brutEffectif - salariales.total + csgNonDed + crds;
 const netImposableAnnuel = netImposableMensuel * 12;
 const abattement = Math.min(Math.max(netImposableAnnuel * 0.1, 495), 14171);
 const netImposableApresAbattement = netImposableAnnuel - abattement;
-const impotAnnuel = estimerImpotRevenu(netImposableApresAbattement);
+const impotAnnuel = estimerImpotRevenu(netImposableApresAbattement, nbParts, partsBase);
 const impotMensuel = Math.round(impotAnnuel / 12);
 const netApresImpot = netAvantImpot - impotMensuel;
 const coutEmployeur = brutEffectif + patronales.total;
@@ -115,6 +153,19 @@ const resultat = calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
 const diff = resultat.netAvantImpot - netMensuelCible;
 if (Math.abs(diff) < 0.01) break;
 brutEstime -= diff * 0.7;
+}
+return calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
+}
+function calculerNetApresImpotVersBrut(netApresImpotCible, statut, tempsTravail, options) {
+statut = statut || 'non-cadre';
+tempsTravail = tempsTravail != null ? tempsTravail : 1;
+options = options || {};
+let brutEstime = netApresImpotCible * 1.5;
+for (let i = 0; i < 80; i++) {
+const resultat = calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
+const diff = resultat.netApresImpot - netApresImpotCible;
+if (Math.abs(diff) < 0.01) break;
+brutEstime -= diff * 0.5;
 }
 return calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
 }

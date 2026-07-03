@@ -372,28 +372,56 @@
                             <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
                                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
                             </div>
-                            <h2 class="text-lg font-semibold text-slate-900">Votre salaire brut</h2>
+                            <h2 class="text-lg font-semibold text-slate-900">Votre salaire</h2>
                         </div>
 
-                        <!-- Inputs mensuel + annuel -->
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div>
-                                <label for="input-salaire" class="block text-sm font-medium text-slate-500 mb-1">Mensuel</label>
-                                <div class="relative">
-                                    <input type="text" inputmode="decimal" id="input-salaire" value="2500"
-                                        class="w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-xl font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
-                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-500">€</span>
-                                </div>
+                        <!-- Grid 3 lignes x 2 colonnes -->
+                        <div class="grid grid-cols-[auto_1fr_1fr] gap-x-3 gap-y-3 items-center mb-4">
+                            <!-- Header row -->
+                            <div></div>
+                            <div class="text-sm font-medium text-slate-500 text-center">Mensuel</div>
+                            <div class="text-sm font-medium text-slate-500 text-center">Annuel</div>
+
+                            <!-- Salaire brut -->
+                            <label class="text-sm font-medium text-slate-700 whitespace-nowrap">Salaire brut</label>
+                            <div class="relative">
+                                <input type="text" inputmode="decimal" id="input-brut-m" value="2500"
+                                    class="w-full rounded-xl border-2 border-brand-500 bg-white px-3 py-2.5 text-lg font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
                             </div>
-                            <div>
-                                <label for="input-salaire-annuel" class="block text-sm font-medium text-slate-500 mb-1">Annuel</label>
-                                <div class="relative">
-                                    <input type="text" inputmode="decimal" id="input-salaire-annuel" value="30000"
-                                        class="w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-xl font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
-                                    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-500">€</span>
-                                </div>
+                            <div class="relative">
+                                <input type="text" inputmode="decimal" id="input-brut-a" value="30000"
+                                    class="w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-3 py-2.5 text-lg font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
+                            </div>
+
+                            <!-- Net avant impot -->
+                            <label class="text-sm font-medium text-slate-700 whitespace-nowrap">Net avant impot</label>
+                            <div class="relative">
+                                <input type="text" inputmode="decimal" id="input-net-m" value="1950"
+                                    class="w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-3 py-2.5 text-lg font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
+                            </div>
+                            <div class="relative">
+                                <input type="text" inputmode="decimal" id="input-net-a" value="23400"
+                                    class="w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-3 py-2.5 text-lg font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
+                            </div>
+
+                            <!-- Net apres impot -->
+                            <label class="text-sm font-medium text-emerald-700 whitespace-nowrap">Net apres impot</label>
+                            <div class="relative">
+                                <input type="text" inputmode="decimal" id="input-netai-m" value="1850"
+                                    class="w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-3 py-2.5 text-lg font-bold text-emerald-700 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
+                            </div>
+                            <div class="relative">
+                                <input type="text" inputmode="decimal" id="input-netai-a" value="22200"
+                                    class="w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-3 py-2.5 text-lg font-bold text-emerald-700 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
+                                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
                             </div>
                         </div>
+
                         <input type="range" id="slider-salaire" min="0" max="20000" step="50" value="2500"
                             aria-label="Ajuster le salaire brut mensuel" class="w-full mb-2">
                         <div class="flex justify-between text-xs text-slate-600">
@@ -447,6 +475,45 @@
                             <span>100% (temps plein)</span>
                         </div>
                     </div>
+
+                    <!-- Card: Situation fiscale -->
+                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                </div>
+                                <h2 class="text-lg font-semibold text-slate-900">Situation fiscale</h2>
+                            </div>
+                            <span id="display-parts" class="text-lg font-bold text-brand-700">1 part</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 mb-5">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="situation" value="single" class="peer sr-only" checked>
+                                <div class="rounded-xl border-2 border-slate-200 bg-white p-3 text-center hover:border-slate-300 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
+                                    <span class="block text-sm font-semibold text-slate-700">Celibataire</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="situation" value="couple" class="peer sr-only">
+                                <div class="rounded-xl border-2 border-slate-200 bg-white p-3 text-center hover:border-slate-300 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
+                                    <span class="block text-sm font-semibold text-slate-700">Marie(e) / Pacse(e)</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <p class="text-sm font-medium text-slate-700 mb-2">Enfants a charge</p>
+                        <div class="flex gap-2 mb-4" id="enfants-btns">
+                            <button type="button" data-enfants="0" class="enfant-btn flex-1 rounded-xl border-2 border-brand-500 bg-brand-50 py-2 text-sm font-semibold text-brand-700 transition-all">0</button>
+                            <button type="button" data-enfants="1" class="enfant-btn flex-1 rounded-xl border-2 border-slate-200 bg-white py-2 text-sm font-semibold text-slate-600 hover:border-slate-300 transition-all">1</button>
+                            <button type="button" data-enfants="2" class="enfant-btn flex-1 rounded-xl border-2 border-slate-200 bg-white py-2 text-sm font-semibold text-slate-600 hover:border-slate-300 transition-all">2</button>
+                            <button type="button" data-enfants="3" class="enfant-btn flex-1 rounded-xl border-2 border-slate-200 bg-white py-2 text-sm font-semibold text-slate-600 hover:border-slate-300 transition-all">3</button>
+                            <button type="button" data-enfants="4" class="enfant-btn flex-1 rounded-xl border-2 border-slate-200 bg-white py-2 text-sm font-semibold text-slate-600 hover:border-slate-300 transition-all">4+</button>
+                        </div>
+
+                        <p class="text-xs text-slate-400">Estimation basee sur le bareme progressif de l'impot sur le revenu.</p>
+                    </div>
                 </div>
 
                 <!-- Right Column: Results (sticky) -->
@@ -474,7 +541,7 @@
                                 <span class="text-sm font-bold text-slate-900" id="result-net-avant">1 950 €</span>
                             </div>
                             <div class="flex justify-between items-center">
-                                <span class="text-sm text-slate-500">Impôt estimé <span class="text-xs">(célibataire)</span></span>
+                                <span class="text-sm text-slate-500">Impôt estimé <span class="text-xs" id="result-impot-label">(1 part)</span></span>
                                 <span class="text-sm font-semibold text-orange-500" id="result-impot">- 100 €</span>
                             </div>
                             <div class="h-px bg-slate-100"></div>
@@ -1127,28 +1194,61 @@
         // State
         let statut = 'non-cadre';
         let tempsTravail = 1;
-        let updatingFrom = null; // prevent loops
+        let situation = 'single';
+        let nbEnfants = 0;
+        let updatingFrom = null;
 
         // DOM refs
-        const inputSalaire = document.getElementById('input-salaire');
-        const inputSalaireAnnuel = document.getElementById('input-salaire-annuel');
+        const inputBrutM = document.getElementById('input-brut-m');
+        const inputBrutA = document.getElementById('input-brut-a');
+        const inputNetM = document.getElementById('input-net-m');
+        const inputNetA = document.getElementById('input-net-a');
+        const inputNetAIM = document.getElementById('input-netai-m');
+        const inputNetAIA = document.getElementById('input-netai-a');
         const sliderSalaire = document.getElementById('slider-salaire');
         const sliderTemps = document.getElementById('slider-temps');
         const displayTemps = document.getElementById('display-temps');
+        const displayParts = document.getElementById('display-parts');
+
+        function getFiscalOptions() {
+            const qf = calculerNbParts(situation, nbEnfants);
+            return { nbParts: qf.nbParts, partsBase: qf.partsBase };
+        }
+
+        function getPartsLabel() {
+            const qf = calculerNbParts(situation, nbEnfants);
+            var n = qf.nbParts;
+            if (n === 1) return '1 part';
+            // Format: 1.5 -> "1,5 parts"
+            var s = n % 1 === 0 ? n.toString() : n.toFixed(1).replace('.', ',');
+            return s + ' parts';
+        }
+
+        function highlightActiveInput(activeId) {
+            var allInputs = [inputBrutM, inputBrutA, inputNetM, inputNetA, inputNetAIM, inputNetAIA];
+            allInputs.forEach(function(inp) {
+                if (inp.id === activeId) {
+                    inp.classList.remove('border-slate-200', 'bg-slate-50');
+                    inp.classList.add('border-brand-500', 'bg-white');
+                } else {
+                    inp.classList.remove('border-brand-500');
+                    inp.classList.add('border-slate-200', 'bg-slate-50');
+                }
+            });
+        }
 
         // Initialize
         function init() {
-            // Load from URL params
             const params = new URLSearchParams(window.location.search);
             if (params.has('brut')) {
                 const brut = parseFloat(params.get('brut')) || 0;
-                inputSalaire.value = brut;
-                inputSalaireAnnuel.value = Math.round(brut * 12);
+                inputBrutM.value = brut;
+                inputBrutA.value = Math.round(brut * 12);
                 sliderSalaire.value = brut;
             }
             if (params.has('statut')) {
                 const s = params.get('statut');
-                const radio = document.querySelector(`input[name="statut"][value="${s}"]`);
+                const radio = document.querySelector('input[name="statut"][value="' + s + '"]');
                 if (radio) { statut = s; radio.checked = true; }
             }
             if (params.has('temps')) {
@@ -1161,61 +1261,175 @@
 
             bindEvents();
             requestAnimationFrame(() => {
-                calculate();
+                syncFromBrutM();
                 populateMontantsTable();
             });
 
-            // Si on arrive via un lien partagé, scroller vers les résultats
             if (params.has('brut')) {
                 setTimeout(() => document.getElementById('resultats').scrollIntoView({ behavior: 'smooth' }), 300);
             }
         }
 
-        function syncFromMensuel() {
-            if (updatingFrom === 'annuel') return;
-            updatingFrom = 'mensuel';
-            const m = parseFloat(inputSalaire.value) || 0;
-            inputSalaireAnnuel.value = Math.round(m * 12);
+        // ---- 6 sync functions ----
+        function syncFromBrutM() {
+            if (updatingFrom) return;
+            updatingFrom = 'brut-m';
+            const m = parseFloat(inputBrutM.value) || 0;
+            inputBrutA.value = Math.round(m * 12);
             sliderSalaire.value = m;
             updateSliderProgress(sliderSalaire);
-            calculate();
+            var result = calculerBrutVersNet(m, statut, tempsTravail, getFiscalOptions());
+            inputNetM.value = Math.round(result.netAvantImpot);
+            inputNetA.value = Math.round(result.netAvantImpot * 12);
+            inputNetAIM.value = Math.round(result.netApresImpot);
+            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            highlightActiveInput('input-brut-m');
+            updateUI(result);
             updatingFrom = null;
         }
 
-        function syncFromAnnuel() {
-            if (updatingFrom === 'mensuel') return;
-            updatingFrom = 'annuel';
-            const a = parseFloat(inputSalaireAnnuel.value) || 0;
-            inputSalaire.value = Math.round(a / 12);
+        function syncFromBrutA() {
+            if (updatingFrom) return;
+            updatingFrom = 'brut-a';
+            const a = parseFloat(inputBrutA.value) || 0;
+            inputBrutM.value = Math.round(a / 12);
             sliderSalaire.value = Math.round(a / 12);
             updateSliderProgress(sliderSalaire);
-            calculate();
+            var result = calculerBrutVersNet(Math.round(a / 12), statut, tempsTravail, getFiscalOptions());
+            inputNetM.value = Math.round(result.netAvantImpot);
+            inputNetA.value = Math.round(result.netAvantImpot * 12);
+            inputNetAIM.value = Math.round(result.netApresImpot);
+            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            highlightActiveInput('input-brut-a');
+            updateUI(result);
             updatingFrom = null;
+        }
+
+        function syncFromNetM() {
+            if (updatingFrom) return;
+            updatingFrom = 'net-m';
+            const m = parseFloat(inputNetM.value) || 0;
+            inputNetA.value = Math.round(m * 12);
+            var result = calculerNetVersBrut(m, statut, tempsTravail, getFiscalOptions());
+            inputBrutM.value = Math.round(result.brutMensuel);
+            inputBrutA.value = Math.round(result.brutAnnuel);
+            sliderSalaire.value = Math.round(result.brutMensuel);
+            updateSliderProgress(sliderSalaire);
+            inputNetAIM.value = Math.round(result.netApresImpot);
+            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            highlightActiveInput('input-net-m');
+            updateUI(result);
+            updatingFrom = null;
+        }
+
+        function syncFromNetA() {
+            if (updatingFrom) return;
+            updatingFrom = 'net-a';
+            const a = parseFloat(inputNetA.value) || 0;
+            inputNetM.value = Math.round(a / 12);
+            var result = calculerNetVersBrut(Math.round(a / 12), statut, tempsTravail, getFiscalOptions());
+            inputBrutM.value = Math.round(result.brutMensuel);
+            inputBrutA.value = Math.round(result.brutAnnuel);
+            sliderSalaire.value = Math.round(result.brutMensuel);
+            updateSliderProgress(sliderSalaire);
+            inputNetAIM.value = Math.round(result.netApresImpot);
+            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            highlightActiveInput('input-net-a');
+            updateUI(result);
+            updatingFrom = null;
+        }
+
+        function syncFromNetAIM() {
+            if (updatingFrom) return;
+            updatingFrom = 'netai-m';
+            const m = parseFloat(inputNetAIM.value) || 0;
+            inputNetAIA.value = Math.round(m * 12);
+            var result = calculerNetApresImpotVersBrut(m, statut, tempsTravail, getFiscalOptions());
+            inputBrutM.value = Math.round(result.brutMensuel);
+            inputBrutA.value = Math.round(result.brutAnnuel);
+            sliderSalaire.value = Math.round(result.brutMensuel);
+            updateSliderProgress(sliderSalaire);
+            inputNetM.value = Math.round(result.netAvantImpot);
+            inputNetA.value = Math.round(result.netAvantImpot * 12);
+            highlightActiveInput('input-netai-m');
+            updateUI(result);
+            updatingFrom = null;
+        }
+
+        function syncFromNetAIA() {
+            if (updatingFrom) return;
+            updatingFrom = 'netai-a';
+            const a = parseFloat(inputNetAIA.value) || 0;
+            inputNetAIM.value = Math.round(a / 12);
+            var result = calculerNetApresImpotVersBrut(Math.round(a / 12), statut, tempsTravail, getFiscalOptions());
+            inputBrutM.value = Math.round(result.brutMensuel);
+            inputBrutA.value = Math.round(result.brutAnnuel);
+            sliderSalaire.value = Math.round(result.brutMensuel);
+            updateSliderProgress(sliderSalaire);
+            inputNetM.value = Math.round(result.netAvantImpot);
+            inputNetA.value = Math.round(result.netAvantImpot * 12);
+            highlightActiveInput('input-netai-a');
+            updateUI(result);
+            updatingFrom = null;
+        }
+
+        function recalcFromBrut() {
+            updatingFrom = null;
+            syncFromBrutM();
         }
 
         function bindEvents() {
-            inputSalaire.addEventListener('input', syncFromMensuel);
-
-            inputSalaireAnnuel.addEventListener('input', syncFromAnnuel);
+            inputBrutM.addEventListener('input', syncFromBrutM);
+            inputBrutA.addEventListener('input', syncFromBrutA);
+            inputNetM.addEventListener('input', syncFromNetM);
+            inputNetA.addEventListener('input', syncFromNetA);
+            inputNetAIM.addEventListener('input', syncFromNetAIM);
+            inputNetAIA.addEventListener('input', syncFromNetAIA);
 
             sliderSalaire.addEventListener('input', () => {
-                inputSalaire.value = sliderSalaire.value;
-                inputSalaireAnnuel.value = Math.round(parseFloat(sliderSalaire.value) * 12);
+                inputBrutM.value = sliderSalaire.value;
+                inputBrutA.value = Math.round(parseFloat(sliderSalaire.value) * 12);
                 updateSliderProgress(sliderSalaire);
-                calculate();
+                updatingFrom = null;
+                syncFromBrutM();
             });
 
             sliderTemps.addEventListener('input', () => {
                 tempsTravail = parseInt(sliderTemps.value) / 100;
                 displayTemps.textContent = sliderTemps.value + '%';
                 updateSliderProgress(sliderTemps);
-                calculate();
+                recalcFromBrut();
             });
 
             document.querySelectorAll('input[name="statut"]').forEach(radio => {
                 radio.addEventListener('change', () => {
                     statut = radio.value;
-                    calculate();
+                    recalcFromBrut();
+                });
+            });
+
+            // Situation fiscale
+            document.querySelectorAll('input[name="situation"]').forEach(radio => {
+                radio.addEventListener('change', () => {
+                    situation = radio.value;
+                    displayParts.textContent = getPartsLabel();
+                    recalcFromBrut();
+                });
+            });
+
+            // Enfants buttons
+            document.querySelectorAll('.enfant-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    var val = parseInt(btn.getAttribute('data-enfants'));
+                    nbEnfants = val;
+                    document.querySelectorAll('.enfant-btn').forEach(b => {
+                        b.classList.remove('border-brand-500', 'bg-brand-50', 'text-brand-700');
+                        b.classList.add('border-slate-200', 'bg-white', 'text-slate-600');
+                    });
+                    btn.classList.remove('border-slate-200', 'bg-white', 'text-slate-600');
+                    btn.classList.add('border-brand-500', 'bg-brand-50', 'text-brand-700');
+                    displayParts.textContent = getPartsLabel();
+                    recalcFromBrut();
                 });
             });
 
@@ -1240,24 +1454,24 @@
             // Share
             function getShareUrl() {
                 const url = new URL(window.location.href.split('?')[0]);
-                url.searchParams.set('brut', inputSalaire.value);
+                url.searchParams.set('brut', inputBrutM.value);
                 url.searchParams.set('statut', statut);
                 url.searchParams.set('temps', sliderTemps.value);
                 return url.toString();
             }
             function getShareText() {
                 const net = document.getElementById('result-net').textContent;
-                return `Mon salaire : ${inputSalaire.value} € brut = ${net} net/mois`;
+                return 'Mon salaire : ' + inputBrutM.value + ' \u20AC brut = ' + net + ' net/mois';
             }
             function updateShareLinks(shareUrl) {
                 const text = getShareText();
                 const encoded = encodeURIComponent(shareUrl);
                 const encodedText = encodeURIComponent(text);
-                document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodedText}%20${encoded}`;
-                document.getElementById('share-twitter').href = `https://x.com/intent/tweet?text=${encodedText}&url=${encoded}`;
-                document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encoded}`;
-                document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encoded}`;
-                document.getElementById('share-email').href = `mailto:?subject=${encodeURIComponent('Calcul Salaire Brut Net')}&body=${encodedText}%0A${encoded}`;
+                document.getElementById('share-whatsapp').href = 'https://wa.me/?text=' + encodedText + '%20' + encoded;
+                document.getElementById('share-twitter').href = 'https://x.com/intent/tweet?text=' + encodedText + '&url=' + encoded;
+                document.getElementById('share-facebook').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encoded;
+                document.getElementById('share-linkedin').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encoded;
+                document.getElementById('share-email').href = 'mailto:?subject=' + encodeURIComponent('Calcul Salaire Brut Net') + '&body=' + encodedText + '%0A' + encoded;
             }
             document.getElementById('btn-share').addEventListener('click', async () => {
                 const shareUrl = getShareUrl();
@@ -1265,7 +1479,7 @@
                     try {
                         await navigator.share({ title: 'Calcul Salaire Brut Net', text: getShareText(), url: shareUrl });
                         return;
-                    } catch(e) { /* cancelled or fallback */ }
+                    } catch(e) {}
                 }
                 document.getElementById('share-url').value = shareUrl;
                 updateShareLinks(shareUrl);
@@ -1296,16 +1510,13 @@
             updateSliderProgress(sliderTemps);
         }
 
-
         function updateSliderProgress(slider) {
             const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
             slider.style.setProperty('--progress', pct + '%');
         }
 
-        function calculate() {
-            const brutMensuel = parseFloat(inputSalaire.value) || 0;
-
-            const result = calculerBrutVersNet(brutMensuel, statut, tempsTravail);
+        function updateUI(result) {
+            var partsLabel = getPartsLabel();
 
             // Main result
             document.getElementById('result-net').textContent = formatMoney(result.netAvantImpot);
@@ -1314,9 +1525,10 @@
             document.getElementById('result-cotisations').textContent = '- ' + formatMoney(result.totalSalarial);
             document.getElementById('result-net-avant').textContent = formatMoney(result.netAvantImpot);
             document.getElementById('result-impot').textContent = '- ' + formatMoney(result.impotMensuel);
+            document.getElementById('result-impot-label').textContent = '(' + partsLabel + ')';
             document.getElementById('result-net-apres').textContent = formatMoney(result.netApresImpot);
 
-            // Coût employeur
+            // Cout employeur
             document.getElementById('result-cout-employeur').textContent = formatMoney(result.coutEmployeur);
             document.getElementById('result-cotisations-patronales').textContent = '+ ' + formatMoney(result.totalPatronal);
 
@@ -1351,30 +1563,22 @@
             for (const key in details) {
                 const c = details[key];
                 if (c.montant < 0.01) continue;
-                html += `<tr class="border-b border-slate-50">
-                    <td class="py-2 text-slate-600">${c.label}</td>
-                    <td class="py-2 text-right text-slate-500">${(c.taux * 100).toFixed(2)}%</td>
-                    <td class="py-2 text-right font-medium text-slate-900">${formatMoneyPrecis(c.montant)}</td>
-                </tr>`;
+                html += '<tr class="border-b border-slate-50"><td class="py-2 text-slate-600">' + c.label + '</td><td class="py-2 text-right text-slate-500">' + (c.taux * 100).toFixed(2) + '%</td><td class="py-2 text-right font-medium text-slate-900">' + formatMoneyPrecis(c.montant) + '</td></tr>';
             }
-            html += `<tr class="border-t border-slate-200 font-semibold">
-                <td class="py-2 text-slate-900">Total</td>
-                <td class="py-2"></td>
-                <td class="py-2 text-right text-slate-900">${formatMoneyPrecis(total)}</td>
-            </tr>`;
+            html += '<tr class="border-t border-slate-200 font-semibold"><td class="py-2 text-slate-900">Total</td><td class="py-2"></td><td class="py-2 text-right text-slate-900">' + formatMoneyPrecis(total) + '</td></tr>';
             tbody.innerHTML = html;
         }
 
         function exportPDF() {
-            const brutMensuel = parseFloat(inputSalaire.value) || 0;
-            const result = calculerBrutVersNet(brutMensuel, statut, tempsTravail);
+            const brutMensuel = parseFloat(inputBrutM.value) || 0;
+            const result = calculerBrutVersNet(brutMensuel, statut, tempsTravail, getFiscalOptions());
+            var partsLabel = getPartsLabel();
 
             const statutLabel = statut === 'cadre' ? 'Cadre' : 'Non-cadre';
             const tempsLabel = Math.round(tempsTravail * 100) + '%';
             const now = new Date();
             const dateStr = now.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 
-            // Build cotisations salariales rows
             let cotSalRows = '';
             for (const key in result.detailCotisationsSalariales) {
                 const c = result.detailCotisationsSalariales[key];
@@ -1383,7 +1587,6 @@
             }
             cotSalRows += '<tr class="total-row"><td>Total cotisations salariales</td><td></td><td>' + formatMoneyPrecis(result.totalSalarial) + '</td></tr>';
 
-            // Build cotisations patronales rows
             let cotPatRows = '';
             for (const key in result.detailCotisationsPatronales) {
                 const c = result.detailCotisationsPatronales[key];
@@ -1396,26 +1599,23 @@
             printEl.innerHTML =
                 '<h2>Simulation Salaire Brut Net</h2>' +
                 '<p class="print-date">Date de simulation : ' + dateStr + '</p>' +
-
                 '<div class="print-params">' +
                     '<span>Salaire brut mensuel : <strong>' + formatMoney(result.brutMensuel) + '</strong></span>' +
                     '<span>Statut : <strong>' + statutLabel + '</strong></span>' +
                     '<span>Temps de travail : <strong>' + tempsLabel + '</strong></span>' +
+                    '<span>Situation fiscale : <strong>' + partsLabel + '</strong></span>' +
                 '</div>' +
-
                 '<div class="print-highlight">' + formatMoney(result.netAvantImpot) + '</div>' +
                 '<p class="print-highlight-label">Salaire net mensuel avant impôt</p>' +
-
                 '<h2>Résultats principaux</h2>' +
                 '<table>' +
                     '<tr><td>Salaire brut</td><td>' + formatMoney(result.brutMensuel) + '</td></tr>' +
                     '<tr><td>Cotisations salariales</td><td>- ' + formatMoney(result.totalSalarial) + '</td></tr>' +
                     '<tr><td>Net avant impôt</td><td>' + formatMoney(result.netAvantImpot) + '</td></tr>' +
-                    '<tr><td>Impôt estimé (célibataire)</td><td>- ' + formatMoney(result.impotMensuel) + '</td></tr>' +
+                    '<tr><td>Impôt estimé (' + partsLabel + ')</td><td>- ' + formatMoney(result.impotMensuel) + '</td></tr>' +
                     '<tr style="font-weight:700"><td>Net après impôt</td><td>' + formatMoney(result.netApresImpot) + '</td></tr>' +
                     '<tr><td>Coût total employeur</td><td>' + formatMoney(result.coutEmployeur) + '</td></tr>' +
                 '</table>' +
-
                 '<h2>Récapitulatif mensuel et annuel</h2>' +
                 '<table>' +
                     '<thead><tr><th></th><th>Mensuel</th><th>Annuel</th></tr></thead>' +
@@ -1426,19 +1626,16 @@
                         '<tr><td>Coût employeur</td><td>' + formatMoney(result.coutEmployeur) + '</td><td>' + formatMoney(result.coutEmployeur * 12) + '</td></tr>' +
                     '</tbody>' +
                 '</table>' +
-
                 '<h2>Détail des cotisations salariales</h2>' +
                 '<table>' +
                     '<thead><tr><th>Cotisation</th><th>Taux</th><th>Montant</th></tr></thead>' +
                     '<tbody>' + cotSalRows + '</tbody>' +
                 '</table>' +
-
                 '<h2>Détail des cotisations patronales</h2>' +
                 '<table>' +
                     '<thead><tr><th>Cotisation</th><th>Taux</th><th>Montant</th></tr></thead>' +
                     '<tbody>' + cotPatRows + '</tbody>' +
                 '</table>' +
-
                 '<div class="print-footer">Généré sur salairebrutonet.com – Estimation indicative, ne remplace pas un bulletin de paie officiel</div>';
 
             window.print();
@@ -1451,13 +1648,13 @@
             montants.forEach(m => {
                 const nc = calculerBrutVersNet(m, 'non-cadre', 1);
                 const c = calculerBrutVersNet(m, 'cadre', 1);
-                html += `<tr class="border-b border-slate-100 hover:bg-slate-50">
-                    <td class="py-3 text-slate-900 font-medium"><a href="/${m}-euros-brut-en-net/" class="text-brand-700 hover:text-brand-800">${m.toLocaleString('fr-FR')} €</a></td>
-                    <td class="py-3 text-right text-slate-900">${formatMoney(nc.netAvantImpot)}</td>
-                    <td class="py-3 text-right text-slate-900">${formatMoney(c.netAvantImpot)}</td>
-                    <td class="py-3 text-right text-slate-500">${formatMoney(m * 12)}</td>
-                    <td class="py-3 text-right text-slate-500">${formatMoney(nc.netAvantImpot * 12)}</td>
-                </tr>`;
+                html += '<tr class="border-b border-slate-100 hover:bg-slate-50">' +
+                    '<td class="py-3 text-slate-900 font-medium"><a href="/' + m + '-euros-brut-en-net/" class="text-brand-700 hover:text-brand-800">' + m.toLocaleString('fr-FR') + ' €</a></td>' +
+                    '<td class="py-3 text-right text-slate-900">' + formatMoney(nc.netAvantImpot) + '</td>' +
+                    '<td class="py-3 text-right text-slate-900">' + formatMoney(c.netAvantImpot) + '</td>' +
+                    '<td class="py-3 text-right text-slate-500">' + formatMoney(m * 12) + '</td>' +
+                    '<td class="py-3 text-right text-slate-500">' + formatMoney(nc.netAvantImpot * 12) + '</td>' +
+                '</tr>';
             });
             tbody.innerHTML = html;
         }
@@ -1469,20 +1666,14 @@
             const containerBrut = document.getElementById('liens-montants');
             let htmlBrut = '';
             montantsBrut.forEach(m => {
-                htmlBrut += `<a href="/${m}-euros-brut-en-net/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all">
-                    <span class="block text-lg font-bold text-slate-900">${m.toLocaleString('fr-FR')} €</span>
-                    <span class="block text-xs text-slate-500">brut en net</span>
-                </a>`;
+                htmlBrut += '<a href="/' + m + '-euros-brut-en-net/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-lg font-bold text-slate-900">' + m.toLocaleString('fr-FR') + ' €</span><span class="block text-xs text-slate-500">brut en net</span></a>';
             });
             containerBrut.innerHTML = htmlBrut;
 
             const containerNet = document.getElementById('liens-montants-net');
             let htmlNet = '';
             montantsNet.forEach(m => {
-                htmlNet += `<a href="/${m}-euros-net-en-brut/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all">
-                    <span class="block text-lg font-bold text-slate-900">${m.toLocaleString('fr-FR')} €</span>
-                    <span class="block text-xs text-slate-500">net en brut</span>
-                </a>`;
+                htmlNet += '<a href="/' + m + '-euros-net-en-brut/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-lg font-bold text-slate-900">' + m.toLocaleString('fr-FR') + ' €</span><span class="block text-xs text-slate-500">net en brut</span></a>';
             });
             containerNet.innerHTML = htmlNet;
         }
