@@ -459,18 +459,25 @@
                     </div>
 
                     <!-- Card: Statut & Temps de travail -->
+                    <style>
+                        .statut-toggle { position: relative; display: flex; background: #f1f5f9; border-radius: 0.75rem; padding: 3px; }
+                        .statut-toggle label { flex: 1; cursor: pointer; text-align: center; }
+                        .statut-toggle input { display: none; }
+                        .statut-toggle .statut-btn { display: block; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; color: #64748b; border-radius: 0.625rem; transition: all 0.2s; }
+                        .statut-toggle input:checked + .statut-btn { background: white; color: #0284c7; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+                    </style>
                     <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                         <!-- Statut -->
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-sm font-semibold text-slate-700">Statut</span>
-                            <div class="flex rounded-lg border border-slate-200 overflow-hidden">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="statut" value="non-cadre" class="peer sr-only" checked>
-                                    <div class="px-4 py-2 text-sm font-medium text-slate-500 peer-checked:bg-brand-500 peer-checked:text-white transition-all">Non-cadre</div>
+                        <div class="mb-4">
+                            <span class="text-sm font-semibold text-slate-700 mb-2 block">Statut</span>
+                            <div class="statut-toggle">
+                                <label>
+                                    <input type="radio" name="statut" value="non-cadre" checked>
+                                    <span class="statut-btn">Non-cadre</span>
                                 </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="statut" value="cadre" class="peer sr-only">
-                                    <div class="px-4 py-2 text-sm font-medium text-slate-500 border-l border-slate-200 peer-checked:bg-brand-500 peer-checked:text-white transition-all">Cadre</div>
+                                <label>
+                                    <input type="radio" name="statut" value="cadre">
+                                    <span class="statut-btn">Cadre</span>
                                 </label>
                             </div>
                         </div>
