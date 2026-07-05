@@ -404,12 +404,12 @@
                             <div class="salary-row flex items-center gap-3 mb-2">
                                 <div class="salary-label w-36 text-sm font-semibold text-slate-700">Salaire brut</div>
                                 <div class="flex-1 relative">
-                                    <input type="text" inputmode="decimal" id="input-brut-m" value="2500"
+                                    <input type="text" inputmode="decimal" id="input-brut-m" value="2 500"
                                         class="salary-input w-full rounded-xl border-2 border-brand-500 bg-white px-4 py-3 text-xl font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
                                     <span class="salary-euro absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
                                 </div>
                                 <div class="flex-1 relative">
-                                    <input type="text" inputmode="decimal" id="input-brut-a" value="30000"
+                                    <input type="text" inputmode="decimal" id="input-brut-a" value="30 000"
                                         class="salary-input w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-3 text-xl font-bold text-slate-900 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
                                     <span class="salary-euro absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
                                 </div>
@@ -1237,6 +1237,10 @@
         let nbEnfants = 0;
         let updatingFrom = null;
 
+        // Format helpers
+        function fmt(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+        function unfmt(s) { return parseFloat(s.replace(/\s/g, '')) || 0; }
+
         // DOM refs
         const inputBrutM = document.getElementById('input-brut-m');
         const inputBrutA = document.getElementById('input-brut-a');
@@ -1281,8 +1285,8 @@
             const params = new URLSearchParams(window.location.search);
             if (params.has('brut')) {
                 const brut = parseFloat(params.get('brut')) || 0;
-                inputBrutM.value = brut;
-                inputBrutA.value = Math.round(brut * 12);
+                inputBrutM.value = fmt(brut);
+                inputBrutA.value = fmt(brut * 12);
                 sliderSalaire.value = brut;
             }
             if (params.has('statut')) {
@@ -1313,15 +1317,15 @@
         function syncFromBrutM() {
             if (updatingFrom) return;
             updatingFrom = 'brut-m';
-            const m = parseFloat(inputBrutM.value) || 0;
-            inputBrutA.value = Math.round(m * 12);
+            const m = unfmt(inputBrutM.value);
+            inputBrutA.value = fmt(m * 12);
             sliderSalaire.value = m;
             updateSliderProgress(sliderSalaire);
             var result = calculerBrutVersNet(m, statut, tempsTravail, getFiscalOptions());
-            inputNetM.value = Math.round(result.netAvantImpot);
-            inputNetA.value = Math.round(result.netAvantImpot * 12);
-            inputNetAIM.value = Math.round(result.netApresImpot);
-            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            inputNetM.value = fmt(result.netAvantImpot);
+            inputNetA.value = fmt(result.netAvantImpot * 12);
+            inputNetAIM.value = fmt(result.netApresImpot);
+            inputNetAIA.value = fmt(result.netApresImpot * 12);
             highlightActiveInput('input-brut-m');
             updateUI(result);
             updatingFrom = null;
@@ -1330,15 +1334,15 @@
         function syncFromBrutA() {
             if (updatingFrom) return;
             updatingFrom = 'brut-a';
-            const a = parseFloat(inputBrutA.value) || 0;
-            inputBrutM.value = Math.round(a / 12);
+            const a = unfmt(inputBrutA.value);
+            inputBrutM.value = fmt(a / 12);
             sliderSalaire.value = Math.round(a / 12);
             updateSliderProgress(sliderSalaire);
             var result = calculerBrutVersNet(Math.round(a / 12), statut, tempsTravail, getFiscalOptions());
-            inputNetM.value = Math.round(result.netAvantImpot);
-            inputNetA.value = Math.round(result.netAvantImpot * 12);
-            inputNetAIM.value = Math.round(result.netApresImpot);
-            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            inputNetM.value = fmt(result.netAvantImpot);
+            inputNetA.value = fmt(result.netAvantImpot * 12);
+            inputNetAIM.value = fmt(result.netApresImpot);
+            inputNetAIA.value = fmt(result.netApresImpot * 12);
             highlightActiveInput('input-brut-a');
             updateUI(result);
             updatingFrom = null;
@@ -1347,15 +1351,15 @@
         function syncFromNetM() {
             if (updatingFrom) return;
             updatingFrom = 'net-m';
-            const m = parseFloat(inputNetM.value) || 0;
-            inputNetA.value = Math.round(m * 12);
+            const m = unfmt(inputNetM.value);
+            inputNetA.value = fmt(m * 12);
             var result = calculerNetVersBrut(m, statut, tempsTravail, getFiscalOptions());
-            inputBrutM.value = Math.round(result.brutMensuel);
-            inputBrutA.value = Math.round(result.brutAnnuel);
+            inputBrutM.value = fmt(result.brutMensuel);
+            inputBrutA.value = fmt(result.brutAnnuel);
             sliderSalaire.value = Math.round(result.brutMensuel);
             updateSliderProgress(sliderSalaire);
-            inputNetAIM.value = Math.round(result.netApresImpot);
-            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            inputNetAIM.value = fmt(result.netApresImpot);
+            inputNetAIA.value = fmt(result.netApresImpot * 12);
             highlightActiveInput('input-net-m');
             updateUI(result);
             updatingFrom = null;
@@ -1364,15 +1368,15 @@
         function syncFromNetA() {
             if (updatingFrom) return;
             updatingFrom = 'net-a';
-            const a = parseFloat(inputNetA.value) || 0;
-            inputNetM.value = Math.round(a / 12);
+            const a = unfmt(inputNetA.value);
+            inputNetM.value = fmt(a / 12);
             var result = calculerNetVersBrut(Math.round(a / 12), statut, tempsTravail, getFiscalOptions());
-            inputBrutM.value = Math.round(result.brutMensuel);
-            inputBrutA.value = Math.round(result.brutAnnuel);
+            inputBrutM.value = fmt(result.brutMensuel);
+            inputBrutA.value = fmt(result.brutAnnuel);
             sliderSalaire.value = Math.round(result.brutMensuel);
             updateSliderProgress(sliderSalaire);
-            inputNetAIM.value = Math.round(result.netApresImpot);
-            inputNetAIA.value = Math.round(result.netApresImpot * 12);
+            inputNetAIM.value = fmt(result.netApresImpot);
+            inputNetAIA.value = fmt(result.netApresImpot * 12);
             highlightActiveInput('input-net-a');
             updateUI(result);
             updatingFrom = null;
@@ -1381,15 +1385,15 @@
         function syncFromNetAIM() {
             if (updatingFrom) return;
             updatingFrom = 'netai-m';
-            const m = parseFloat(inputNetAIM.value) || 0;
-            inputNetAIA.value = Math.round(m * 12);
+            const m = unfmt(inputNetAIM.value);
+            inputNetAIA.value = fmt(m * 12);
             var result = calculerNetApresImpotVersBrut(m, statut, tempsTravail, getFiscalOptions());
-            inputBrutM.value = Math.round(result.brutMensuel);
-            inputBrutA.value = Math.round(result.brutAnnuel);
+            inputBrutM.value = fmt(result.brutMensuel);
+            inputBrutA.value = fmt(result.brutAnnuel);
             sliderSalaire.value = Math.round(result.brutMensuel);
             updateSliderProgress(sliderSalaire);
-            inputNetM.value = Math.round(result.netAvantImpot);
-            inputNetA.value = Math.round(result.netAvantImpot * 12);
+            inputNetM.value = fmt(result.netAvantImpot);
+            inputNetA.value = fmt(result.netAvantImpot * 12);
             highlightActiveInput('input-netai-m');
             updateUI(result);
             updatingFrom = null;
@@ -1398,15 +1402,15 @@
         function syncFromNetAIA() {
             if (updatingFrom) return;
             updatingFrom = 'netai-a';
-            const a = parseFloat(inputNetAIA.value) || 0;
-            inputNetAIM.value = Math.round(a / 12);
+            const a = unfmt(inputNetAIA.value);
+            inputNetAIM.value = fmt(a / 12);
             var result = calculerNetApresImpotVersBrut(Math.round(a / 12), statut, tempsTravail, getFiscalOptions());
-            inputBrutM.value = Math.round(result.brutMensuel);
-            inputBrutA.value = Math.round(result.brutAnnuel);
+            inputBrutM.value = fmt(result.brutMensuel);
+            inputBrutA.value = fmt(result.brutAnnuel);
             sliderSalaire.value = Math.round(result.brutMensuel);
             updateSliderProgress(sliderSalaire);
-            inputNetM.value = Math.round(result.netAvantImpot);
-            inputNetA.value = Math.round(result.netAvantImpot * 12);
+            inputNetM.value = fmt(result.netAvantImpot);
+            inputNetA.value = fmt(result.netAvantImpot * 12);
             highlightActiveInput('input-netai-a');
             updateUI(result);
             updatingFrom = null;
@@ -1426,8 +1430,8 @@
             inputNetAIA.addEventListener('input', syncFromNetAIA);
 
             sliderSalaire.addEventListener('input', () => {
-                inputBrutM.value = sliderSalaire.value;
-                inputBrutA.value = Math.round(parseFloat(sliderSalaire.value) * 12);
+                inputBrutM.value = fmt(sliderSalaire.value);
+                inputBrutA.value = fmt(parseFloat(sliderSalaire.value) * 12);
                 updateSliderProgress(sliderSalaire);
                 updatingFrom = null;
                 syncFromBrutM();
@@ -1674,7 +1678,7 @@
         }
 
         function exportPDF() {
-            const brutMensuel = parseFloat(inputBrutM.value) || 0;
+            const brutMensuel = unfmt(inputBrutM.value);
             const result = calculerBrutVersNet(brutMensuel, statut, tempsTravail, getFiscalOptions());
             var partsLabel = getPartsLabel();
 
