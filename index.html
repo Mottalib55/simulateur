@@ -456,20 +456,16 @@
                             <span>0 €</span>
                             <span>20 000 €/mois</span>
                         </div>
-                    </div>
 
-                    <!-- Card: Statut & Temps de travail -->
-                    <style>
-                        .statut-toggle { position: relative; display: flex; background: #f1f5f9; border-radius: 0.75rem; padding: 3px; }
-                        .statut-toggle label { flex: 1; cursor: pointer; text-align: center; }
-                        .statut-toggle input { display: none; }
-                        .statut-toggle .statut-btn { display: block; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; color: #64748b; border-radius: 0.625rem; transition: all 0.2s; }
-                        .statut-toggle input:checked + .statut-btn { background: white; color: #0284c7; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-                    </style>
-                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                         <!-- Statut -->
-                        <div class="mb-4">
-                            <span class="text-sm font-semibold text-slate-700 mb-2 block">Statut</span>
+                        <style>
+                            .statut-toggle { position: relative; display: flex; background: #f1f5f9; border-radius: 0.75rem; padding: 3px; }
+                            .statut-toggle label { flex: 1; cursor: pointer; text-align: center; }
+                            .statut-toggle input { display: none; }
+                            .statut-toggle .statut-btn { display: block; padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 600; color: #64748b; border-radius: 0.625rem; transition: all 0.2s; }
+                            .statut-toggle input:checked + .statut-btn { background: white; color: #0284c7; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+                        </style>
+                        <div class="mt-4">
                             <div class="statut-toggle">
                                 <label>
                                     <input type="radio" name="statut" value="non-cadre" checked>
@@ -481,16 +477,8 @@
                                 </label>
                             </div>
                         </div>
-                        <!-- Temps de travail -->
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm font-semibold text-slate-700">Temps de travail</span>
-                            <span id="display-temps" class="text-sm font-bold text-brand-700">100%</span>
-                        </div>
-                        <input type="range" id="slider-temps" min="10" max="100" step="5" value="100" aria-label="Ajuster le temps de travail" class="w-full">
-                        <div class="flex justify-between text-xs text-slate-400 mt-1">
-                            <span>10%</span>
-                            <span>100%</span>
-                        </div>
+                        <!-- Temps de travail fixé à 100% -->
+                        <input type="hidden" id="slider-temps" value="100">
                     </div>
 
                     <!-- Card: Situation fiscale -->
@@ -1441,7 +1429,7 @@
 
             sliderTemps.addEventListener('input', () => {
                 tempsTravail = parseInt(sliderTemps.value) / 100;
-                displayTemps.textContent = sliderTemps.value + '%';
+                if (displayTemps) displayTemps.textContent = sliderTemps.value + '%';
                 updateSliderProgress(sliderTemps);
                 recalcFromBrut();
             });
