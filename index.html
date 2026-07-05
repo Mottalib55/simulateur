@@ -710,15 +710,21 @@
         <section class="bg-white border-t border-slate-200 py-16 px-4">
             <div class="mx-auto max-w-7xl">
                 <h2 id="tableau-conversion" class="text-2xl font-bold text-slate-900 mb-8 text-center">Tableau de conversion Brut → Net 2026</h2>
+                <style>
+                    @media (max-width: 639px) {
+                        .col-annual { display: none !important; }
+                        .table-conv th, .table-conv td { padding: 0.625rem 0.25rem !important; font-size: 0.8rem !important; }
+                    }
+                </style>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
+                    <table class="table-conv w-full text-sm">
                         <thead>
                             <tr class="border-b-2 border-slate-200">
-                                <th class="py-3 text-left font-semibold text-slate-900">Salaire brut mensuel</th>
+                                <th class="py-3 text-left font-semibold text-slate-900">Brut mensuel</th>
                                 <th class="py-3 text-right font-semibold text-slate-900">Net non-cadre</th>
                                 <th class="py-3 text-right font-semibold text-slate-900">Net cadre</th>
-                                <th class="py-3 text-right font-semibold text-slate-900">Brut annuel</th>
-                                <th class="py-3 text-right font-semibold text-slate-900">Net annuel (non-cadre)</th>
+                                <th class="py-3 text-right font-semibold text-slate-900 col-annual">Brut annuel</th>
+                                <th class="py-3 text-right font-semibold text-slate-900 col-annual">Net annuel</th>
                             </tr>
                         </thead>
                         <tbody id="table-montants"></tbody>
@@ -1750,8 +1756,8 @@
                     '<td class="py-3 text-slate-900 font-medium"><a href="/' + m + '-euros-brut-en-net/" class="text-brand-700 hover:text-brand-800">' + m.toLocaleString('fr-FR') + ' €</a></td>' +
                     '<td class="py-3 text-right text-slate-900">' + formatMoney(nc.netAvantImpot) + '</td>' +
                     '<td class="py-3 text-right text-slate-900">' + formatMoney(c.netAvantImpot) + '</td>' +
-                    '<td class="py-3 text-right text-slate-500">' + formatMoney(m * 12) + '</td>' +
-                    '<td class="py-3 text-right text-slate-500">' + formatMoney(nc.netAvantImpot * 12) + '</td>' +
+                    '<td class="py-3 text-right text-slate-500 col-annual">' + formatMoney(m * 12) + '</td>' +
+                    '<td class="py-3 text-right text-slate-500 col-annual">' + formatMoney(nc.netAvantImpot * 12) + '</td>' +
                 '</tr>';
             });
             tbody.innerHTML = html;
