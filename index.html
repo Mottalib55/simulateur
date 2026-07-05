@@ -458,49 +458,31 @@
                         </div>
                     </div>
 
-                    <!-- Card: Statut -->
+                    <!-- Card: Statut & Temps de travail -->
                     <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                        <!-- Statut -->
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-semibold text-slate-700">Statut</span>
+                            <div class="flex rounded-lg border border-slate-200 overflow-hidden">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="statut" value="non-cadre" class="peer sr-only" checked>
+                                    <div class="px-4 py-2 text-sm font-medium text-slate-500 peer-checked:bg-brand-500 peer-checked:text-white transition-all">Non-cadre</div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="statut" value="cadre" class="peer sr-only">
+                                    <div class="px-4 py-2 text-sm font-medium text-slate-500 border-l border-slate-200 peer-checked:bg-brand-500 peer-checked:text-white transition-all">Cadre</div>
+                                </label>
                             </div>
-                            <h2 class="text-lg font-semibold text-slate-900">Statut professionnel</h2>
                         </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="cursor-pointer">
-                                <input type="radio" name="statut" value="non-cadre" class="peer sr-only" checked>
-                                <div class="rounded-xl border-2 border-slate-200 bg-white p-4 text-center hover:border-slate-300 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
-                                    <svg class="h-6 w-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                    <span class="block text-sm font-semibold text-slate-700">Non-cadre</span>
-                                    <span class="block text-xs text-slate-600 mt-1">~22% de cotisations</span>
-                                </div>
-                            </label>
-                            <label class="cursor-pointer">
-                                <input type="radio" name="statut" value="cadre" class="peer sr-only">
-                                <div class="rounded-xl border-2 border-slate-200 bg-white p-4 text-center hover:border-slate-300 peer-checked:border-brand-500 peer-checked:bg-brand-50 transition-all">
-                                    <svg class="h-6 w-6 mx-auto mb-2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-                                    <span class="block text-sm font-semibold text-slate-700">Cadre</span>
-                                    <span class="block text-xs text-slate-600 mt-1">~25% de cotisations</span>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Card: Temps de travail -->
-                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="p-2 bg-brand-50 rounded-lg text-brand-600">
-                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                                </div>
-                                <h2 class="text-lg font-semibold text-slate-900">Temps de travail</h2>
-                            </div>
-                            <span id="display-temps" class="text-lg font-bold text-brand-700">100%</span>
+                        <!-- Temps de travail -->
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-semibold text-slate-700">Temps de travail</span>
+                            <span id="display-temps" class="text-sm font-bold text-brand-700">100%</span>
                         </div>
                         <input type="range" id="slider-temps" min="10" max="100" step="5" value="100" aria-label="Ajuster le temps de travail" class="w-full">
-                        <div class="flex justify-between text-xs text-slate-600 mt-1">
+                        <div class="flex justify-between text-xs text-slate-400 mt-1">
                             <span>10%</span>
-                            <span>100% (temps plein)</span>
+                            <span>100%</span>
                         </div>
                     </div>
 
