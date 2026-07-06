@@ -91,15 +91,15 @@ def estimer_impot_revenu(net_imposable_annuel):
         (180294, 0.41),
         (float("inf"), 0.45),
     ]
-    impot = 0
+    impôt = 0
     prev = 0
     for limit, taux in tranches:
         if net_imposable_annuel <= prev:
             break
         base = min(net_imposable_annuel, limit) - prev
-        impot += base * taux
+        impôt += base * taux
         prev = limit
-    return round(impot)
+    return round(impôt)
 
 
 def calculer_brut_vers_net(brut_mensuel, statut):
@@ -169,19 +169,19 @@ _INTERNAL_LINKS = [
     ("cotisations sociales", "/cotisations-sociales-salariales/"),
     ("cotisations patronales", "/cout-employeur/"),
     ("pr\u00e9l\u00e8vement \u00e0 la source", "/salaire-net-avant-apres-impot/"),
-    ("prelevement a la source", "/salaire-net-avant-apres-impot/"),
+    ("prélèvement à la source", "/salaire-net-avant-apres-impot/"),
     ("salaire m\u00e9dian fran\u00e7ais", "/salaire-moyen-france/"),
     ("salaire m\u00e9dian", "/salaire-moyen-france/"),
-    ("salaire median", "/salaire-moyen-france/"),
+    ("salaire médian", "/salaire-moyen-france/"),
     ("net imposable", "/salaire-net-imposable/"),
     ("fiche de paie", "/lire-fiche-de-paie/"),
     ("co\u00fbt total pour votre employeur", "/cout-employeur/"),
     ("co\u00fbt employeur", "/cout-employeur/"),
-    ("cout employeur", "/cout-employeur/"),
+    ("coût employeur", "/cout-employeur/"),
     ("AGIRC-ARRCO", "/salaire-brut-net-cadre/"),
     ("n\u00e9gociation salariale", "/negocier-salaire/"),
-    ("negociation salariale", "/negocier-salaire/"),
-    ("negocier", "/negocier-salaire/"),
+    ("négociation salariale", "/negocier-salaire/"),
+    ("négocier", "/negocier-salaire/"),
     ("Alsace-Moselle", "/salaire-brut-net-alsace-moselle/"),
     ("SMIC", "/smic-brut-net-2026/"),
 ]
@@ -481,20 +481,20 @@ def generate_sitemap():
         ("salaire-brut-net-journalier", "0.7"),
         ("taux-horaire-brut-net", "0.7"),
         # Éducatif
-        ("difference-salaire-brut-net", "0.7"),
+        ("différence-salaire-brut-net", "0.7"),
         ("cotisations-sociales-salariales", "0.7"),
         ("salaire-net-imposable", "0.7"),
-        ("salaire-net-avant-apres-impot", "0.7"),
+        ("salaire-net-avant-après-impôt", "0.7"),
         ("lire-fiche-de-paie", "0.7"),
         ("salaire-moyen-france", "0.7"),
-        ("negocier-salaire", "0.7"),
+        ("négocier-salaire", "0.7"),
         # Outils
-        ("cout-employeur", "0.7"),
-        ("calculateur-cout-employeur", "0.7"),
-        ("calculateur-heures-supplementaires", "0.7"),
+        ("coût-employeur", "0.7"),
+        ("calculateur-coût-employeur", "0.7"),
+        ("calculateur-heures-supplémentaires", "0.7"),
         ("prime-brut-en-net", "0.7"),
         ("13eme-mois-brut-net", "0.7"),
-        ("heures-supplementaires-brut-net", "0.7"),
+        ("heures-supplémentaires-brut-net", "0.7"),
         ("avantages-en-nature", "0.7"),
         ("comparateur-salaire-net-par-pays", "0.6"),
         # Nouvelles pages

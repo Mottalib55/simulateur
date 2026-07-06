@@ -68,7 +68,7 @@
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "WebApplication",
         "name": "Calculateur Salaire Brut Net 2026",
         "alternateName": ["Convertisseur Brut Net", "Salaire Brut Net", "Calcul Brut Net"],
@@ -85,7 +85,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "FAQPage",
         "mainEntity": [
             {
@@ -141,7 +141,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             {
@@ -155,12 +155,12 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "Organization",
         "name": "SalaireBrutNet",
         "url": "https://salairebrutonet.com",
         "logo": "https://salairebrutonet.com/img/logo.svg",
-        "description": "Simulateur gratuit de conversion salaire brut en net pour la France. Taux 2026 a jour, cadre et non-cadre.",
+        "description": "Simulateur gratuit de conversion salaire brut en net pour la France. Taux 2026 à jour, cadre et non-cadre.",
         "founder": {
             "@type": "Person",
             "name": "Mottalib Radif",
@@ -173,7 +173,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "Person",
         "name": "Mottalib Radif",
         "url": "https://salairebrutonet.com/a-propos/",
@@ -189,12 +189,12 @@
             "name": "SalaireBrutNet",
             "url": "https://salairebrutonet.com"
         },
-        "knowsAbout": ["salaire brut net", "cotisations sociales", "fiscalite francaise", "droit du travail", "finance personnelle"]
+        "knowsAbout": ["salaire brut net", "cotisations sociales", "fiscalité française", "droit du travail", "finance personnelle"]
     }
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "WebSite",
         "name": "SalaireBrutNet",
         "url": "https://salairebrutonet.com",
@@ -414,9 +414,9 @@
                                     <span class="salary-euro absolute right-3 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-400">€</span>
                                 </div>
                             </div>
-                            <!-- Row: Net avant impot -->
+                            <!-- Row: Net avant impôt -->
                             <div class="salary-row flex items-center gap-3 mb-2">
-                                <div class="salary-label w-36 text-sm font-medium text-slate-500" style="flex-shrink:0">Net avant impot</div>
+                                <div class="salary-label w-36 text-sm font-medium text-slate-500" style="flex-shrink:0">Net avant impôt</div>
                                 <div class="flex-1 relative">
                                     <input type="text" inputmode="decimal" id="input-net-m" value="1950"
                                         class="salary-input w-full rounded-xl border-2 border-slate-200 bg-slate-50 px-4 py-2.5 text-lg font-bold text-slate-700 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
@@ -434,9 +434,9 @@
                                 <div class="flex-1 border-t border-dashed border-slate-200"></div>
                                 <div class="flex-1 border-t border-dashed border-slate-200"></div>
                             </div>
-                            <!-- Row: Net apres impot -->
+                            <!-- Row: Net après impôt -->
                             <div class="salary-row flex items-center gap-3">
-                                <div class="salary-label w-36 text-sm font-semibold text-emerald-600" style="flex-shrink:0">Net apres impot</div>
+                                <div class="salary-label w-36 text-sm font-semibold text-emerald-600" style="flex-shrink:0">Net après impôt</div>
                                 <div class="flex-1 relative">
                                     <input type="text" inputmode="decimal" id="input-netai-m" value="1850"
                                         class="salary-input w-full rounded-xl border-2 border-slate-200 bg-emerald-50 px-4 py-3 text-xl font-bold text-emerald-700 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-100 transition-all">
@@ -513,12 +513,12 @@
                             <button type="button" data-enfants="4" class="enfant-btn flex-1 rounded-xl border-2 border-slate-200 bg-white py-2 text-sm font-semibold text-slate-600 hover:border-slate-300 transition-all">4+</button>
                         </div>
 
-                        <p class="text-xs text-slate-400">Estimation basee sur le bareme progressif de l'impot sur le revenu.</p>
+                        <p class="text-xs text-slate-400">Estimation basee sur le barème progressif de l'impôt sur le revenu.</p>
                     </div>
                 </div>
 
                 <!-- Right Column: Results (sticky) -->
-                <div class="order-2 lg:col-span-5 lg:sticky lg:top-24 space-y-5" id="resultats">
+                <div class="order-2 lg:col-span-5 lg:sticky lg:top-24 space-y-5" id="résultats">
 
                     <!-- Main result -->
                     <div class="rounded-2xl border-2 border-brand-500 bg-gradient-to-br from-brand-50 to-white p-6 shadow-sm">
@@ -542,13 +542,13 @@
                                 <span class="text-sm font-bold text-slate-900" id="result-net-avant">1 950 €</span>
                             </div>
                             <div class="flex justify-between items-center">
-                                <span class="text-sm text-slate-500">Impôt estimé <span class="text-xs" id="result-impot-label">(1 part)</span></span>
-                                <span class="text-sm font-semibold text-orange-500" id="result-impot">- 100 €</span>
+                                <span class="text-sm text-slate-500">Impôt estimé <span class="text-xs" id="result-impôt-label">(1 part)</span></span>
+                                <span class="text-sm font-semibold text-orange-500" id="result-impôt">- 100 €</span>
                             </div>
                             <div class="h-px bg-slate-100"></div>
                             <div class="flex justify-between items-center">
                                 <span class="text-sm font-medium text-emerald-700">Net après impôt</span>
-                                <span class="text-sm font-bold text-emerald-600" id="result-net-apres">1 850 €</span>
+                                <span class="text-sm font-bold text-emerald-600" id="result-net-après">1 850 €</span>
                             </div>
                         </div>
                     </div>
@@ -572,13 +572,13 @@
                             <div class="flex items-end gap-1 justify-center mb-4" id="hp-distrib-bars" style="height: 48px;"></div>
                             <div class="flex justify-between text-slate-500 mb-4" style="font-size:10px">
                                 <span>Revenus faibles</span>
-                                <span>Revenus eleves</span>
+                                <span>Revenus élevés</span>
                             </div>
                             <div class="rounded-xl p-3" style="background: rgba(255,255,255,0.04);">
                                 <div class="flex items-center gap-3">
                                     <div class="flex gap-0.5 flex-shrink-0" id="hp-people-dots"></div>
                                     <p class="text-xs text-slate-400 leading-relaxed">
-                                        Sur 100 Francais, <strong class="text-white" id="hp-people-count">50</strong> gagnent moins que vous.
+                                        Sur 100 Français, <strong class="text-white" id="hp-people-count">50</strong> gagnent moins que vous.
                                     </p>
                                 </div>
                             </div>
@@ -589,7 +589,7 @@
                     <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-sm font-medium text-slate-700">Coût total employeur</span>
-                            <span class="text-lg font-bold text-slate-900" id="result-cout-employeur">3 625 €</span>
+                            <span class="text-lg font-bold text-slate-900" id="result-coût-employeur">3 625 €</span>
                         </div>
                         <div class="flex justify-between items-center text-sm text-slate-500">
                             <span>Cotisations patronales</span>
@@ -627,8 +627,8 @@
                                     </tr>
                                     <tr>
                                         <td class="py-2 text-slate-600">Coût employeur</td>
-                                        <td class="py-2 text-right font-medium text-slate-900" id="recap-cout-m">3 625 €</td>
-                                        <td class="py-2 text-right font-medium text-slate-900" id="recap-cout-a">43 500 €</td>
+                                        <td class="py-2 text-right font-medium text-slate-900" id="recap-coût-m">3 625 €</td>
+                                        <td class="py-2 text-right font-medium text-slate-900" id="recap-coût-a">43 500 €</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -753,11 +753,11 @@
 
                 <p>Au total, les cotisations salariales représentent environ <strong>22% du salaire brut pour un non-cadre</strong> et <strong>25% pour un cadre</strong>.</p>
 
-                <h3 id="difference-cadre-non-cadre" class="text-xl font-semibold text-slate-900 mt-8">Différence cadre / non-cadre</h3>
+                <h3 id="différence-cadre-non-cadre" class="text-xl font-semibold text-slate-900 mt-8">Différence cadre / non-cadre</h3>
 
                 <p>La principale différence entre un <strong>cadre</strong> et un <strong>non-cadre</strong> réside dans la cotisation CET (Contribution d'Équilibre Technique) de 0,14% supplémentaire pour les cadres. Historiquement, les cadres cotisaient davantage à l'AGIRC, mais depuis la fusion AGIRC-ARRCO en 2019, les taux sont harmonisés. La différence reste visible sur le net final.</p>
 
-                <h3 id="prelevement-a-la-source" class="text-xl font-semibold text-slate-900 mt-8">Le prélèvement à la source</h3>
+                <h3 id="prélèvement-a-la-source" class="text-xl font-semibold text-slate-900 mt-8">Le prélèvement à la source</h3>
 
                 <p>Depuis janvier 2019, l'<strong>impôt sur le revenu</strong> est prélevé directement sur votre salaire. Le <strong>net après impôt</strong> (aussi appelé "net à payer") est donc inférieur au net avant impôt affiché sur votre fiche de paie. Le taux de prélèvement dépend de votre situation fiscale personnelle.</p>
 
@@ -777,10 +777,10 @@
             </div>
         </section>
 
-        <!-- Comment ça marche -->
+        <!-- Comment ça marché -->
         <section class="bg-white border-t border-slate-200 py-16 px-4" id="how-it-works">
             <div class="mx-auto max-w-5xl">
-                <h2 class="text-2xl font-bold text-slate-900 text-center mb-12">Comment ça marche ?</h2>
+                <h2 class="text-2xl font-bold text-slate-900 text-center mb-12">Comment ça marché ?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="text-center">
                         <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-brand-50 flex items-center justify-center">
@@ -1309,7 +1309,7 @@
             });
 
             if (params.has('brut')) {
-                setTimeout(() => document.getElementById('resultats').scrollIntoView({ behavior: 'smooth' }), 300);
+                setTimeout(() => document.getElementById('résultats').scrollIntoView({ behavior: 'smooth' }), 300);
             }
         }
 
@@ -1542,7 +1542,7 @@
 
             // Mobile results button
             document.getElementById('mobile-results-btn').addEventListener('click', () => {
-                document.getElementById('resultats').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('résultats').scrollIntoView({ behavior: 'smooth' });
             });
 
             // PDF Export
@@ -1585,11 +1585,11 @@
             var label = 'Top ' + topRound + '%';
             document.getElementById('hp-pct-number').textContent = label;
             var phrase;
-            if (topRound <= 1) phrase = 'Vous faites partie des 1% les mieux remuneres';
-            else if (topRound <= 5) phrase = 'Vous faites partie des 5% les mieux remuneres';
-            else if (topRound <= 10) phrase = 'Vous etes dans le top 10% des revenus';
+            if (topRound <= 1) phrase = 'Vous faites partie des 1% les mieux rémunérés';
+            else if (topRound <= 5) phrase = 'Vous faites partie des 5% les mieux rémunérés';
+            else if (topRound <= 10) phrase = 'Vous êtes dans le top 10% des revenus';
             else if (topRound <= 25) phrase = 'Vous depassez 75% des foyers fiscaux';
-            else if (topRound <= 50) phrase = 'Vous etes au-dessus de la mediane';
+            else if (topRound <= 50) phrase = 'Vous êtes au-dessus de la médiane';
             else phrase = 'des foyers fiscaux en France';
             document.getElementById('hp-pct-phrase').textContent = phrase;
             var gF, gT;
@@ -1629,12 +1629,12 @@
             document.getElementById('result-brut').textContent = formatMoney(result.brutMensuel);
             document.getElementById('result-cotisations').textContent = '- ' + formatMoney(result.totalSalarial);
             document.getElementById('result-net-avant').textContent = formatMoney(result.netAvantImpot);
-            document.getElementById('result-impot').textContent = '- ' + formatMoney(result.impotMensuel);
-            document.getElementById('result-impot-label').textContent = '(' + partsLabel + ')';
-            document.getElementById('result-net-apres').textContent = formatMoney(result.netApresImpot);
+            document.getElementById('result-impôt').textContent = '- ' + formatMoney(result.impotMensuel);
+            document.getElementById('result-impôt-label').textContent = '(' + partsLabel + ')';
+            document.getElementById('result-net-après').textContent = formatMoney(result.netApresImpot);
 
-            // Cout employeur
-            document.getElementById('result-cout-employeur').textContent = formatMoney(result.coutEmployeur);
+            // Coût employeur
+            document.getElementById('result-coût-employeur').textContent = formatMoney(result.coutEmployeur);
             document.getElementById('result-cotisations-patronales').textContent = '+ ' + formatMoney(result.totalPatronal);
 
             // Recap table
@@ -1644,8 +1644,8 @@
             document.getElementById('recap-net-a').textContent = formatMoney(result.netAvantImpot * 12);
             document.getElementById('recap-netai-m').textContent = formatMoney(result.netApresImpot);
             document.getElementById('recap-netai-a').textContent = formatMoney(result.netApresImpot * 12);
-            document.getElementById('recap-cout-m').textContent = formatMoney(result.coutEmployeur);
-            document.getElementById('recap-cout-a').textContent = formatMoney(result.coutEmployeur * 12);
+            document.getElementById('recap-coût-m').textContent = formatMoney(result.coutEmployeur);
+            document.getElementById('recap-coût-a').textContent = formatMoney(result.coutEmployeur * 12);
 
             // Donut
             const netPct = result.brutMensuel > 0 ? Math.round((result.netAvantImpot / result.brutMensuel) * 100) : 0;

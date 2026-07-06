@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "https://salairebrutonet.com/" },
@@ -31,7 +31,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "FAQPage",
         "mainEntity": [
             {
@@ -87,7 +87,7 @@
     </script>
     <script type="application/ld+json">
     {
-    "@context": "https://schema.org",
+    "@context": "https://schéma.org",
     "@type": "Article",
     "headline": "Cadre ou Non-Cadre 2026 : Comparaison Salaire Net",
     "description": "Quelle différence de salaire net entre cadre et non-cadre en 2026 ? Comparatif cotisations, charges et net à payer côte à côte. Calculateur double inclus.",
@@ -224,16 +224,16 @@
                                 <hr class="border-emerald-200">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-500">Impôt sur le revenu</span>
-                                    <span class="text-sm font-semibold text-slate-700" id="nc-impot">--</span>
+                                    <span class="text-sm font-semibold text-slate-700" id="nc-impôt">--</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-500">Net après impôt</span>
-                                    <span class="text-lg font-bold text-emerald-700" id="nc-net-apres">--</span>
+                                    <span class="text-lg font-bold text-emerald-700" id="nc-net-après">--</span>
                                 </div>
                                 <hr class="border-emerald-200">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-500">Coût employeur</span>
-                                    <span class="text-sm font-semibold text-slate-700" id="nc-cout">--</span>
+                                    <span class="text-sm font-semibold text-slate-700" id="nc-coût">--</span>
                                 </div>
                             </div>
                         </div>
@@ -262,16 +262,16 @@
                                 <hr class="border-brand-200">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-500">Impôt sur le revenu</span>
-                                    <span class="text-sm font-semibold text-slate-700" id="c-impot">--</span>
+                                    <span class="text-sm font-semibold text-slate-700" id="c-impôt">--</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-500">Net après impôt</span>
-                                    <span class="text-lg font-bold text-brand-700" id="c-net-apres">--</span>
+                                    <span class="text-lg font-bold text-brand-700" id="c-net-après">--</span>
                                 </div>
                                 <hr class="border-brand-200">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-500">Coût employeur</span>
-                                    <span class="text-sm font-semibold text-slate-700" id="c-cout">--</span>
+                                    <span class="text-sm font-semibold text-slate-700" id="c-coût">--</span>
                                 </div>
                             </div>
                         </div>
@@ -306,16 +306,16 @@
                 document.getElementById('nc-net-avant').textContent = formatMoney(nc.netAvantImpot);
                 document.getElementById('nc-cotisations').textContent = formatMoney(nc.totalSalarial);
                 document.getElementById('nc-taux').textContent = nc.tauxCotisationsSalariales + ' %';
-                document.getElementById('nc-impot').textContent = formatMoney(nc.impotMensuel);
-                document.getElementById('nc-net-apres').textContent = formatMoney(nc.netApresImpot);
-                document.getElementById('nc-cout').textContent = formatMoney(nc.coutEmployeur);
+                document.getElementById('nc-impôt').textContent = formatMoney(nc.impotMensuel);
+                document.getElementById('nc-net-après').textContent = formatMoney(nc.netApresImpot);
+                document.getElementById('nc-coût').textContent = formatMoney(nc.coutEmployeur);
 
                 document.getElementById('c-net-avant').textContent = formatMoney(c.netAvantImpot);
                 document.getElementById('c-cotisations').textContent = formatMoney(c.totalSalarial);
                 document.getElementById('c-taux').textContent = c.tauxCotisationsSalariales + ' %';
-                document.getElementById('c-impot').textContent = formatMoney(c.impotMensuel);
-                document.getElementById('c-net-apres').textContent = formatMoney(c.netApresImpot);
-                document.getElementById('c-cout').textContent = formatMoney(c.coutEmployeur);
+                document.getElementById('c-impôt').textContent = formatMoney(c.impotMensuel);
+                document.getElementById('c-net-après').textContent = formatMoney(c.netApresImpot);
+                document.getElementById('c-coût').textContent = formatMoney(c.coutEmployeur);
 
                 const diff = nc.netAvantImpot - c.netAvantImpot;
                 document.getElementById('diff-net').textContent = formatMoney(Math.abs(diff));
@@ -401,7 +401,7 @@
                     <li><strong>ARRCO</strong> : pour tous les salariés (cadres et non-cadres)</li>
                     <li><strong>AGIRC</strong> : exclusivement pour les cadres, avec des taux plus élevés</li>
                 </ul>
-                <p>Cette double cotisation créait un écart de net significatif. Depuis la fusion au 1er janvier 2019, un régime unique <strong>AGIRC-ARRCO</strong> s'applique à tous les salariés avec les mêmes taux :</p>
+                <p>Cette double cotisation créait un écart de net significatif. Depuis la fusion au 1er janvier 2019, un régime unique <strong>AGIRC-ARRCO</strong> s'appliqué à tous les salariés avec les mêmes taux :</p>
                 <ul>
                     <li><strong>Tranche 1</strong> (jusqu'au plafond SS) : 3,15% salarié / 4,72% employeur</li>
                     <li><strong>Tranche 2</strong> (au-delà du plafond SS) : 8,64% salarié / 12,95% employeur</li>
@@ -625,11 +625,11 @@
         <!-- Contenu enrichi -->
         <section class="bg-white border-t border-slate-200 py-12 px-4">
             <div class="mx-auto max-w-4xl prose prose-slate">
-                <h2 class="text-xl font-semibold text-slate-900">Impact du statut cadre sur la retraite et la prevoyance</h2>
-                <p>La distinction cadre/non-cadre a un impact majeur sur les droits a la retraite et la protection sociale. Les cadres cotisent davantage a l'AGIRC-ARRCO (cotisation CET supplementaire de 0,14 %), ce qui genere plus de points de retraite complementaire. Sur une carriere complete de 40 ans, cette difference peut representer plusieurs dizaines d'euros de pension mensuelle supplementaire. De plus, les entreprises doivent obligatoirement souscrire un contrat de prevoyance pour les cadres (convention collective nationale des cadres de 1947, article 7), garantissant un capital deces minimum egal a 1,5 % du salaire brut annuel multiplie par le nombre de trimestres cotises. Cette obligation n'existe pas pour les non-cadres, sauf si la convention collective le prevoit. En pratique, les garantees de prevoyance cadre sont souvent plus genereuses : maintien de salaire en cas d'arret maladie plus long (90 jours a 100 % contre 30 jours pour un non-cadre dans de nombreuses conventions), rente d'invalidite plus elevee, et capital deces supplementaire.</p>
+                <h2 class="text-xl font-semibold text-slate-900">Impact du statut cadre sur la retraite et la prévoyance</h2>
+                <p>La distinction cadre/non-cadre à un impact majeur sur les droits à la retraite et la protection sociale. Les cadres cotisent davantage à l'AGIRC-ARRCO (cotisation CET supplémentaire de 0,14 %), ce qui génère plus de points de retraite complémentaire. Sur une carrière complete de 40 ans, cette différence peut représenter plusieurs dizaines d'euros de pension mensuelle supplémentaire. De plus, les entreprises doivent obligatoirement souscrire un contrat de prévoyance pour les cadres (convention collective nationale des cadres de 1947, article 7), garantissant un capital deces minimum égal a 1,5 % du salaire brut annuel multiplie par le nombre de trimestres cotises. Cette obligation n'existe pas pour les non-cadres, sauf si la convention collective le prévoit. En pratique, les garantees de prévoyance cadre sont souvent plus généreuses : maintien de salaire en cas d'arrêt maladie plus long (90 jours à 100 % contre 30 jours pour un non-cadre dans de nombreuses conventions), rente d'invalidite plus élevée, et capital deces supplémentaire.</p>
 
-                <h2 class="text-xl font-semibold text-slate-900 mt-8">Comment negocier le passage au statut cadre</h2>
-                <p>Le passage du statut non-cadre a cadre peut se negocier a plusieurs moments cles de la carriere : lors d'une promotion interne avec prise de responsabilites manageriales, lors d'un entretien annuel en valorisant l'elargissement de vos missions, ou lors d'un changement d'entreprise. Pour preparer votre demande, appuyez-vous sur des elements objectifs : la classification de votre poste dans la convention collective applicable (les niveaux cadre sont generalement definis a partir du coefficient 300 ou 350 selon les conventions), le contenu reel de vos missions (management, autonomie decisionnelle, expertise technique), et les pratiques du marche pour des postes equivalents. Le passage cadre s'accompagne generalement d'une augmentation de salaire brut de 5 a 15 % pour compenser les cotisations supplementaires et refleter l'evolution du poste. Si l'employeur refuse le passage cadre formel, vous pouvez negocier un statut « assimile cadre » (agent de maitrise au forfait jours, par exemple) qui offre certains avantages du statut cadre sans tous les couts pour l'employeur. Enfin, verifiez que le passage cadre ne vous fait pas perdre d'avantages specifiques lies a votre convention collective actuelle (primes de poste, majorations de nuit, etc.).</p>
+                <h2 class="text-xl font-semibold text-slate-900 mt-8">Comment négocier le passage au statut cadre</h2>
+                <p>Le passage du statut non-cadre a cadre peut se négocier a plusieurs moments cles de la carrière : lors d'une promotion interne avec prise de responsabilités managériales, lors d'un entretien annuel en valorisant l'elargissement de vos missions, ou lors d'un changement d'entreprise. Pour préparer votre demande, appuyez-vous sur des éléments objectifs : la classification de votre poste dans la convention collective applicable (les niveaux cadre sont généralement definis à partir du coefficient 300 ou 350 selon les conventions), le contenu réel de vos missions (management, autonomie decisionnelle, expertise technique), et les pratiques du marché pour des postes équivalents. Le passage cadre s'accompagne généralement d'une augmentation de salaire brut de 5 à 15 % pour compenser les cotisations supplémentaires et refleter l'évolution du poste. Si l'employeur refuse le passage cadre formel, vous pouvez négocier un statut « assimile cadre » (agent de maîtrise au forfait jours, par exemple) qui offre certains avantages du statut cadre sans tous les couts pour l'employeur. Enfin, verifiez que le passage cadre ne vous fait pas perdre d'avantages spécifiques liés à votre convention collective actuelle (primes de poste, majorations de nuit, etc.).</p>
             </div>
         </section>
 

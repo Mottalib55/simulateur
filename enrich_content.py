@@ -14,14 +14,14 @@ with open('generate-pages.py', 'r', encoding='utf-8') as f:
 
 print("Starting content enrichment...")
 
-# Define FAQ data for different page types
+# Define FAQ data for différent page types
 STATUS_FAQS = {
     "cadre": [
-        {"q": "Quelle est la différence entre cadre et non-cadre pour le salaire net ?", "a": "Un cadre paye environ 3% de cotisations supplémentaires, notamment la CET à 0,14%. Pour un même brut, le net cadre est légèrement inférieur au net non-cadre."},
+        {"q": "Quelle est la différence entre cadre et non-cadre pour le salaire net ?", "a": "Un cadre payé environ 3% de cotisations supplémentaires, notamment la CET à 0,14%. Pour un même brut, le net cadre est légèrement inférieur au net non-cadre."},
         {"q": "Comment est calculée la cotisation CET pour les cadres ?", "a": "La CET (Contribution d'Équilibre Technique) représente 0,14% du salaire brut total. Elle finance l'équilibre du régime de retraite complémentaire AGIRC-ARRCO."},
         {"q": "Un cadre a-t-il une meilleure retraite qu'un non-cadre ?", "a": "Oui, grâce aux cotisations AGIRC-ARRCO majorées sur la tranche 2, les cadres accumulent plus de points de retraite complémentaire, surtout sur les salaires élevés."},
         {"q": "Le statut cadre change-t-il le calcul de l'impôt sur le revenu ?", "a": "Non, l'impôt est calculé sur le net imposable, identique pour cadres et non-cadres à salaire brut égal. Seules les cotisations sociales diffèrent."},
-        {"q": "À partir de quel salaire brut est-on concerné par la tranche 2 AGIRC-ARRCO ?", "a": "La tranche 2 s'applique au-delà du plafond de la Sécurité sociale, soit 3 864 € brut mensuel en 2026. Le taux passe alors de 3,15% à 8,64%."}
+        {"q": "À partir de quel salaire brut est-on concerné par la tranche 2 AGIRC-ARRCO ?", "a": "La tranche 2 s'appliqué au-delà du plafond de la Sécurité sociale, soit 3 864 € brut mensuel en 2026. Le taux passé alors de 3,15% à 8,64%."}
     ],
     "non-cadre": [
         {"q": "Quel est le taux moyen de cotisations pour un non-cadre ?", "a": "En moyenne, les cotisations salariales représentent environ 22% du salaire brut pour un non-cadre, soit un coefficient de conversion brut-net d'environ 0,78."},

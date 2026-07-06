@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 patch_seo.py — SEO V6 improvements for salairebrutonet.com
-Adds: og:image:alt, Twitter Card, font preload, Article schema
+Adds: og:image:alt, Twitter Card, font preload, Article schéma
 Skips: prime-brut-en-net/
 """
 
@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Pages that should NOT be touched
 SKIP_DIRS = ['prime-brut-en-net']
 
-# Pages that get Article schema (educational/guide content only)
+# Pages that get Article schéma (educational/guide content only)
 ARTICLE_PAGES = [
     'salaire-brut-net-cadre',
     'salaire-brut-net-non-cadre',
@@ -28,31 +28,31 @@ ARTICLE_PAGES = [
     'salaire-brut-net-horaire',
     'salaire-brut-net-journalier',
     'taux-horaire-brut-net',
-    'difference-salaire-brut-net',
+    'différence-salaire-brut-net',
     'cotisations-sociales-salariales',
     'salaire-net-imposable',
-    'salaire-net-avant-apres-impot',
+    'salaire-net-avant-après-impôt',
     'lire-fiche-de-paie',
     'salaire-moyen-france',
-    'negocier-salaire',
-    'cout-employeur',
+    'négocier-salaire',
+    'coût-employeur',
     'cadre-vs-non-cadre',
     'salaire-brut-net-alsace-moselle',
     'smic-brut-net-2026',
     'salaire-brut-net-2026',
     '13eme-mois-brut-net',
-    'heures-supplementaires-brut-net',
+    'heures-supplémentaires-brut-net',
     'avantages-en-nature',
 ]
 
 # All guide/tool pages to patch (excluding prime-brut-en-net, admin, scripts, etc.)
 ALL_PAGES = ARTICLE_PAGES + [
-    'calculateur-cout-employeur',
-    'calculateur-heures-supplementaires',
+    'calculateur-coût-employeur',
+    'calculateur-heures-supplémentaires',
     'calculateur-temps-partiel',
     'comparateur-salaire-net-par-pays',
     'simulateur-augmentation',
-    'simulateur-impot-sur-le-revenu',
+    'simulateur-impôt-sur-le-revenu',
     'glossaire',
     'a-propos',
     'mentions-legales',
@@ -146,12 +146,12 @@ def add_font_preload(html):
 
 
 def add_article_schema(html, title, description, canonical_url):
-    """Add Article schema JSON-LD after the last existing </script> JSON-LD block."""
+    """Add Article schéma JSON-LD after the last existing </script> JSON-LD block."""
     if '"@type": "Article"' in html or '"@type":"Article"' in html:
         return html
 
-    schema = {
-        "@context": "https://schema.org",
+    schéma = {
+        "@context": "https://schéma.org",
         "@type": "Article",
         "headline": title,
         "description": description,
@@ -175,7 +175,7 @@ def add_article_schema(html, title, description, canonical_url):
         }
     }
 
-    schema_json = json.dumps(schema, indent=4, ensure_ascii=False)
+    schema_json = json.dumps(schéma, indent=4, ensure_ascii=False)
     script_block = f'''    <script type="application/ld+json">
     {schema_json}
     </script>'''
@@ -196,7 +196,7 @@ def add_article_schema(html, title, description, canonical_url):
         return html
 
     last_ld_end = ld_blocks[-1].end()
-    # Insert the new schema after the last JSON-LD block
+    # Insert the new schéma after the last JSON-LD block
     html = html[:last_ld_end] + '\n' + script_block + html[last_ld_end:]
 
     return html
@@ -222,7 +222,7 @@ def patch_file(filepath, page_slug):
     # 3. Add font preload
     html = add_font_preload(html)
 
-    # 4. Add Article schema (only for guide pages)
+    # 4. Add Article schéma (only for guide pages)
     if page_slug in ARTICLE_PAGES:
         html = add_article_schema(html, title, description, canonical_url)
 

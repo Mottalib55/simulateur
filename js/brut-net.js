@@ -41,7 +41,7 @@ maladie: { taux: 0.07, montant: brutMensuel * 0.07, label: 'Maladie', assiette: 
 vieillessePlafonnee: { taux: 0.0855, montant: t1 * 0.0855, label: 'Vieillesse plafonnée', assiette: 'Tranche 1' },
 vieillesseDeplafonee: { taux: 0.0202, montant: brutMensuel * 0.0202, label: 'Vieillesse déplafonnée', assiette: 'Totalité' },
 allocFamiliales: { taux: tauxAllocFam, montant: brutMensuel * tauxAllocFam, label: 'Allocations familiales', assiette: 'Totalité' },
-chomage: { taux: 0.0405, montant: t1 * 0.0405, label: 'Chômage', assiette: 'Tranche A' },
+chômage: { taux: 0.0405, montant: t1 * 0.0405, label: 'Chômage', assiette: 'Tranche A' },
 agircArrcoT1: { taux: 0.0472, montant: t1 * 0.0472, label: 'AGIRC-ARRCO T1', assiette: 'Tranche 1' },
 agircArrcoT2: { taux: 0.1295, montant: t2 * 0.1295, label: 'AGIRC-ARRCO T2', assiette: 'Tranche 2' },
 atmp: { taux: 0.01, montant: brutMensuel * 0.01, label: 'AT/MP (taux moyen)', assiette: 'Totalité' },
@@ -86,7 +86,7 @@ var b = Math.min(revenuParPartBase, tr.max) - tr.min;
 impotSansQF += b * tr.taux;
 }
 impotSansQF = impotSansQF * partsBase;
-// Plafond : 1 759 EUR par demi-part supplementaire
+// Plafond : 1 759 EUR par demi-part supplémentaire
 var plafondReduction = 1759 * (demiPartsSupp / 0.5);
 var reductionQF = impotSansQF - impotQF;
 if (reductionQF > plafondReduction) {
@@ -149,8 +149,8 @@ tempsTravail = tempsTravail != null ? tempsTravail : 1;
 options = options || {};
 let brutEstime = netMensuelCible * 1.3;
 for (let i = 0; i < 50; i++) {
-const resultat = calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
-const diff = resultat.netAvantImpot - netMensuelCible;
+const résultat = calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
+const diff = résultat.netAvantImpot - netMensuelCible;
 if (Math.abs(diff) < 0.01) break;
 brutEstime -= diff * 0.7;
 }
@@ -162,8 +162,8 @@ tempsTravail = tempsTravail != null ? tempsTravail : 1;
 options = options || {};
 let brutEstime = netApresImpotCible * 1.5;
 for (let i = 0; i < 80; i++) {
-const resultat = calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
-const diff = resultat.netApresImpot - netApresImpotCible;
+const résultat = calculerBrutVersNet(brutEstime, statut, tempsTravail, options);
+const diff = résultat.netApresImpot - netApresImpotCible;
 if (Math.abs(diff) < 0.01) break;
 brutEstime -= diff * 0.5;
 }

@@ -41,7 +41,7 @@
     <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","xanyylalio");</script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "https://salairebrutonet.com/" },
@@ -51,12 +51,12 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "Organization",
         "name": "SalaireBrutNet",
         "url": "https://salairebrutonet.com",
         "logo": "https://salairebrutonet.com/img/logo.svg",
-        "description": "Simulateur gratuit de conversion salaire brut en net pour la France. Taux 2026 a jour, cadre et non-cadre.",
+        "description": "Simulateur gratuit de conversion salaire brut en net pour la France. Taux 2026 à jour, cadre et non-cadre.",
         "founder": {
             "@type": "Person",
             "name": "Mottalib Radif",
@@ -68,7 +68,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "Person",
         "name": "Mottalib Radif",
         "url": "https://salairebrutonet.com/a-propos/",
@@ -79,7 +79,7 @@
             "name": "SalaireBrutNet",
             "url": "https://salairebrutonet.com"
         },
-        "knowsAbout": ["salaire brut net", "cotisations sociales", "fiscalite francaise", "droit du travail"]
+        "knowsAbout": ["salaire brut net", "cotisations sociales", "fiscalité française", "droit du travail"]
     }
     </script>
 </head>
@@ -186,7 +186,7 @@
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-xs text-slate-600 font-medium">Coût employeur heures sup</p>
-                            <p class="text-2xl font-bold text-slate-900" id="hs-res-cout">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="hs-res-coût">–</p>
                         </div>
                     </div>
 
@@ -202,7 +202,7 @@
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-xs text-slate-600 font-medium">Total coût employeur</p>
-                            <p class="text-2xl font-bold text-slate-900" id="hs-tot-cout">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="hs-tot-coût">–</p>
                         </div>
                     </div>
 
@@ -253,10 +253,10 @@
 
             document.getElementById('hs-res-brut').textContent = formatMoney(brutHS);
             document.getElementById('hs-res-net').textContent = formatMoney(netHS);
-            document.getElementById('hs-res-cout').textContent = formatMoney(coutHS);
+            document.getElementById('hs-res-coût').textContent = formatMoney(coutHS);
             document.getElementById('hs-tot-brut').textContent = formatMoney(totBrut);
             document.getElementById('hs-tot-net').textContent = formatMoney(totNet);
-            document.getElementById('hs-tot-cout').textContent = formatMoney(totCout);
+            document.getElementById('hs-tot-coût').textContent = formatMoney(totCout);
 
             // Primes CDD / Intérim
             var primesDiv = document.getElementById('hs-primes');
@@ -300,7 +300,7 @@
                     <li><strong>Exonération de cotisations salariales</strong> : réduction de 11,31% sur les cotisations vieillesse et retraite complémentaire. Seules la CSG/CRDS (~9,53%) restent dues.</li>
                     <li><strong>Exonération d'impôt sur le revenu</strong> : les heures supplémentaires sont exonérées d'impôt jusqu'à <strong>7 500 &euro; net par an</strong>.</li>
                 </ul>
-                <p>Concretement, le net perçu pour une heure supplementaire est environ <strong>90 %</strong> du brut majore, contre environ 78 % pour une heure normale. Cette difference de traitement rend les heures supplementaires particulierement avantageuses financierement. Pour un salarie au SMIC effectuant 4 heures supplementaires par semaine, le gain net mensuel supplementaire est d'environ 190 euros, soit plus de 2 280 euros par an en net exonere d'impot, representant un 13e mois en complement de revenus.</p>
+                <p>Concretement, le net perçu pour une heure supplémentaire est environ <strong>90 %</strong> du brut majoré, contre environ 78 % pour une heure normale. Cette différence de traitement rend les heures supplémentaires particulierement avantageuses financierement. Pour un salarié au SMIC effectuant 4 heures supplémentaires par semaine, le gain net mensuel supplémentaire est d'environ 190 euros, soit plus de 2 280 euros par an en net exonéré d'impôt, representant un 13e mois en complément de revenus.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Différences CDI, CDD et Intérim</h2>
                 <p>Le calcul des heures supplémentaires est identique quel que soit le contrat. La différence vient des <strong>primes de fin de contrat</strong> :</p>
@@ -309,22 +309,22 @@
                     <li><strong>CDD</strong> : prime de précarité de <strong>10%</strong> du salaire brut total (base + HS) versée en fin de contrat.</li>
                     <li><strong>Intérim</strong> : indemnité de fin de mission (IFM) de <strong>10%</strong> + indemnité compensatrice de congés payés (ICCP) de <strong>10%</strong> calculée sur le brut + IFM.</li>
                 </ul>
-                <p>Pour en savoir plus, consultez notre guide complet sur les <a href="/heures-supplementaires-brut-net/" class="text-brand-600 hover:text-brand-700">heures supplementaires brut/net</a>.</p>
+                <p>Pour en savoir plus, consultez notre guide complet sur les <a href="/heures-supplementaires-brut-net/" class="text-brand-600 hover:text-brand-700">heures supplémentaires brut/net</a>.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Contingent annuel et repos compensateur obligatoire</h2>
-                <p>Le contingent annuel d'heures supplementaires est fixe a <strong>220 heures par an et par salarie</strong> par le Code du travail (article D.3121-24). Cependant, un accord de branche ou d'entreprise peut modifier ce plafond a la hausse ou a la baisse. Au-dela du contingent, chaque heure supplementaire ouvre droit a une <strong>contrepartie obligatoire en repos (COR)</strong> : 50 % du temps travaille dans les entreprises de 20 salaries ou moins, et 100 % dans les entreprises de plus de 20 salaries. Par exemple, si un salarie depasse le contingent de 10 heures dans une entreprise de 50 personnes, il acquiert 10 heures de repos compensateur obligatoire, soit environ 1,4 jour de repos supplementaire. Ce repos doit etre pris dans un delai de deux mois suivant l'ouverture du droit. L'employeur ne peut pas refuser la prise de ce repos et doit en informer le salarie mensuellement par un document annexe au bulletin de paie.</p>
+                <p>Le contingent annuel d'heures supplémentaires est fixe a <strong>220 heures par an et par salarie</strong> par le Code du travail (article D.3121-24). Cependant, un accord de branche ou d'entreprise peut modifier ce plafond à la hausse ou à la baisse. Au-dela du contingent, chaque heure supplémentaire ouvre droit à une <strong>contrepartie obligatoire en repos (COR)</strong> : 50 % du temps travaille dans les entreprises de 20 salariés ou moins, et 100 % dans les entreprises de plus de 20 salariés. Par exemple, si un salarié dépassé le contingent de 10 heures dans une entreprise de 50 personnes, il acquiert 10 heures de repos compensateur obligatoire, soit environ 1,4 jour de repos supplémentaire. Ce repos doit être pris dans un delai de deux mois suivant l'ouverture du droit. L'employeur ne peut pas refuser la prise de ce repos et doit en informer le salarié mensuellement par un document annexe au bulletin de paie.</p>
 
-                <h2 class="text-xl font-semibold text-slate-900 mt-8">Calcul detaille du brut et du net des heures supplementaires</h2>
-                <p>Le calcul du salaire brut des heures supplementaires part du <strong>taux horaire de base</strong>, obtenu en divisant le salaire mensuel brut par 151,67 (nombre d'heures mensuelles pour un temps plein a 35h). Ce taux est ensuite majore de 25 % pour les 8 premieres heures supplementaires par semaine, puis de 50 % au-dela. Prenons un salarie non-cadre a 2 500 euros brut mensuel : son taux horaire de base est de 16,48 euros. Une heure supplementaire en majoration de 25 % represente 20,60 euros brut. Grace a l'exoneration de cotisations salariales, le taux de prelevement sur les heures supplementaires est reduit a environ 9,7 % (seules la CSG et la CRDS restent dues), contre environ 22 % pour les heures normales. Le net percu pour cette heure supplementaire sera donc d'environ 18,60 euros, soit 90 % du brut majore. De plus, les revenus des heures supplementaires sont exoneres d'impot sur le revenu dans la limite de 7 500 euros net par an, ce qui correspond a environ 400 heures supplementaires au SMIC ou 250 heures a 3 000 euros brut mensuel.</p>
+                <h2 class="text-xl font-semibold text-slate-900 mt-8">Calcul détaillé du brut et du net des heures supplémentaires</h2>
+                <p>Le calcul du salaire brut des heures supplémentaires part du <strong>taux horaire de base</strong>, obtenu en divisant le salaire mensuel brut par 151,67 (nombre d'heures mensuelles pour un temps plein a 35h). Ce taux est ensuite majoré de 25 % pour les 8 premières heures supplémentaires par semaine, puis de 50 % au-delà. Prenons un salarié non-cadre à 2 500 euros brut mensuel : son taux horaire de base est de 16,48 euros. Une heure supplémentaire en majoration de 25 % représente 20,60 euros brut. Grace à l'exonération de cotisations salariales, le taux de prélèvement sur les heures supplémentaires est réduit a environ 9,7 % (seules la CSG et la CRDS restent dues), contre environ 22 % pour les heures normales. Le net percu pour cette heure supplémentaire sera donc d'environ 18,60 euros, soit 90 % du brut majoré. De plus, les revenus des heures supplémentaires sont exonérés d'impôt sur le revenu dans la limite de 7 500 euros net par an, ce qui correspond à environ 400 heures supplémentaires au SMIC ou 250 heures à 3 000 euros brut mensuel.</p>
 
-                <h2 class="text-xl font-semibold text-slate-900 mt-8">Impact des heures supplementaires sur les droits sociaux</h2>
-                <p>Les heures supplementaires, bien que partiellement exonerees de cotisations, sont pleinement prises en compte pour le calcul des droits sociaux. Elles sont integrees dans le <strong>salaire de reference pour la retraite</strong>, ce qui signifie qu'elles augmentent le nombre de trimestres valides et le salaire annuel moyen utilise pour calculer la pension. En revanche, l'exoneration de cotisations salariales ne diminue pas les droits a la retraite complementaire AGIRC-ARRCO car la cotisation patronale reste due. Pour l'<strong>assurance chomage</strong>, les heures supplementaires regulieres sont integrees dans le Salaire Journalier de Reference (SJR) qui determine le montant des allocations en cas de perte d'emploi. Pour les <strong>indemnites journalieres de Securite sociale</strong> (arret maladie, maternite), le salaire de reference inclut les heures supplementaires des trois derniers mois, ce qui peut augmenter significativement le montant des indemnites. Enfin, les heures supplementaires comptent pour le calcul de la <strong>prime de licenciement</strong> si elles sont regulieres et previsibles.</p>
+                <h2 class="text-xl font-semibold text-slate-900 mt-8">Impact des heures supplémentaires sur les droits sociaux</h2>
+                <p>Les heures supplémentaires, bien que partiellement exonérées de cotisations, sont pleinement prises en compte pour le calcul des droits sociaux. Elles sont integrees dans le <strong>salaire de référence pour la retraite</strong>, ce qui signifie qu'elles augmentent le nombre de trimestres validés et le salaire annuel moyen utilise pour calculer la pension. En revanche, l'exonération de cotisations salariales ne diminue pas les droits à la retraite complémentaire AGIRC-ARRCO car la cotisation patronale reste due. Pour l'<strong>assurance chômage</strong>, les heures supplémentaires régulières sont integrees dans le Salaire Journalier de Reference (SJR) qui détermine le montant des allocations en cas de perte d'emploi. Pour les <strong>indemnités journalières de Sécurité sociale</strong> (arrêt maladie, maternite), le salaire de référence inclut les heures supplémentaires des trois derniers mois, ce qui peut augmenter significativement le montant des indemnités. Enfin, les heures supplémentaires comptent pour le calcul de la <strong>prime de licenciement</strong> si elles sont régulières et previsibles.</p>
 
-                <h2 class="text-xl font-semibold text-slate-900 mt-8">Heures supplementaires et forfait jours</h2>
-                <p>Les salaries au <strong>forfait jours</strong> (principalement les cadres autonomes) ne sont pas soumis au decompte horaire et ne beneficient donc pas du regime des heures supplementaires au sens classique. Leur remuneration est fixee pour un nombre de jours travailles par an (218 jours maximum selon la loi, sauf convention collective differente). En revanche, ils peuvent renoncer a une partie de leurs jours de repos (RTT) en les faisant racheter par l'employeur avec une majoration de 10 % minimum. Ce rachat est plafonne : le salarie ne peut pas depasser 235 jours travailles par an. Par ailleurs, le repos quotidien de 11 heures et le repos hebdomadaire de 24 heures (plus les 11 heures de repos quotidien, soit 35 heures consecutives) doivent etre respectes meme pour les forfaits jours. La Cour de cassation a invalide de nombreuses conventions collectives dont les dispositions sur le forfait jours ne garantissaient pas suffisamment le suivi de la charge de travail et le droit au repos des salaries. Si vous etes au forfait jours et que votre charge de travail est excessive, vous pouvez contester ce forfait et demander le paiement d'heures supplementaires retroactivement sur 3 ans.</p>
+                <h2 class="text-xl font-semibold text-slate-900 mt-8">Heures supplémentaires et forfait jours</h2>
+                <p>Les salariés au <strong>forfait jours</strong> (principalement les cadres autonomes) ne sont pas soumis au décompte horaire et ne bénéficient donc pas du régime des heures supplémentaires au sens classique. Leur rémunération est fixée pour un nombre de jours travailles par an (218 jours maximum selon la loi, sauf convention collective différente). En revanche, ils peuvent renoncer à une partie de leurs jours de repos (RTT) en les faisant racheter par l'employeur avec une majoration de 10 % minimum. Ce rachat est plafonne : le salarié ne peut pas dépasser 235 jours travailles par an. Par ailleurs, le repos quotidien de 11 heures et le repos hebdomadaire de 24 heures (plus les 11 heures de repos quotidien, soit 35 heures consécutives) doivent être respectes même pour les forfaits jours. La Cour de cassation a invalidé de nombreuses conventions collectives dont les dispositions sur le forfait jours ne garantissaient pas suffisamment le suivi de la charge de travail et le droit au repos des salariés. Si vous êtes au forfait jours et que votre charge de travail est excessive, vous pouvez contester ce forfait et demander le paiement d'heures supplémentaires rétroactivement sur 3 ans.</p>
 
-                <h2 class="text-xl font-semibold text-slate-900 mt-8">Heures supplementaires et conventions collectives</h2>
-                <p>De nombreuses conventions collectives prevoient des dispositions specifiques pour les heures supplementaires. Certaines conventions (metallurgie, BTP, transport routier) fixent des taux de majoration superieurs au minimum legal : 50 % des la premiere heure supplementaire dans certaines branches. D'autres conventions definissent un contingent annuel different des 220 heures legales. Dans l'hotellerie-restauration (HCR), par exemple, le contingent est fixe a 360 heures par an. Les accords d'entreprise peuvent egalement prevoir le remplacement de la majoration salariale par un <strong>repos compensateur de remplacement</strong> (RCR) : au lieu de payer une heure a 125 % du taux normal, l'employeur accorde 1 heure et 15 minutes de repos. Ce mecanisme est souvent utilise dans les entreprises soumises a des variations d'activite saisonnieres. Avant d'effectuer des heures supplementaires, verifiez votre convention collective applicable (mentionnee sur votre bulletin de paie) pour connaitre vos droits specifiques. Vous pouvez consulter le texte integral de votre convention sur le site legifrance.gouv.fr ou aupres de votre representant du personnel.</p>
+                <h2 class="text-xl font-semibold text-slate-900 mt-8">Heures supplémentaires et conventions collectives</h2>
+                <p>De nombreuses conventions collectives prevoient des dispositions spécifiques pour les heures supplémentaires. Certaines conventions (metallurgie, BTP, transport routier) fixent des taux de majoration supérieurs au minimum legal : 50 % des la première heure supplémentaire dans certaines branches. D'autres conventions definissent un contingent annuel différent des 220 heures legales. Dans l'hotellerie-restauration (HCR), par exemple, le contingent est fixe a 360 heures par an. Les accords d'entreprise peuvent également prevoir le remplacement de la majoration salariale par un <strong>repos compensateur de remplacement</strong> (RCR) : au lieu de payer une heure a 125 % du taux normal, l'employeur accorde 1 heure et 15 minutes de repos. Ce mécanisme est souvent utilise dans les entreprises soumises à des variations d'activité saisonnieres. Avant d'effectuer des heures supplémentaires, verifiez votre convention collective applicable (mentionnee sur votre bulletin de paie) pour connaître vos droits spécifiques. Vous pouvez consulter le texte integral de votre convention sur le site legifrance.gouv.fr ou aupres de votre representant du personnel.</p>
             </div>
         </section>
         <section class="bg-white border-t border-slate-200 py-12 px-4">

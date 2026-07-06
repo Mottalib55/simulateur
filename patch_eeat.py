@@ -30,7 +30,7 @@ SRC_URSSAF_TAUX = ('URSSAF \u2013 Taux de cotisations sociales 2026', 'https://w
 SRC_URSSAF_PLAFONDS = ('URSSAF \u2013 Plafonds de S\u00e9curit\u00e9 sociale', 'https://www.urssaf.fr/accueil/taux-baremes/plafonds.html')
 SRC_AGIRC_ARRCO = ('AGIRC-ARRCO \u2013 Retraite compl\u00e9mentaire', 'https://www.agirc-arrco.fr/')
 SRC_SERVICE_PUBLIC_SMIC = ('Service-Public.fr \u2013 SMIC 2026', 'https://www.service-public.fr/particuliers/vosdroits/F2300')
-SRC_IMPOTS_PAS = ('Imp\u00f4ts.gouv.fr \u2013 Pr\u00e9l\u00e8vement \u00e0 la source', 'https://www.impots.gouv.fr/particulier/le-prelevement-la-source')
+SRC_IMPOTS_PAS = ('Imp\u00f4ts.gouv.fr \u2013 Pr\u00e9l\u00e8vement \u00e0 la source', 'https://www.impots.gouv.fr/particulier/le-prélèvement-la-source')
 SRC_INSEE = ('INSEE \u2013 Salaires dans le secteur priv\u00e9', 'https://www.insee.fr/fr/statistiques/serie/001567616')
 SRC_LEGIFRANCE = ('L\u00e9gifrance \u2013 Code du travail', 'https://www.legifrance.gouv.fr/')
 SRC_SERVICE_PUBLIC_FICHE = ('Service-Public.fr \u2013 Fiche de paie', 'https://www.service-public.fr/particuliers/vosdroits/F559')
@@ -58,31 +58,31 @@ PAGE_SOURCES = {
     'salaire-brut-net-horaire': [SRC_URSSAF_TAUX, SRC_SERVICE_PUBLIC_SMIC],
     'salaire-brut-net-journalier': [SRC_URSSAF_TAUX, SRC_URSSAF_PLAFONDS],
     'taux-horaire-brut-net': [SRC_URSSAF_TAUX, SRC_SERVICE_PUBLIC_SMIC],
-    'difference-salaire-brut-net': [SRC_URSSAF_TAUX, SRC_URSSAF_PLAFONDS],
+    'différence-salaire-brut-net': [SRC_URSSAF_TAUX, SRC_URSSAF_PLAFONDS],
     'cotisations-sociales-salariales': [SRC_URSSAF_TAUX, SRC_URSSAF_PLAFONDS, SRC_AGIRC_ARRCO],
     'salaire-net-imposable': [SRC_IMPOTS_PAS, SRC_URSSAF_TAUX],
-    'salaire-net-avant-apres-impot': [SRC_IMPOTS_PAS, SRC_IMPOTS_BAREME],
+    'salaire-net-avant-après-impôt': [SRC_IMPOTS_PAS, SRC_IMPOTS_BAREME],
     'lire-fiche-de-paie': [SRC_SERVICE_PUBLIC_FICHE, SRC_URSSAF_TAUX],
     'salaire-moyen-france': [SRC_INSEE, SRC_URSSAF_TAUX],
-    'negocier-salaire': [SRC_INSEE, SRC_SERVICE_PUBLIC_SMIC],
-    'cout-employeur': [SRC_URSSAF_TAUX, SRC_URSSAF_PLAFONDS],
+    'négocier-salaire': [SRC_INSEE, SRC_SERVICE_PUBLIC_SMIC],
+    'coût-employeur': [SRC_URSSAF_TAUX, SRC_URSSAF_PLAFONDS],
     'cadre-vs-non-cadre': [SRC_URSSAF_TAUX, SRC_AGIRC_ARRCO],
     'salaire-brut-net-alsace-moselle': [SRC_URSSAF_ALSACE, SRC_URSSAF_PLAFONDS],
     'smic-brut-net-2026': [SRC_SERVICE_PUBLIC_SMIC, SRC_LEGIFRANCE, SRC_URSSAF_TAUX],
     'salaire-brut-net-2026': [SRC_URSSAF_TAUX, SRC_SERVICE_PUBLIC_SMIC, SRC_URSSAF_PLAFONDS],
     '13eme-mois-brut-net': [SRC_URSSAF_TAUX, SRC_LEGIFRANCE],
-    'heures-supplementaires-brut-net': [SRC_SERVICE_PUBLIC_HEURES_SUP, SRC_LEGIFRANCE, SRC_URSSAF_TAUX],
+    'heures-supplémentaires-brut-net': [SRC_SERVICE_PUBLIC_HEURES_SUP, SRC_LEGIFRANCE, SRC_URSSAF_TAUX],
     'avantages-en-nature': [SRC_URSSAF_AVN, SRC_URSSAF_TAUX],
 }
 
 # All pages to patch with byline+dates (guides + tools, no sources for tools)
 ALL_PAGES = list(PAGE_SOURCES.keys()) + [
-    'calculateur-cout-employeur',
-    'calculateur-heures-supplementaires',
+    'calculateur-coût-employeur',
+    'calculateur-heures-supplémentaires',
     'calculateur-temps-partiel',
     'comparateur-salaire-net-par-pays',
     'simulateur-augmentation',
-    'simulateur-impot-sur-le-revenu',
+    'simulateur-impôt-sur-le-revenu',
     'glossaire',
     'a-propos',
     'mentions-legales',
@@ -217,10 +217,10 @@ def add_inline_source_links(html, page_slug):
             'agirc-arrco.fr'
         ))
 
-    if any('prelevement-la-source' in url for _, url in sources):
+    if any('prélèvement-la-source' in url for _, url in sources):
         inline_rules.append((
             r'(pr\u00e9l\u00e8vement \u00e0 la source)',
-            r'<a href="https://www.impots.gouv.fr/particulier/le-prelevement-la-source" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">\1</a>',
+            r'<a href="https://www.impots.gouv.fr/particulier/le-prélèvement-la-source" target="_blank" rel="noopener" class="text-brand-600 hover:text-brand-700">\1</a>',
             'impots.gouv.fr'
         ))
 

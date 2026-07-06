@@ -152,7 +152,7 @@ old_content_render = '''    for p in pages:
 
 new_content_render = '''    # Add FAQs to content pages
     for p in pages:
-        if "difference" in p["slug"]:
+        if "différence" in p["slug"]:
             p["faqs"] = generate_faq_section([
                 {"q": "Pourquoi y a-t-il une différence entre brut et net ?", "a": "La différence correspond aux cotisations sociales (retraite, santé, chômage, CSG/CRDS) qui financent notre protection sociale."},
                 {"q": "Le brut ou le net est-il mentionné sur le contrat de travail ?", "a": "Le contrat mentionne toujours le salaire brut. Le net varie selon les cotisations et ne peut être garanti à l'avance."},

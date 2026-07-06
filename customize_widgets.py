@@ -111,7 +111,7 @@ W02 = '''\
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-sm text-slate-500 font-medium">Écart avec cadre</p>
-                            <p class="text-2xl font-bold text-emerald-600" id="res-ecart">–</p>
+                            <p class="text-2xl font-bold text-emerald-600" id="res-écart">–</p>
                         </div>
                     </div>
                 </div>
@@ -127,8 +127,8 @@ W02 = '''\
             const c = calculerBrutVersNet(v, 'cadre', 1);
             document.getElementById('res-net').textContent = formatMoney(nc.netAvantImpot);
             document.getElementById('res-taux').textContent = nc.tauxCotisationsSalariales + ' %';
-            const ecart = nc.netAvantImpot - c.netAvantImpot;
-            document.getElementById('res-ecart').textContent = '+' + formatMoney(ecart);
+            const écart = nc.netAvantImpot - c.netAvantImpot;
+            document.getElementById('res-écart').textContent = '+' + formatMoney(écart);
         }
         inp.addEventListener('input', calc);
         calc();
@@ -274,7 +274,7 @@ W05 = '''\
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-700 mb-1">Année de contrat</label>
-                            <select id="widget-annee" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 focus:border-brand-500 focus:outline-none">
+                            <select id="widget-année" class="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-900 focus:border-brand-500 focus:outline-none">
                                 <option value="1" selected>1ère année</option>
                                 <option value="2">2ème année</option>
                                 <option value="3">3ème année</option>
@@ -292,7 +292,7 @@ W05 = '''\
                         </div>
                         <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-center">
                             <p class="text-sm text-emerald-600 font-medium">Impôt</p>
-                            <p class="text-lg font-bold text-emerald-700" id="res-impot">Exonéré</p>
+                            <p class="text-lg font-bold text-emerald-700" id="res-impôt">Exonéré</p>
                         </div>
                     </div>
                 </div>
@@ -302,7 +302,7 @@ W05 = '''\
     <script>
     (function() {
         const age = document.getElementById('widget-age');
-        const annee = document.getElementById('widget-annee');
+        const année = document.getElementById('widget-année');
         /* Grille apprentissage 2026 (% du SMIC) */
         const grille = {
             '16-17': [0.27, 0.39, 0.55],
@@ -318,17 +318,17 @@ W05 = '''\
         }
         function calc() {
             const a = parseInt(age.value) || 20;
-            const y = parseInt(annee.value) - 1;
+            const y = parseInt(année.value) - 1;
             const pct = grille[trancheAge(a)][y] || 0.43;
             const brut = SMIC_MENSUEL_BRUT * pct;
             /* Apprenti exonéré de cotisations sous le SMIC */
             const net = brut <= SMIC_MENSUEL_BRUT ? brut : brut - (brut - SMIC_MENSUEL_BRUT) * 0.22;
             document.getElementById('res-brut').textContent = formatMoney(brut);
             document.getElementById('res-net').textContent = formatMoney(net);
-            document.getElementById('res-impot').textContent = 'Exonéré';
+            document.getElementById('res-impôt').textContent = 'Exonéré';
         }
         age.addEventListener('input', calc);
-        annee.addEventListener('change', calc);
+        année.addEventListener('change', calc);
         calc();
     })();
     </script>'''
@@ -562,7 +562,7 @@ W09 = '''\
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-sm text-slate-500 font-medium">Impôt annuel estimé</p>
-                            <p class="text-2xl font-bold text-slate-900" id="res-impot">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="res-impôt">–</p>
                         </div>
                     </div>
                 </div>
@@ -579,7 +579,7 @@ W09 = '''\
             const r = calculerBrutVersNet(mensuel, sel.value, 1);
             document.getElementById('res-annuel').textContent = formatMoney(r.netAvantImpot * 12);
             document.getElementById('res-mensuel').textContent = formatMoney(r.netAvantImpot);
-            document.getElementById('res-impot').textContent = formatMoney(r.impotAnnuel);
+            document.getElementById('res-impôt').textContent = formatMoney(r.impotAnnuel);
         }
         inp.addEventListener('input', calc);
         sel.addEventListener('change', calc);
@@ -753,7 +753,7 @@ W12 = '''\
     </script>'''
 
 # ============================================================
-# 13. difference-salaire-brut-net – "Visualiser la Différence"
+# 13. différence-salaire-brut-net – "Visualiser la Différence"
 # ============================================================
 W13 = '''\
 <section class="py-12 px-4">
@@ -918,7 +918,7 @@ W15 = '''\
                     </div>
                     <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                         <p class="text-sm text-slate-500 font-medium">Écart (CSG non déductible + CRDS)</p>
-                        <p class="text-xl font-bold text-slate-900" id="res-ecart">–</p>
+                        <p class="text-xl font-bold text-slate-900" id="res-écart">–</p>
                     </div>
                 </div>
             </div>
@@ -933,8 +933,8 @@ W15 = '''\
             const r = calculerBrutVersNet(v, sel.value, 1);
             document.getElementById('res-net').textContent = formatMoney(r.netAvantImpot);
             document.getElementById('res-imposable').textContent = formatMoney(r.netImposableMensuel);
-            const ecart = r.netImposableMensuel - r.netAvantImpot;
-            document.getElementById('res-ecart').textContent = '+' + formatMoneyPrecis(ecart);
+            const écart = r.netImposableMensuel - r.netAvantImpot;
+            document.getElementById('res-écart').textContent = '+' + formatMoneyPrecis(écart);
         }
         inp.addEventListener('input', calc);
         sel.addEventListener('change', calc);
@@ -943,7 +943,7 @@ W15 = '''\
     </script>'''
 
 # ============================================================
-# 16. salaire-net-avant-apres-impot – "Avant et Après Impôt"
+# 16. salaire-net-avant-après-impôt – "Avant et Après Impôt"
 # ============================================================
 W16 = '''\
 <section class="py-12 px-4">
@@ -971,11 +971,11 @@ W16 = '''\
                         </div>
                         <div class="rounded-xl bg-red-50 border border-red-200 p-4 text-center">
                             <p class="text-sm text-red-500 font-medium">Impôt estimé (PAS)</p>
-                            <p class="text-2xl font-bold text-red-600" id="res-impot">–</p>
+                            <p class="text-2xl font-bold text-red-600" id="res-impôt">–</p>
                         </div>
                         <div class="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-center">
                             <p class="text-sm text-emerald-600 font-medium">Net après impôt</p>
-                            <p class="text-2xl font-bold text-emerald-700" id="res-apres">–</p>
+                            <p class="text-2xl font-bold text-emerald-700" id="res-après">–</p>
                         </div>
                     </div>
                 </div>
@@ -990,8 +990,8 @@ W16 = '''\
             const v = parseFloat(inp.value) || 0;
             const r = calculerBrutVersNet(v, sel.value, 1);
             document.getElementById('res-avant').textContent = formatMoney(r.netAvantImpot);
-            document.getElementById('res-impot').textContent = '−' + formatMoney(r.impotMensuel);
-            document.getElementById('res-apres').textContent = formatMoney(r.netApresImpot);
+            document.getElementById('res-impôt').textContent = '−' + formatMoney(r.impotMensuel);
+            document.getElementById('res-après').textContent = formatMoney(r.netApresImpot);
         }
         inp.addEventListener('input', calc);
         sel.addEventListener('change', calc);
@@ -1026,7 +1026,7 @@ W17 = '''\
                         <div class="flex justify-between py-2 border-b border-slate-100 text-red-600"><span>− Cotisations salariales</span><span id="fp-cotis">–</span></div>
                         <div class="flex justify-between py-2 border-b border-slate-200 bg-brand-50 px-2 rounded"><span class="font-semibold text-brand-700">Net à payer</span><span class="font-bold text-brand-700" id="fp-net">–</span></div>
                         <div class="flex justify-between py-2 border-b border-slate-100"><span class="text-slate-500">Net imposable</span><span id="fp-imposable">–</span></div>
-                        <div class="flex justify-between py-2"><span class="text-slate-500">Coût employeur</span><span id="fp-cout">–</span></div>
+                        <div class="flex justify-between py-2"><span class="text-slate-500">Coût employeur</span><span id="fp-coût">–</span></div>
                     </div>
                 </div>
             </div>
@@ -1043,7 +1043,7 @@ W17 = '''\
             document.getElementById('fp-cotis').textContent = '−' + formatMoney(r.totalSalarial);
             document.getElementById('fp-net').textContent = formatMoney(r.netAvantImpot);
             document.getElementById('fp-imposable').textContent = formatMoney(r.netImposableMensuel);
-            document.getElementById('fp-cout').textContent = formatMoney(r.coutEmployeur);
+            document.getElementById('fp-coût').textContent = formatMoney(r.coutEmployeur);
         }
         inp.addEventListener('input', calc);
         sel.addEventListener('change', calc);
@@ -1080,7 +1080,7 @@ W18 = '''\
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-sm text-slate-500 font-medium">Impôt estimé sur le 13ème mois</p>
-                            <p class="text-2xl font-bold text-slate-900" id="res-impot">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="res-impôt">–</p>
                         </div>
                     </div>
                 </div>
@@ -1103,7 +1103,7 @@ W18 = '''\
             var imposable13 = r12.netImposableMensuel * 13;
             var abat = Math.min(Math.max(imposable13 * 0.1, 495), 14171);
             var impot13 = estimerImpotRevenu(imposable13 - abat);
-            document.getElementById('res-impot').textContent = formatMoney(impot13 - impot12);
+            document.getElementById('res-impôt').textContent = formatMoney(impot13 - impot12);
         }
         inp.addEventListener('input', calc);
         sel.addEventListener('change', calc);
@@ -1112,7 +1112,7 @@ W18 = '''\
     </script>'''
 
 # ============================================================
-# 19. heures-supplementaires-brut-net – "Calculateur Heures Sup"
+# 19. heures-supplémentaires-brut-net – "Calculateur Heures Sup"
 # ============================================================
 W19 = '''\
 <section class="py-12 px-4">
@@ -1325,11 +1325,11 @@ W22 = '''\
                         <div>
                             <div class="flex justify-between text-sm mb-1">
                                 <span class="font-medium text-slate-700">Salaire médian : 2 100 € net</span>
-                                <span id="lbl-median" class="text-slate-500">–</span>
+                                <span id="lbl-médian" class="text-slate-500">–</span>
                             </div>
                             <div class="w-full bg-slate-100 rounded-full h-4 relative">
                                 <div class="h-full rounded-full bg-amber-400" style="width:50%"></div>
-                                <div class="absolute h-full top-0 w-0.5 bg-slate-900" id="marker-median" style="left:50%"></div>
+                                <div class="absolute h-full top-0 w-0.5 bg-slate-900" id="marker-médian" style="left:50%"></div>
                             </div>
                         </div>
                         <div>
@@ -1357,10 +1357,10 @@ W22 = '''\
             document.getElementById('res-net').textContent = formatMoney(net);
             /* Jauge médian (2100) */
             var pctMedian = Math.min(100, (net / 4200) * 100);
-            document.querySelectorAll('#marker-median')[0].previousElementSibling.style.width = pctMedian + '%';
-            document.getElementById('marker-median').style.left = Math.min(100, (2100 / 4200) * 100) + '%';
+            document.querySelectorAll('#marker-médian')[0].previousElementSibling.style.width = pctMedian + '%';
+            document.getElementById('marker-médian').style.left = Math.min(100, (2100 / 4200) * 100) + '%';
             var diffMed = net - 2100;
-            document.getElementById('lbl-median').textContent = (diffMed >= 0 ? '+' : '') + formatMoney(diffMed);
+            document.getElementById('lbl-médian').textContent = (diffMed >= 0 ? '+' : '') + formatMoney(diffMed);
             /* Jauge moyen (2700) */
             var pctMoyen = Math.min(100, (net / 5400) * 100);
             document.querySelectorAll('#marker-moyen')[0].previousElementSibling.style.width = pctMoyen + '%';
@@ -1374,7 +1374,7 @@ W22 = '''\
     </script>'''
 
 # ============================================================
-# 23. negocier-salaire – "Simulateur Augmentation"
+# 23. négocier-salaire – "Simulateur Augmentation"
 # ============================================================
 W23 = '''\
 <section class="py-12 px-4">
@@ -1475,11 +1475,11 @@ W_ALSACE = '''\
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-sm text-slate-500 font-medium">Net régime général</p>
-                            <p class="text-2xl font-bold text-slate-900" id="res-general">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="res-général">–</p>
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-sm text-slate-500 font-medium">Surcoût Alsace-Moselle</p>
-                            <p class="text-2xl font-bold text-slate-900" id="res-ecart">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="res-écart">–</p>
                         </div>
                     </div>
                 </div>
@@ -1495,8 +1495,8 @@ W_ALSACE = '''\
             const rAM = calculerBrutVersNet(v, sel.value, 1, {alsaceMoselle: true});
             const rGen = calculerBrutVersNet(v, sel.value, 1);
             document.getElementById('res-net').textContent = formatMoney(rAM.netAvantImpot);
-            document.getElementById('res-general').textContent = formatMoney(rGen.netAvantImpot);
-            document.getElementById('res-ecart').textContent = formatMoney(rGen.netAvantImpot - rAM.netAvantImpot);
+            document.getElementById('res-général').textContent = formatMoney(rGen.netAvantImpot);
+            document.getElementById('res-écart').textContent = formatMoney(rGen.netAvantImpot - rAM.netAvantImpot);
         }
         inp.addEventListener('input', calc);
         sel.addEventListener('change', calc);
@@ -1504,10 +1504,10 @@ W_ALSACE = '''\
     })();
     </script>'''
 
-# simulateur-augmentation – same as negocier-salaire
+# simulateur-augmentation – same as négocier-salaire
 W_AUGMENTATION = W23
 
-# simulateur-impot-sur-le-revenu
+# simulateur-impôt-sur-le-revenu
 W_IMPOT = '''\
 <section class="py-12 px-4">
             <div class="mx-auto max-w-3xl">
@@ -1530,7 +1530,7 @@ W_IMPOT = '''\
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div class="rounded-xl bg-brand-50 border border-brand-100 p-4 text-center">
                             <p class="text-sm text-brand-600 font-medium">Impôt annuel estimé</p>
-                            <p class="text-2xl font-bold text-slate-900" id="res-impot">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="res-impôt">–</p>
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-sm text-slate-500 font-medium">Prélèvement mensuel</p>
@@ -1552,7 +1552,7 @@ W_IMPOT = '''\
         function calc() {
             const v = parseFloat(inp.value) || 0;
             const r = calculerBrutVersNet(v, sel.value, 1);
-            document.getElementById('res-impot').textContent = formatMoney(r.impotAnnuel);
+            document.getElementById('res-impôt').textContent = formatMoney(r.impotAnnuel);
             document.getElementById('res-mensuel').textContent = formatMoney(r.impotMensuel);
             document.getElementById('res-net').textContent = formatMoney(r.netApresImpot);
         }
@@ -1562,7 +1562,7 @@ W_IMPOT = '''\
     })();
     </script>'''
 
-# cout-employeur
+# coût-employeur
 W_COUT = '''\
 <section class="py-12 px-4">
             <div class="mx-auto max-w-3xl">
@@ -1585,7 +1585,7 @@ W_COUT = '''\
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <div class="rounded-xl bg-brand-50 border border-brand-100 p-4 text-center">
                             <p class="text-sm text-brand-600 font-medium">Coût employeur</p>
-                            <p class="text-2xl font-bold text-slate-900" id="res-cout">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="res-coût">–</p>
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-sm text-slate-500 font-medium">Cotisations patronales</p>
@@ -1607,7 +1607,7 @@ W_COUT = '''\
         function calc() {
             const v = parseFloat(inp.value) || 0;
             const r = calculerBrutVersNet(v, sel.value, 1);
-            document.getElementById('res-cout').textContent = formatMoney(r.coutEmployeur);
+            document.getElementById('res-coût').textContent = formatMoney(r.coutEmployeur);
             document.getElementById('res-pat').textContent = formatMoney(r.totalPatronal);
             document.getElementById('res-net').textContent = formatMoney(r.netAvantImpot);
         }
@@ -1730,7 +1730,7 @@ W_CADRE_VS = '''\
     })();
     </script>'''
 
-# difference-salaire-brut-net already done (W13)
+# différence-salaire-brut-net already done (W13)
 # Now map pages to widgets
 
 PAGES = {
@@ -1746,17 +1746,17 @@ PAGES = {
     'salaire-brut-net-horaire': W10,
     'salaire-brut-net-journalier': W11,
     'taux-horaire-brut-net': W12,
-    'difference-salaire-brut-net': W13,
+    'différence-salaire-brut-net': W13,
     'cotisations-sociales-salariales': W14,
     'salaire-net-imposable': W15,
-    'salaire-net-avant-apres-impot': W16,
+    'salaire-net-avant-après-impôt': W16,
     'lire-fiche-de-paie': W17,
     '13eme-mois-brut-net': W18,
-    'heures-supplementaires-brut-net': W19,
+    'heures-supplémentaires-brut-net': W19,
     'avantages-en-nature': W20,
     'smic-brut-net-2026': W21,
     'salaire-moyen-france': W22,
-    'negocier-salaire': W23,
+    'négocier-salaire': W23,
 }
 
 # Additional pages that also have the generic widget
@@ -1764,8 +1764,8 @@ EXTRA_PAGES = {
     'salaire-brut-net-2026': W_BRUT_NET_2026,
     'salaire-brut-net-alsace-moselle': W_ALSACE,
     'simulateur-augmentation': W_AUGMENTATION,
-    'simulateur-impot-sur-le-revenu': W_IMPOT,
-    'cout-employeur': W_COUT,
+    'simulateur-impôt-sur-le-revenu': W_IMPOT,
+    'coût-employeur': W_COUT,
     'calculateur-temps-partiel': W_TEMPS_PARTIEL,
     'cadre-vs-non-cadre': W_CADRE_VS,
 }

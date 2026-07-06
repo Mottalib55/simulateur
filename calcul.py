@@ -63,15 +63,15 @@ def estimer_impot_revenu(net_imposable_annuel):
         (180294, 0.41),
         (float("inf"), 0.45),
     ]
-    impot = 0
+    impôt = 0
     prev = 0
     for limit, taux in tranches:
         if net_imposable_annuel <= prev:
             break
         base = min(net_imposable_annuel, limit) - prev
-        impot += base * taux
+        impôt += base * taux
         prev = limit
-    return round(impot)
+    return round(impôt)
 
 
 def calculer_brut_vers_net(brut_mensuel, statut):

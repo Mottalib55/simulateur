@@ -44,7 +44,7 @@ def page_head(title, description, canonical, keywords=""):
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
     {{
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             {{ "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "{BASE_URL}/" }},

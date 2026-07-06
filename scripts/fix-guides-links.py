@@ -41,7 +41,7 @@ REPLACEMENTS = [
 
 # Process all HTML files (excluding index.html which was already fixed)
 html_files = glob.glob(os.path.join(BASE, "*/index.html"))
-# Also check guide pages that might be at different paths
+# Also check guide pages that might be at différent paths
 html_files = [f for f in html_files if "/scripts/" not in f and "/node_modules/" not in f]
 
 updated = 0

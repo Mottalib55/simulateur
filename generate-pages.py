@@ -44,7 +44,7 @@ def page_head(title, description, canonical, keywords=""):
     <script type="text/javascript">(function(c,l,a,r,i,t,y){{c[a]=c[a]||function(){{(c[a].q=c[a].q||[]).push(arguments)}};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)}})(window,document,"clarity","script","xanyylalio");</script>
     <script type="application/ld+json">
     {{
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             {{ "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "{BASE_URL}/" }},
@@ -54,12 +54,12 @@ def page_head(title, description, canonical, keywords=""):
     </script>
     <script type="application/ld+json">
     {{
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "Organization",
         "name": "SalaireBrutNet",
         "url": "https://salairebrutonet.com",
         "logo": "https://salairebrutonet.com/img/logo.svg",
-        "description": "Simulateur gratuit de conversion salaire brut en net pour la France. Taux 2026 a jour, cadre et non-cadre.",
+        "description": "Simulateur gratuit de conversion salaire brut en net pour la France. Taux 2026 à jour, cadre et non-cadre.",
         "founder": {{
             "@type": "Person",
             "name": "Mottalib Radif",
@@ -71,7 +71,7 @@ def page_head(title, description, canonical, keywords=""):
     </script>
     <script type="application/ld+json">
     {{
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "Person",
         "name": "Mottalib Radif",
         "url": "https://salairebrutonet.com/a-propos/",
@@ -82,7 +82,7 @@ def page_head(title, description, canonical, keywords=""):
             "name": "SalaireBrutNet",
             "url": "https://salairebrutonet.com"
         }},
-        "knowsAbout": ["salaire brut net", "cotisations sociales", "fiscalite francaise", "droit du travail"]
+        "knowsAbout": ["salaire brut net", "cotisations sociales", "fiscalité française", "droit du travail"]
     }}
     </script>
 </head>'''
@@ -338,7 +338,7 @@ def generate_conversion_table(amounts, statut="non-cadre"):
 
 
 def generate_faq_section(faqs):
-    """Generate FAQ accordion with schema.org markup."""
+    """Generate FAQ accordion with schéma.org markup."""
     chevron_svg = '<svg class="h-5 w-5 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>'
     items_html = ""
     schema_items = []
@@ -368,12 +368,12 @@ def generate_faq_section(faqs):
             </div>
         </section>
         <script type="application/ld+json">
-        {{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{schema_json}]}}
+        {{"@context":"https://schéma.org","@type":"FAQPage","mainEntity":[{schema_json}]}}
         </script>'''
 
 
 def generate_examples(scenarios):
-    """Generate concrete example cards."""
+    """Generate concrète example cards."""
     cards = ""
     for s in scenarios:
         cards += f'''
@@ -457,7 +457,7 @@ def gen_status_pages():
                     <li>En 2026, le <strong>prix d'achat du point</strong> est de 18,7669 €</li>
                     <li>À la retraite, chaque point rapporte une <strong>valeur de service</strong> de 1,4159 € par an</li>
                 </ul>
-                <p>Pour un cadre, les cotisations sur la tranche 2 (au-delà de 3 864 €/mois) représentent un avantage important : le taux de cotisation de 8,64% (part salariale) permet d'accumuler davantage de points que sur la tranche 1. Par exemple, un cadre gagnant 5 000 € brut mensuel cotise sur environ 1 136 € en tranche 2, ce qui génère environ 120 points par an supplémentaires par rapport à un non-cadre au plafond.</p>
+                <p>Pour un cadre, les cotisations sur la tranche 2 (au-delà de 3 864 €/mois) représentent un avantage important : le taux de cotisation de 8,64% (part salariale) permet d'accumuler davantage de points que sur la tranche 1. Par exemple, un cadre gagnant 5 000 € brut mensuel cotisé sur environ 1 136 € en tranche 2, ce qui génère environ 120 points par an supplémentaires par rapport à un non-cadre au plafond.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Prévoyance obligatoire cadre : la convention AGIRC</h3>
                 <p>Les cadres bénéficient d'une <strong>prévoyance collective obligatoire</strong> financée par l'employeur (minimum 1,5% de la tranche A du salaire). Cette prévoyance couvre :</p>
@@ -563,7 +563,7 @@ def gen_status_pages():
                     <li><strong>Employés</strong> : travail principalement administratif, commercial ou de service (secrétaires, assistants, vendeurs, hôtes d'accueil, agents de service)</li>
                     <li><strong>Ouvriers</strong> : travail manuel dans l'industrie, le bâtiment ou l'artisanat (opérateurs de production, mécaniciens, électriciens, maçons, chauffeurs)</li>
                     <li><strong>Techniciens</strong> : qualification technique spécialisée sans fonction d'encadrement (techniciens de maintenance, informaticiens, dessinateurs, laborantins)</li>
-                    <li><strong>Agents de maîtrise</strong> : position intermédiaire entre employés/ouvriers et cadres, souvent avec une petite équipe à superviser (chefs d'équipe, contremaîtres, responsables de secteur)</li>
+                    <li><strong>Agents de maîtrise</strong> : position intermédiaire entre employés/ouvriers et cadres, souvent avec une petite équipe à superviser (chefs d'équipe, contremaîtrès, responsables de secteur)</li>
                 </ul>
                 <p>Depuis la fusion AGIRC-ARRCO en 2019, ces distinctions n'ont plus d'impact sur les <a href="/cotisations-sociales-salariales/" class="text-brand-600 hover:text-brand-700">cotisations sociales</a>. Tous les non-cadres cotisent aux mêmes taux, quelle que soit leur catégorie.</p>
 
@@ -606,8 +606,8 @@ def gen_status_pages():
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Impact du dépassement du plafond de la Sécurité sociale</h2>
                 <p>Le <strong>plafond de la Sécurité sociale</strong> (3 864 € mensuels en 2026) est un seuil important dans le calcul des cotisations. Au-delà de ce montant, certaines cotisations changent :</p>
                 <ul>
-                    <li>La cotisation <strong>vieillesse plafonnée (6,90%)</strong> ne s'applique plus sur la part dépassant 3 864 €</li>
-                    <li>La cotisation <strong>AGIRC-ARRCO passe de 3,15% à 8,64%</strong> sur la tranche 2 (au-delà du plafond)</li>
+                    <li>La cotisation <strong>vieillesse plafonnée (6,90%)</strong> ne s'appliqué plus sur la part dépassant 3 864 €</li>
+                    <li>La cotisation <strong>AGIRC-ARRCO passé de 3,15% à 8,64%</strong> sur la tranche 2 (au-delà du plafond)</li>
                     <li>La <strong>CEG augmente</strong> de 0,86% à 1,08% sur la tranche 2</li>
                 </ul>
                 <p>Exemple concret : pour un non-cadre gagnant <strong>4 500 € brut</strong> :</p>
@@ -902,7 +902,7 @@ def gen_status_pages():
                     <li>Prestations de services BNC : <strong>10,6%</strong> au lieu de 21,1%</li>
                     <li>Professions libérales CIPAV : <strong>10,6%</strong> au lieu de 21,2%</li>
                 </ul>
-                <p>L'ACRE s'applique automatiquement à tous les créateurs d'auto-entreprise depuis 2020. L'exonération est dégressive : taux réduit la 1ère année, puis retour au taux normal dès la 2ème année.</p>
+                <p>L'ACRE s'appliqué automatiquement à tous les créateurs d'auto-entreprise depuis 2020. L'exonération est dégressive : taux réduit la 1ère année, puis retour au taux normal dès la 2ème année.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Exemple chiffré de l'ACRE</h3>
                 <p>Un consultant en micro-BNC réalisant 40 000 € de CA la première année :</p>
@@ -994,7 +994,7 @@ def gen_status_pages():
                     <li>CA entre 10 000 € et 32 600 € : entre <strong>220 € et 1 100 €</strong></li>
                     <li>CA entre 32 600 € et 100 000 € : entre <strong>220 € et 2 400 €</strong></li>
                 </ul>
-                <p>La CFE est payable en novembre (ou en deux fois en juin et novembre si le montant dépasse 3 000 €). Elle est déductible du bénéfice imposable si vous êtes à l'IR.</p>
+                <p>La CFE est payable en novembre (ou en deux fois en juin et novembre si le montant dépassé 3 000 €). Elle est déductible du bénéfice imposable si vous êtes à l'IR.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Exonérations possibles de CFE</h3>
                 <p>Certains auto-entrepreneurs peuvent bénéficier d'exonérations permanentes ou temporaires :</p>
@@ -1058,7 +1058,7 @@ def gen_status_pages():
                 </ul>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Brut = Net pour les apprentis ?</h3>
-                <p>Bonne nouvelle : pour les apprentis dont la rémunération ne dépasse pas <strong>79% du SMIC</strong>, le salaire brut est égal au salaire net. Les cotisations salariales sont entièrement exonérées.</p>
+                <p>Bonne nouvelle : pour les apprentis dont la rémunération ne dépassé pas <strong>79% du SMIC</strong>, le salaire brut est égal au salaire net. Les cotisations salariales sont entièrement exonérées.</p>
                 <p>Au-delà de 79% du SMIC, seule la part excédentaire est soumise aux cotisations normales.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Contrat de professionnalisation</h3>
@@ -1178,7 +1178,7 @@ def gen_status_pages():
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Aide à l'embauche d'un alternant 2026</h2>
                 <p>Pour encourager le recrutement d'alternants, l'État a reconduit en 2026 une <strong>aide exceptionnelle à l'embauche</strong> qui représente un avantage financier majeur pour les employeurs.</p>
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Montant de l'aide 2026</h3>
-                <p>L'aide s'élève à <strong>6 000 €</strong> pour tout contrat d'apprentissage conclu entre le 1er janvier 2026 et le 31 décembre 2026, quelle que soit la taille de l'entreprise. Cette aide s'applique pour :</p>
+                <p>L'aide s'élève à <strong>6 000 €</strong> pour tout contrat d'apprentissage conclu entre le 1er janvier 2026 et le 31 décembre 2026, quelle que soit la taille de l'entreprise. Cette aide s'appliqué pour :</p>
                 <ul>
                     <li>Les apprentis préparant un diplôme ou titre à finalité professionnelle inférieur ou égal au <strong>niveau 7 du RNCP</strong> (Bac +5, master, diplôme d'ingénieur)</li>
                     <li>Les contrats conclus dans les <strong>entreprises de moins de 250 salariés</strong> sans condition</li>
@@ -1188,7 +1188,7 @@ def gen_status_pages():
                 <p>L'aide de 6 000 € est versée automatiquement par l'Agence de Services et de Paiement (ASP) :</p>
                 <ul>
                     <li>Versement mensuel anticipé de <strong>500 €/mois pendant 12 mois</strong> (soit 6 000 € sur la première année)</li>
-                    <li>Aucune démarche à effectuer : l'aide est attribuée automatiquement après transmission du contrat à l'OPCO</li>
+                    <li>Aucune démarché à effectuer : l'aide est attribuée automatiquement après transmission du contrat à l'OPCO</li>
                     <li>L'aide couvre en grande partie le coût du salaire de l'apprenti en 1ère année</li>
                 </ul>
                 <p>Combinée aux exonérations de charges patronales, cette aide rend le <a href="/cout-employeur/" class="text-brand-600 hover:text-brand-700">coût d'un apprenti</a> très avantageux, voire quasi nul pour les petites entreprises et les apprentis mineurs.</p>
@@ -1209,7 +1209,7 @@ def gen_status_pages():
                 <p>La gratification minimum est de <strong>4,35 € par heure</strong>, soit environ <strong>669 € par mois</strong> pour un temps plein (154 heures). Ce montant correspond à 15% du plafond horaire de la Sécurité sociale.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Brut = Net pour les stagiaires</h3>
-                <p>Tant que la gratification ne dépasse pas le seuil de <strong>4,35 €/heure</strong> (environ 669 €/mois), elle est <strong>totalement exonérée</strong> de cotisations sociales et d'impôt sur le revenu. Le brut est donc égal au net.</p>
+                <p>Tant que la gratification ne dépassé pas le seuil de <strong>4,35 €/heure</strong> (environ 669 €/mois), elle est <strong>totalement exonérée</strong> de cotisations sociales et d'impôt sur le revenu. Le brut est donc égal au net.</p>
                 <p>Si l'employeur verse plus que le minimum, seule la <strong>fraction excédentaire</strong> est soumise aux cotisations sociales classiques.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Exemple</h3>
@@ -1223,7 +1223,7 @@ def gen_status_pages():
                 <p>Les stages en France sont strictement encadrés par la loi pour éviter les abus et garantir que le stage reste un <strong>dispositif pédagogique</strong> et non un contrat de travail déguisé.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Durée maximale du stage</h3>
-                <p>Un stage ne peut pas dépasser <strong>6 mois par année d'enseignement</strong> (soit 924 heures). Cette limite s'applique quel que soit le nombre de stages effectués dans l'année. Au-delà, l'entreprise doit embaucher l'étudiant en <a href="/salaire-brut-net-alternance-apprentissage/" class="text-brand-600 hover:text-brand-700">contrat d'apprentissage</a> ou en contrat de professionnalisation.</p>
+                <p>Un stage ne peut pas dépasser <strong>6 mois par année d'enseignement</strong> (soit 924 heures). Cette limite s'appliqué quel que soit le nombre de stages effectués dans l'année. Au-delà, l'entreprise doit embaucher l'étudiant en <a href="/salaire-brut-net-alternance-apprentissage/" class="text-brand-600 hover:text-brand-700">contrat d'apprentissage</a> ou en contrat de professionnalisation.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Convention de stage obligatoire</h3>
                 <p>Tout stage doit faire l'objet d'une <strong>convention tripartite</strong> signée entre :</p>
@@ -1235,7 +1235,7 @@ def gen_status_pages():
                 <p>La convention définit les missions, la durée, les horaires, la gratification et les conditions d'encadrement. Sans convention de stage, la relation peut être requalifiée en <strong>contrat de travail</strong>, avec obligation pour l'employeur de payer des cotisations rétroactives et d'éventuelles indemnités.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Délai de carence entre deux stages</h3>
-                <p>Pour éviter que les entreprises n'enchaînent les stagiaires sur un même poste, la loi impose un <strong>délai de carence</strong> entre deux stages sur le même poste :</p>
+                <p>Pour éviter que les entreprises n'enchaînent les stagiaires sur un même poste, la loi imposé un <strong>délai de carence</strong> entre deux stages sur le même poste :</p>
                 <ul>
                     <li>Délai de carence = <strong>1/3 de la durée du stage précédent</strong></li>
                     <li>Exemple : après un stage de 6 mois, l'entreprise doit attendre 2 mois avant d'accueillir un nouveau stagiaire sur le même poste</li>
@@ -1326,7 +1326,7 @@ def gen_status_pages():
                 <p>Si le stage ne respecte pas les conditions légales, il peut être <strong>requalifié en contrat de travail</strong> par le conseil de prud'hommes. Les principaux motifs de requalification sont :</p>
                 <ul>
                     <li><strong>Absence de convention de stage</strong> ou convention non conforme</li>
-                    <li><strong>Missions ne correspondant pas à la formation</strong> : le stagiaire effectue des tâches purement productives sans lien avec son cursus</li>
+                    <li><strong>Missions ne correspondant pas à la formation</strong> : le stagiaire effectué des tâches purement productives sans lien avec son cursus</li>
                     <li><strong>Autonomie excessive</strong> : le stagiaire travaille sans encadrement ni suivi pédagogique</li>
                     <li><strong>Remplacement d'un salarié absent</strong> ou récemment licencié</li>
                     <li><strong>Dépassement de la durée légale</strong> de 6 mois</li>
@@ -1344,9 +1344,9 @@ def gen_status_pages():
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">1. Embauche en CDI ou CDD classique</h3>
                 <p>L'entreprise peut proposer un <a href="/salaire-brut-net-non-cadre/" class="text-brand-600 hover:text-brand-700">contrat de travail classique</a> (CDD ou CDI). Dans ce cas :</p>
                 <ul>
-                    <li>La <strong>période d'essai</strong> s'applique normalement (2 à 4 mois selon le statut)</li>
+                    <li>La <strong>période d'essai</strong> s'appliqué normalement (2 à 4 mois selon le statut)</li>
                     <li>La <strong>durée du stage</strong> peut être déduite de la période d'essai si cela est prévu dans le contrat de travail (maximum 50% de la durée du stage)</li>
-                    <li>Le salaire passe au minimum au <a href="/smic-brut-net-2026/" class="text-brand-600 hover:text-brand-700">SMIC</a> (1 801,80 € brut) ou plus selon le poste</li>
+                    <li>Le salaire passé au minimum au <a href="/smic-brut-net-2026/" class="text-brand-600 hover:text-brand-700">SMIC</a> (1 801,80 € brut) ou plus selon le poste</li>
                 </ul>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">2. Contrat d'apprentissage ou de professionnalisation</h3>
@@ -1429,7 +1429,7 @@ def gen_status_pages():
                 <p>En cas de dépassement de la durée maximale, le contrat peut être <strong>requalifié en CDI</strong> avec l'entreprise utilisatrice.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Délai de carence entre deux missions</h3>
-                <p>Pour éviter que l'intérim ne devienne un emploi permanent déguisé, la loi impose un <strong>délai de carence</strong> entre deux missions sur le même poste :</p>
+                <p>Pour éviter que l'intérim ne devienne un emploi permanent déguisé, la loi imposé un <strong>délai de carence</strong> entre deux missions sur le même poste :</p>
                 <ul>
                     <li>Délai de carence = <strong>1/3 de la durée de la mission précédente</strong></li>
                     <li>Exemple : après une mission de 6 mois, l'entreprise doit attendre 2 mois avant de faire appel à un nouvel intérimaire sur ce poste</li>
@@ -1496,7 +1496,7 @@ def gen_status_pages():
                     <li>Restaurant d'entreprise ou tickets restaurant</li>
                     <li>Vestiaires, douches, sanitaires</li>
                     <li>Locaux de repos</li>
-                    <li>Activités sociales et culturelles du CSE (si la mission dépasse 3 mois)</li>
+                    <li>Activités sociales et culturelles du CSE (si la mission dépassé 3 mois)</li>
                 </ul>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">2. Transport et indemnités kilométriques</h3>
@@ -1811,7 +1811,7 @@ def gen_period_pages():
                     <li>Nombre de jours travaillés : 17 jours (du 15 au 31 mars)</li>
                     <li>Salaire prorata : (2 500 / 31) × 17 = <strong>1 370 € brut</strong></li>
                 </ul>
-                <p>Cette règle s'applique aussi en cas d'absence non rémunérée (congé sans solde, grève) : le salaire est réduit au prorata des jours d'absence.</p>
+                <p>Cette règle s'appliqué aussi en cas d'absence non rémunérée (congé sans solde, grève) : le salaire est réduit au prorata des jours d'absence.</p>
             """
         },
         {
@@ -2033,7 +2033,7 @@ def gen_period_pages():
                 <p class="mt-4">Ces fourchettes sont indicatives et peuvent varier selon l'expérience, la région et la taille de l'entreprise. Les métiers spécialisés ou en tension (développeurs, ingénieurs, professions médicales) bénéficient généralement de taux horaires plus élevés.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Taux horaire et temps partiel</h2>
-                <p>Le <strong>taux horaire reste identique</strong> que vous travailliez à temps plein ou à temps partiel. Seul le nombre d'heures travaillées change, ce qui modifie votre salaire mensuel total.</p>
+                <p>Le <strong>taux horaire reste identique</strong> que vous travailliez à temps plein ou à temps partiel. Seul le nombre d'heures travaillées change, ce qui modifié votre salaire mensuel total.</p>
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Calcul du salaire mensuel à temps partiel</h3>
                 <p>Pour calculer votre salaire mensuel à temps partiel, multipliez votre taux horaire par le nombre d'heures mensuelles correspondant à votre quotité de travail :</p>
                 <ul>
@@ -2337,7 +2337,7 @@ def gen_period_pages():
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Taux horaire et convention collective</h2>
                 <p>Les <strong>conventions collectives</strong> fixent des grilles de salaires minimum par catégorie et niveau, qui s'expriment souvent en taux horaire brut. Chaque branche professionnelle définit ses propres grilles, ce qui peut créer des écarts importants entre secteurs.</p>
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Grilles conventionnelles vs SMIC</h3>
-                <p>Le salaire minimum conventionnel ne peut être inférieur au SMIC (11,88 € brut/h en 2026). Si la convention collective prévoit un taux horaire inférieur au SMIC pour un niveau donné, c'est le SMIC qui s'applique automatiquement.</p>
+                <p>Le salaire minimum conventionnel ne peut être inférieur au SMIC (11,88 € brut/h en 2026). Si la convention collective prévoit un taux horaire inférieur au SMIC pour un niveau donné, c'est le SMIC qui s'appliqué automatiquement.</p>
                 <p>Exemples de taux horaires minimums conventionnels dans différentes branches :</p>
                 <ul>
                     <li><strong>Commerce de détail</strong> : niveau 1 à 12,10 €/h, niveau 5 (responsable) à 16,50 €/h</li>
@@ -2529,7 +2529,7 @@ def gen_period_pages():
 def gen_content_pages():
     pages = [
         {
-            "slug": "difference-salaire-brut-net",
+            "slug": "différence-salaire-brut-net",
             "title": "Différence Salaire Brut et Net 2026 : Explications",
             "desc": "Comprendre la différence entre salaire brut et net en 2026. Cotisations sociales détaillées, calcul étape par étape et exemples concrets pour chaque statut.",
             "kw": "différence brut net, c'est quoi le salaire brut, salaire brut vs net, explication brut net",
@@ -2588,7 +2588,7 @@ def gen_content_pages():
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Statuts particuliers</h3>
                 <ul class="space-y-2">
                     <li><strong>Alternants (apprentis, contrats de professionnalisation)</strong> : exonération totale ou partielle de cotisations selon l'âge et le salaire. Un apprenti peut toucher près de 100% de son brut en net.</li>
-                    <li><strong>Stagiaires</strong> : si la gratification dépasse le seuil légal (4,35 €/h en 2026), elle est soumise aux cotisations sociales au-delà de ce seuil uniquement.</li>
+                    <li><strong>Stagiaires</strong> : si la gratification dépassé le seuil légal (4,35 €/h en 2026), elle est soumise aux cotisations sociales au-delà de ce seuil uniquement.</li>
                 </ul>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Brut vs net dans différents secteurs</h2>
@@ -2707,7 +2707,7 @@ def gen_content_pages():
                 <p>Les apprentis sont totalement exonérés de cotisations salariales (hors CSG/CRDS) dans la limite de 79% du SMIC. Au-delà, les cotisations s'appliquent normalement sur la part excédentaire.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Stagiaires</h3>
-                <p>La gratification de stage est exonérée de cotisations sociales tant qu'elle ne dépasse pas le seuil légal de 4,35 € par heure (soit 659,03 € pour un mois complet à 35h/semaine en 2026). Au-delà, des cotisations s'appliquent sur la part excédentaire.</p>
+                <p>La gratification de stage est exonérée de cotisations sociales tant qu'elle ne dépassé pas le seuil légal de 4,35 € par heure (soit 659,03 € pour un mois complet à 35h/semaine en 2026). Au-delà, des cotisations s'appliquent sur la part excédentaire.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Zone de revitalisation rurale (ZRR)</h3>
                 <p>Certains employeurs situés en ZRR peuvent bénéficier d'exonérations de cotisations, mais celles-ci concernent principalement les cotisations patronales plutôt que salariales.</p>
@@ -2742,7 +2742,7 @@ def gen_content_pages():
             """
         },
         {
-            "slug": "salaire-net-avant-apres-impot",
+            "slug": "salaire-net-avant-après-impôt",
             "title": "Net Avant et Après Impôt 2026 : Comprendre l'Écart",
             "desc": "Différence entre net avant impôt et net après impôt en 2026. Prélèvement à la source, net imposable et calcul détaillé. Ce que vous touchez chaque mois.",
             "kw": "net avant impôt, net après impôt, prélèvement à la source, net imposable, salaire net impôt",
@@ -2764,13 +2764,13 @@ def gen_content_pages():
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Le prélèvement à la source (PAS)</h2>
                 <p>Le <strong>prélèvement à la source</strong> est l'impôt sur le revenu prélevé mensuellement sur votre salaire. Il est calculé en appliquant un taux à votre <strong>net imposable</strong>. Ce taux est déterminé par l'administration fiscale en fonction de vos revenus de l'année N-2 (revenus 2024 pour l'impôt 2026).</p>
-                <p>Le prélèvement à la source ne modifie pas le montant total de votre impôt annuel, il modifie seulement la façon dont vous le payez : mensuellement via votre employeur plutôt qu'en une ou plusieurs fois l'année suivante.</p>
+                <p>Le prélèvement à la source ne modifié pas le montant total de votre impôt annuel, il modifié seulement la façon dont vous le payez : mensuellement via votre employeur plutôt qu'en une ou plusieurs fois l'année suivante.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Trois options de taux</h3>
                 <p>Vous pouvez choisir entre trois types de taux de prélèvement à la source :</p>
                 <ul class="space-y-3">
-                    <li><strong>Taux personnalisé (par défaut)</strong> : calculé sur les revenus globaux de votre foyer fiscal. C'est le taux appliqué automatiquement. Il est identique pour tous les membres du foyer. Par exemple, si votre foyer a un taux de 7,5%, chacun des conjoints se verra appliquer 7,5% sur son net imposable.</li>
-                    <li><strong>Taux individualisé</strong> : option pour les couples avec des revenus très différents. Chaque conjoint a un taux différent, proportionnel à ses revenus. Cela évite qu'un conjoint avec des revenus modestes se voie appliquer un taux élevé lié aux hauts revenus de l'autre. À demander sur votre espace impots.gouv.fr.</li>
+                    <li><strong>Taux personnalisé (par défaut)</strong> : calculé sur les revenus globaux de votre foyer fiscal. C'est le taux appliqué automatiquement. Il est identique pour tous les membres du foyer. Par exemple, si votre foyer à un taux de 7,5%, chacun des conjoints se verra appliquer 7,5% sur son net imposable.</li>
+                    <li><strong>Taux individualisé</strong> : option pour les couples avec des revenus très différents. Chaque conjoint à un taux différent, proportionnel à ses revenus. Cela évite qu'un conjoint avec des revenus modestes se voie appliquer un taux élevé lié aux hauts revenus de l'autre. À demander sur votre espace impots.gouv.fr.</li>
                     <li><strong>Taux neutre</strong> : grille par défaut si vous ne souhaitez pas communiquer votre taux à votre employeur (par exemple pour préserver la confidentialité de votre situation familiale). Ce taux ne tient compte que de votre salaire individuel. À la fin de l'année, une régularisation aura lieu pour ajuster à votre taux réel. Demandable sur impots.gouv.fr.</li>
                 </ul>
 
@@ -2793,7 +2793,7 @@ def gen_content_pages():
                         <tr><td class="py-2">Au-delà de 180 294 €</td><td class="py-2 text-right">45%</td></tr>
                     </tbody>
                 </table>
-                <p class="mt-4">Ces tranches s'appliquent au revenu imposable par part fiscale (quotient familial). Un couple marié ou pacsé sans enfant a 2 parts, chaque enfant ajoute 0,5 part (1 part à partir du 3ème enfant).</p>
+                <p class="mt-4">Ces tranches s'appliquent au revenu imposable par part fiscale (quotient familial). Un couple marié ou pacsé sans enfant à 2 parts, chaque enfant ajoute 0,5 part (1 part à partir du 3ème enfant).</p>
                 <p><strong>Exemple</strong> : Pour un célibataire (1 part) avec 30 000 € de revenu imposable annuel, le calcul est : 0% sur 11 497 € + 11% sur (29 315 - 11 497) + 30% sur (30 000 - 29 315) = 0 + 1 960 + 206 = <strong>2 166 € d'impôt annuel</strong>, soit un taux moyen de 7,2%.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Exemples concrets à différents niveaux de salaire</h2>
@@ -2884,7 +2884,7 @@ def gen_content_pages():
             """
         },
         {
-            "slug": "cout-employeur",
+            "slug": "coût-employeur",
             "title": "Coût Employeur 2026 : Super-Brut et Charges Patronales",
             "desc": "Calculez le coût total employeur (super-brut) en 2026. Détail de chaque cotisation patronale, charges sociales complètes et simulateur gratuit instantané.",
             "kw": "coût employeur, super brut, charges patronales, cotisations patronales, coût salarié entreprise",
@@ -2966,7 +2966,7 @@ def gen_content_pages():
                 <p class="mt-4">On observe que le coefficient multiplicateur (coût employeur / brut) diminue pour les bas salaires grâce aux allègements de charges, puis augmente légèrement pour les hauts salaires en raison des taux de cotisations plus élevés sur la Tranche 2.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">La réduction générale de cotisations patronales (ex-réduction Fillon)</h2>
-                <p>La <strong>réduction générale</strong> (anciennement "réduction Fillon") est un dispositif d'allègement de charges patronales qui s'applique automatiquement aux salaires inférieurs à 1,6 SMIC (soit 2 883 € brut en 2026). Cette réduction est maximale au niveau du SMIC et décroît progressivement jusqu'à s'annuler à 1,6 SMIC.</p>
+                <p>La <strong>réduction générale</strong> (anciennement "réduction Fillon") est un dispositif d'allègement de charges patronales qui s'appliqué automatiquement aux salaires inférieurs à 1,6 SMIC (soit 2 883 € brut en 2026). Cette réduction est maximale au niveau du SMIC et décroît progressivement jusqu'à s'annuler à 1,6 SMIC.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Calcul de la réduction générale</h3>
                 <p>Le montant de la réduction dépend du coefficient de réduction, calculé selon la formule :</p>
@@ -3244,7 +3244,7 @@ def gen_content_pages():
                 </ul>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Obligations légales de l'employeur</h2>
-                <p>L'employeur a l'obligation de vous remettre une fiche de paie <strong>à chaque versement de salaire</strong>, même si le montant est nul (absence non rémunérée). Le bulletin doit comporter toutes les mentions obligatoires sous peine de sanctions (amende de 450 €).</p>
+                <p>L'employeur à l'obligation de vous remettre une fiche de paie <strong>à chaque versement de salaire</strong>, même si le montant est nul (absence non rémunérée). Le bulletin doit comporter toutes les mentions obligatoires sous peine de sanctions (amende de 450 €).</p>
                 <p>Mentions obligatoires : identité employeur/salarié, période de paie, détail des éléments de rémunération, détail des cotisations, net imposable, net à payer, cumuls annuels, mention de conservation sans limite, mention de recours au CSE en cas de difficultés.</p>
                 <p><strong>Mentions interdites</strong> : il est interdit de mentionner l'exercice du droit de grève ou l'activité de représentation du personnel.</p>
 
@@ -3265,7 +3265,7 @@ def gen_content_pages():
             "kw": "smic 2026, smic brut net, smic mensuel 2026, smic horaire 2026, smic net",
             "content": """
                 <h2 class="text-xl font-semibold text-slate-900">Le SMIC en 2026 : définition et montants</h2>
-                <p>Le <strong>SMIC</strong> (Salaire Minimum Interprofessionnel de Croissance) est le salaire horaire minimum légal en France. Aucun employeur ne peut vous payer en dessous de ce montant pour une heure de travail effectif (sauf exceptions très rares : apprentis mineurs, travailleurs handicapés avec autorisation). Le SMIC est revalorisé chaque année au 1er janvier, et peut faire l'objet de revalorisations exceptionnelles en cours d'année si l'inflation dépasse 2%.</p>
+                <p>Le <strong>SMIC</strong> (Salaire Minimum Interprofessionnel de Croissance) est le salaire horaire minimum légal en France. Aucun employeur ne peut vous payer en dessous de ce montant pour une heure de travail effectif (sauf exceptions très rares : apprentis mineurs, travailleurs handicapés avec autorisation). Le SMIC est revalorisé chaque année au 1er janvier, et peut faire l'objet de revalorisations exceptionnelles en cours d'année si l'inflation dépassé 2%.</p>
                 <p>Le SMIC est un outil de politique sociale majeur : il garantit un revenu minimum aux salariés, lutte contre la pauvreté au travail et sert de référence pour de nombreuses prestations sociales (RSA, prime d'activité, APL). Il concerne environ 3 millions de salariés en France.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Montants du SMIC 2026</h2>
@@ -3344,7 +3344,7 @@ def gen_content_pages():
                 <p>Le montant du RSA (635 € en 2026 pour une personne seule) est équivalent à environ <strong>44% du SMIC net</strong>. Cette proportion est restée stable au fil des revalorisations.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">4. Plafonds de cotisations (réduction générale)</h3>
-                <p>La réduction générale de cotisations patronales s'applique jusqu'à 1,6 SMIC (2 883 € brut en 2026). Au-delà, l'entreprise paie les cotisations pleines. Toute hausse du SMIC augmente donc le seuil d'exonération.</p>
+                <p>La réduction générale de cotisations patronales s'appliqué jusqu'à 1,6 SMIC (2 883 € brut en 2026). Au-delà, l'entreprise paie les cotisations pleines. Toute hausse du SMIC augmente donc le seuil d'exonération.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">SMIC vs salaire médian</h2>
                 <p>Le <strong>salaire médian</strong> en France (celui qui divise les salariés en deux groupes égaux) est d'environ <strong>2 100 € brut mensuel</strong> en 2026, soit <strong>1,17 fois le SMIC</strong>. Cela signifie que la moitié des salariés gagnent moins de 2 100 € brut.</p>
@@ -3387,7 +3387,7 @@ def gen_content_pages():
                     <li><strong>Bâtiment</strong> : niveau I = 1 900 € brut (SMIC + 5,4%)</li>
                     <li><strong>Banques</strong> : niveau 1 = 2 100 € brut (SMIC + 16,5%)</li>
                 </ul>
-                <p>Si votre convention collective prévoit un minimum supérieur au SMIC pour votre classification, c'est ce minimum qui s'applique. Vérifiez votre grille conventionnelle !</p>
+                <p>Si votre convention collective prévoit un minimum supérieur au SMIC pour votre classification, c'est ce minimum qui s'appliqué. Vérifiez votre grille conventionnelle !</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Peut-on vivre avec un SMIC en 2026 ?</h2>
                 <p>Le SMIC net mensuel (1 426 €) permet de couvrir les besoins essentiels, mais laisse peu de marge pour l'épargne ou les imprévus. Voici un budget type :</p>
@@ -3410,7 +3410,7 @@ def gen_content_pages():
                     <li><strong>La moitié du gain de pouvoir d'achat du salaire horaire de base ouvrier et employé (SHBOE)</strong> : cette composante assure que le SMIC progresse avec les salaires</li>
                 </ul>
                 <p>Le gouvernement peut également décider d'un <strong>"coup de pouce"</strong> supplémentaire, c'est-à-dire une revalorisation allant au-delà de la formule légale. En pratique, aucun coup de pouce n'a été donné depuis 2012, les gouvernements successifs préférant s'en tenir à la formule automatique.</p>
-                <p>Une revalorisation <strong>exceptionnelle en cours d'année</strong> est déclenchée automatiquement si l'inflation dépasse 2% depuis la dernière revalorisation. C'est ce qui s'est produit en mai 2022 et août 2022 en raison de la forte poussée inflationniste.</p>
+                <p>Une revalorisation <strong>exceptionnelle en cours d'année</strong> est déclenchée automatiquement si l'inflation dépassé 2% depuis la dernière revalorisation. C'est ce qui s'est produit en mai 2022 et août 2022 en raison de la forte poussée inflationniste.</p>
             """
         },
         {
@@ -3515,7 +3515,7 @@ def gen_content_pages():
                 </ul>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Salaire moyen par tranche d'âge</h2>
-                <p>L'expérience professionnelle a un impact majeur sur les salaires. Voici l'évolution du salaire brut moyen au cours de la carrière :</p>
+                <p>L'expérience professionnelle à un impact majeur sur les salaires. Voici l'évolution du salaire brut moyen au cours de la carrière :</p>
                 <table class="w-full text-sm border-collapse mt-4">
                     <thead><tr class="border-b-2 border-slate-300">
                         <th class="py-2 text-left">Tranche d'âge</th>
@@ -3587,7 +3587,7 @@ def gen_content_pages():
             """
         },
         {
-            "slug": "negocier-salaire",
+            "slug": "négocier-salaire",
             "title": "Négocier son Salaire 2026 : Guide et Conseils Pratiques",
             "desc": "Comment négocier son salaire brut à l'embauche ou lors d'un entretien annuel en 2026. Conseils pratiques, arguments chiffrés et erreurs courantes à éviter.",
             "kw": "négocier salaire, négociation salaire embauche, augmentation salaire, demander augmentation",
@@ -3711,7 +3711,7 @@ def gen_content_pages():
                 <ul class="space-y-2">
                     <li><strong>Offre déjà au-dessus du marché</strong> : si l'offre est généreuse et alignée avec vos recherches, acceptez sans marchandage excessif</li>
                     <li><strong>Contexte de crise</strong> : si l'entreprise est en difficulté (plan social, licenciements), ce n'est pas le moment</li>
-                    <li><strong>Poste à forte concurrence</strong> : si le recruteur a 50 candidats qualifiés, votre marge de manœuvre est faible</li>
+                    <li><strong>Poste à forte concurrence</strong> : si le recruteur à 50 candidats qualifiés, votre marge de manœuvre est faible</li>
                     <li><strong>Junior sans expérience</strong> : pour un premier emploi, la marge de négociation est limitée. Privilégiez la montée en compétences et négociez dans 1-2 ans</li>
                 </ul>
 
@@ -3823,10 +3823,10 @@ def gen_content_pages():
                     <li><strong>Net imposable</strong> : montant indiqué sur votre fiche de paie, qui sert de base au prélèvement à la source mensuel</li>
                     <li><strong>Net fiscal annuel</strong> : montant annuel pris en compte dans votre déclaration de revenus (somme des nets imposables mensuels + primes annuelles)</li>
                 </ul>
-                <p>Pour votre déclaration, l'administration fiscale applique ensuite un <strong>abattement forfaitaire de 10%</strong> pour frais professionnels (sauf si vous optez pour les frais réels), ce qui donne le "revenu imposable" final.</p>
+                <p>Pour votre déclaration, l'administration fiscale appliqué ensuite un <strong>abattement forfaitaire de 10%</strong> pour frais professionnels (sauf si vous optez pour les frais réels), ce qui donne le "revenu imposable" final.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Impact sur le prélèvement à la source</h2>
-                <p>Votre prélèvement à la source mensuel est calculé en appliquant votre taux de prélèvement au <strong>net imposable</strong>, pas au net à payer. Cela a un impact direct sur le montant prélevé.</p>
+                <p>Votre prélèvement à la source mensuel est calculé en appliquant votre taux de prélèvement au <strong>net imposable</strong>, pas au net à payer. Cela à un impact direct sur le montant prélevé.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Exemple concret</h3>
                 <p>Pour un salaire de 2 500 € brut (célibataire, taux de prélèvement de 5%) :</p>
@@ -3849,7 +3849,7 @@ def gen_content_pages():
                 </ul>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Abattement de 10% pour frais professionnels</h3>
-                <p>Par défaut, l'administration fiscale applique un <strong>abattement forfaitaire de 10%</strong> sur votre net imposable pour tenir compte de vos frais professionnels (transport, repas, etc.). Cet abattement est plafonné à 13 522 € en 2026.</p>
+                <p>Par défaut, l'administration fiscale appliqué un <strong>abattement forfaitaire de 10%</strong> sur votre net imposable pour tenir compte de vos frais professionnels (transport, repas, etc.). Cet abattement est plafonné à 13 522 € en 2026.</p>
                 <p><strong>Exemple</strong> : Net imposable annuel de 25 000 € → Abattement de 10% = 2 500 € → <strong>Revenu imposable</strong> = 22 500 €</p>
                 <p>Vous pouvez aussi opter pour la <strong>déduction des frais réels</strong> si vos dépenses professionnelles dépassent 10% de votre net imposable (trajets domicile-travail longs, déplacements professionnels, achat de matériel, etc.).</p>
 
@@ -4086,14 +4086,14 @@ def gen_content_pages():
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Conseils pratiques</h2>
                 <ul class="space-y-3">
                     <li><strong>Vérifiez votre fiche de paie</strong> : assurez-vous que la valorisation de vos avantages correspond aux barèmes légaux. Une surévaluation vous coûte en cotisations.</li>
-                    <li><strong>Négociez intelligemment</strong> : un avantage en nature peut être plus intéressant qu'une prime brute si sa valeur d'usage dépasse largement sa valorisation fiscale (voiture, logement).</li>
+                    <li><strong>Négociez intelligemment</strong> : un avantage en nature peut être plus intéressant qu'une prime brute si sa valeur d'usage dépassé largement sa valorisation fiscale (voiture, logement).</li>
                     <li><strong>Calculez le coût net</strong> : utilisez notre <a href="/" class="text-brand-600 hover:text-brand-700">calculateur brut/net</a> pour comparer un salaire avec et sans avantages.</li>
                     <li><strong>Anticipez la fin du contrat</strong> : si vous démissionnez, vous perdez les avantages. Prévoyez le budget pour les remplacer (location voiture, loyer).</li>
                 </ul>
             """
         },
         {
-            "slug": "heures-supplementaires-brut-net",
+            "slug": "heures-supplémentaires-brut-net",
             "title": "Heures Sup Brut en Net 2026 : Calcul et Exonérations",
             "desc": "Calculez vos heures supplémentaires brut en net en 2026. Majoration de 25% à 50%, exonération fiscale jusqu'à 7 500€/an et simulateur gratuit instantané.",
             "kw": "heures supplémentaires brut net, calcul heures sup, majoration heures supplémentaires, exonération heures sup",
@@ -4119,11 +4119,11 @@ def gen_content_pages():
                 <p>Depuis janvier 2019, les heures supplémentaires bénéficient d'un régime fiscal et social très avantageux :</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">1. Réduction de cotisations salariales</h3>
-                <p>Les heures supplémentaires bénéficient d'une <strong>réduction de cotisations salariales de 11,31%</strong> (exonération de la part salariale de l'assurance vieillesse). Cette réduction s'applique sur la rémunération des heures sup (y compris la majoration).</p>
+                <p>Les heures supplémentaires bénéficient d'une <strong>réduction de cotisations salariales de 11,31%</strong> (exonération de la part salariale de l'assurance vieillesse). Cette réduction s'appliqué sur la rémunération des heures sup (y compris la majoration).</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">2. Exonération d'impôt sur le revenu</h3>
                 <p>Les heures supplémentaires sont <strong>exonérées d'impôt sur le revenu</strong> dans la limite de <strong>7 500 € net par an et par salarié</strong> (montant 2026). Au-delà de ce plafond, elles sont imposées normalement.</p>
-                <p>Cette exonération s'applique automatiquement : les heures sup n'entrent pas dans votre net imposable (jusqu'au plafond), donc ne sont pas prises en compte pour le prélèvement à la source.</p>
+                <p>Cette exonération s'appliqué automatiquement : les heures sup n'entrent pas dans votre net imposable (jusqu'au plafond), donc ne sont pas prises en compte pour le prélèvement à la source.</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">Cotisations patronales</h3>
                 <p>Les heures supplémentaires ouvrent aussi droit à une <strong>déduction forfaitaire de cotisations patronales</strong> de 1,50 € par heure (dans les entreprises de moins de 20 salariés). Pour les plus grandes entreprises, pas de déduction patronale spécifique.</p>
@@ -4256,7 +4256,7 @@ def gen_content_pages():
                 <p>Créée en 2022 et pérennisée, la <strong>PPV</strong> (anciennement "PEPA") est exonérée de cotisations sociales ET d'impôt sur le revenu dans certaines limites :</p>
                 <ul class="space-y-2">
                     <li><strong>Plafond standard</strong> : 3 000 € par an et par bénéficiaire</li>
-                    <li><strong>Plafond majoré</strong> : 6 000 € si l'entreprise a un accord d'intéressement ou de participation</li>
+                    <li><strong>Plafond majoré</strong> : 6 000 € si l'entreprise à un accord d'intéressement ou de participation</li>
                     <li><strong>Conditions</strong> : entreprise de moins de 50 salariés, ou salariés rémunérés moins de 3× le SMIC annuel (64 865 € brut en 2026)</li>
                 </ul>
                 <p><strong>Avantage</strong> : une PPV de 3 000 € = 3 000 € net versés, sans aucune cotisation ni impôt. C'est le dispositif le plus avantageux actuellement.</p>
@@ -4519,7 +4519,7 @@ def gen_content_pages():
 
     # Add FAQs to content pages
     for p in pages:
-        if "difference" in p["slug"]:
+        if "différence" in p["slug"]:
             p["faqs"] = generate_faq_section([
                 {"q": "Pourquoi y a-t-il une différence entre brut et net ?", "a": "La différence correspond aux cotisations sociales (retraite, santé, chômage, CSG/CRDS) qui financent notre protection sociale."},
                 {"q": "Le brut ou le net est-il mentionné sur le contrat de travail ?", "a": "Le contrat mentionne toujours le salaire brut. Le net varie selon les cotisations et ne peut être garanti à l'avance."},
@@ -4617,7 +4617,7 @@ def gen_tool_pages():
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
                         <div class="rounded-xl bg-brand-50 border border-brand-100 p-4 text-center">
                             <p class="text-xs text-brand-600 font-medium">Coût employeur</p>
-                            <p class="text-2xl font-bold text-slate-900" id="res-cout">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="res-coût">–</p>
                             <p class="text-xs text-slate-500">par mois</p>
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
@@ -4639,7 +4639,7 @@ def gen_tool_pages():
         const sel = document.getElementById('widget-statut');
         function calc() {
             const r = calculerBrutVersNet(parseFloat(inp.value)||0, sel.value, 1);
-            document.getElementById('res-cout').textContent = formatMoney(r.coutEmployeur);
+            document.getElementById('res-coût').textContent = formatMoney(r.coutEmployeur);
             document.getElementById('res-patron').textContent = formatMoney(r.totalPatronal);
             document.getElementById('res-net').textContent = formatMoney(r.netAvantImpot);
         }
@@ -4661,7 +4661,7 @@ def gen_tool_pages():
     html += links_grid("Pages connexes", RELATED_LINKS)
     html += FOOTER
     html += "\n</body></html>"
-    write_page("calculateur-cout-employeur", html)
+    write_page("calculateur-coût-employeur", html)
 
     # Calculateur heures supplémentaires
     html = page_head(
@@ -4724,7 +4724,7 @@ def gen_tool_pages():
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-xs text-slate-600 font-medium">Coût employeur heures sup</p>
-                            <p class="text-2xl font-bold text-slate-900" id="hs-res-cout">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="hs-res-coût">–</p>
                         </div>
                     </div>
 
@@ -4740,7 +4740,7 @@ def gen_tool_pages():
                         </div>
                         <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-center">
                             <p class="text-xs text-slate-600 font-medium">Total coût employeur</p>
-                            <p class="text-2xl font-bold text-slate-900" id="hs-tot-cout">–</p>
+                            <p class="text-2xl font-bold text-slate-900" id="hs-tot-coût">–</p>
                         </div>
                     </div>
 
@@ -4791,10 +4791,10 @@ def gen_tool_pages():
 
             document.getElementById('hs-res-brut').textContent = formatMoney(brutHS);
             document.getElementById('hs-res-net').textContent = formatMoney(netHS);
-            document.getElementById('hs-res-cout').textContent = formatMoney(coutHS);
+            document.getElementById('hs-res-coût').textContent = formatMoney(coutHS);
             document.getElementById('hs-tot-brut').textContent = formatMoney(totBrut);
             document.getElementById('hs-tot-net').textContent = formatMoney(totNet);
-            document.getElementById('hs-tot-cout').textContent = formatMoney(totCout);
+            document.getElementById('hs-tot-coût').textContent = formatMoney(totCout);
 
             // Primes CDD / Intérim
             var primesDiv = document.getElementById('hs-primes');
@@ -4853,7 +4853,7 @@ def gen_tool_pages():
     html += links_grid("Pages connexes", RELATED_LINKS)
     html += FOOTER
     html += "\n</body></html>"
-    write_page("calculateur-heures-supplementaires", html)
+    write_page("calculateur-heures-supplémentaires", html)
 
     # Comparateur salaire par pays
     html = page_head(
@@ -4901,7 +4901,7 @@ def gen_tool_pages():
         <section class="py-12 px-4">
             <div class="mx-auto max-w-4xl prose prose-slate">
                 <h2 class="text-xl font-semibold text-slate-900">Pourquoi les cotisations varient-elles autant ?</h2>
-                <p>Chaque pays a son propre système de protection sociale. La France a l'un des taux de cotisations les plus élevés d'Europe, mais en contrepartie offre une couverture sociale très complète (santé, retraite, chômage, famille).</p>
+                <p>Chaque pays à son propre système de protection sociale. La France à l'un des taux de cotisations les plus élevés d'Europe, mais en contrepartie offre une couverture sociale très complète (santé, retraite, chômage, famille).</p>
 
                 <h3 class="text-lg font-semibold text-slate-900 mt-6">France : cotisations élevées, protection forte</h3>
                 <p>Avec environ 22% de cotisations salariales, la France offre une couverture maladie universelle, des allocations familiales généreuses, un système de retraite par répartition et une assurance chômage.</p>

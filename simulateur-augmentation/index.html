@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "https://salairebrutonet.com/" },
@@ -31,7 +31,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@context": "https://schéma.org",
         "@type": "FAQPage",
         "mainEntity": [
             {
@@ -235,15 +235,15 @@
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-600">Net avant impôt</span>
-                                    <span class="text-sm font-bold text-slate-900" id="avant-net-avant-impot">--</span>
+                                    <span class="text-sm font-bold text-slate-900" id="avant-net-avant-impôt">--</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-600">Net après impôt</span>
-                                    <span class="text-sm font-bold text-slate-900" id="avant-net-apres-impot">--</span>
+                                    <span class="text-sm font-bold text-slate-900" id="avant-net-après-impôt">--</span>
                                 </div>
                                 <div class="border-t border-slate-200 pt-3 flex justify-between items-center">
                                     <span class="text-sm text-slate-600">Coût employeur</span>
-                                    <span class="text-sm font-bold text-slate-900" id="avant-cout-employeur">--</span>
+                                    <span class="text-sm font-bold text-slate-900" id="avant-coût-employeur">--</span>
                                 </div>
                             </div>
                         </div>
@@ -255,19 +255,19 @@
                             <div class="space-y-3">
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-600">Brut mensuel</span>
-                                    <span class="text-sm font-bold text-brand-700" id="apres-brut">--</span>
+                                    <span class="text-sm font-bold text-brand-700" id="après-brut">--</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-600">Net avant impôt</span>
-                                    <span class="text-sm font-bold text-brand-700" id="apres-net-avant-impot">--</span>
+                                    <span class="text-sm font-bold text-brand-700" id="après-net-avant-impôt">--</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-sm text-slate-600">Net après impôt</span>
-                                    <span class="text-sm font-bold text-brand-700" id="apres-net-apres-impot">--</span>
+                                    <span class="text-sm font-bold text-brand-700" id="après-net-après-impôt">--</span>
                                 </div>
                                 <div class="border-t border-brand-200 pt-3 flex justify-between items-center">
                                     <span class="text-sm text-slate-600">Coût employeur</span>
-                                    <span class="text-sm font-bold text-brand-700" id="apres-cout-employeur">--</span>
+                                    <span class="text-sm font-bold text-brand-700" id="après-coût-employeur">--</span>
                                 </div>
                             </div>
                         </div>
@@ -289,7 +289,7 @@
                             </div>
                             <div class="text-center">
                                 <p class="text-xs text-emerald-600 mb-1">Gain avant impôt / mois</p>
-                                <p class="text-xl font-bold text-slate-700" id="gain-avant-impot-mensuel">--</p>
+                                <p class="text-xl font-bold text-slate-700" id="gain-avant-impôt-mensuel">--</p>
                             </div>
                             <div class="text-center">
                                 <p class="text-xs text-emerald-600 mb-1">Surcoût employeur / mois</p>
@@ -357,29 +357,29 @@
 
             // Calculate before and after
             const avant = calculerBrutVersNet(brutActuel, statut, 1);
-            const apres = calculerBrutVersNet(nouveauBrut, statut, 1);
+            const après = calculerBrutVersNet(nouveauBrut, statut, 1);
 
             // Display AVANT
             document.getElementById('avant-brut').textContent = formatMoney(avant.brutMensuel);
-            document.getElementById('avant-net-avant-impot').textContent = formatMoney(avant.netAvantImpot);
-            document.getElementById('avant-net-apres-impot').textContent = formatMoney(avant.netApresImpot);
-            document.getElementById('avant-cout-employeur').textContent = formatMoney(avant.coutEmployeur);
+            document.getElementById('avant-net-avant-impôt').textContent = formatMoney(avant.netAvantImpot);
+            document.getElementById('avant-net-après-impôt').textContent = formatMoney(avant.netApresImpot);
+            document.getElementById('avant-coût-employeur').textContent = formatMoney(avant.coutEmployeur);
 
             // Display APRES
-            document.getElementById('apres-brut').textContent = formatMoney(apres.brutMensuel);
-            document.getElementById('apres-net-avant-impot').textContent = formatMoney(apres.netAvantImpot);
-            document.getElementById('apres-net-apres-impot').textContent = formatMoney(apres.netApresImpot);
-            document.getElementById('apres-cout-employeur').textContent = formatMoney(apres.coutEmployeur);
+            document.getElementById('après-brut').textContent = formatMoney(après.brutMensuel);
+            document.getElementById('après-net-avant-impôt').textContent = formatMoney(après.netAvantImpot);
+            document.getElementById('après-net-après-impôt').textContent = formatMoney(après.netApresImpot);
+            document.getElementById('après-coût-employeur').textContent = formatMoney(après.coutEmployeur);
 
             // Gains
-            const gainNetMensuel = apres.netApresImpot - avant.netApresImpot;
+            const gainNetMensuel = après.netApresImpot - avant.netApresImpot;
             const gainNetAnnuel = gainNetMensuel * 12;
-            const gainAvantImpotMensuel = apres.netAvantImpot - avant.netAvantImpot;
-            const surcoutEmployeur = apres.coutEmployeur - avant.coutEmployeur;
+            const gainAvantImpotMensuel = après.netAvantImpot - avant.netAvantImpot;
+            const surcoutEmployeur = après.coutEmployeur - avant.coutEmployeur;
 
             document.getElementById('gain-net-mensuel').textContent = '+' + formatMoney(gainNetMensuel);
             document.getElementById('gain-net-annuel').textContent = '+' + formatMoney(gainNetAnnuel);
-            document.getElementById('gain-avant-impot-mensuel').textContent = '+' + formatMoney(gainAvantImpotMensuel);
+            document.getElementById('gain-avant-impôt-mensuel').textContent = '+' + formatMoney(gainAvantImpotMensuel);
             document.getElementById('surcout-employeur').textContent = '+' + formatMoney(surcoutEmployeur);
 
             // Taux marginal
@@ -447,8 +447,8 @@
         percentages.forEach(function(pct, i) {
             const augBrut = base * (pct / 100);
             const nouveauBrut = base + augBrut;
-            const apres = calculerBrutVersNet(nouveauBrut, statut, 1);
-            const gainMensuel = apres.netApresImpot - avant.netApresImpot;
+            const après = calculerBrutVersNet(nouveauBrut, statut, 1);
+            const gainMensuel = après.netApresImpot - avant.netApresImpot;
             const gainAnnuel = gainMensuel * 12;
             const taux = ((gainMensuel / augBrut) * 100).toFixed(1);
 
@@ -458,7 +458,7 @@
                 '<td class="px-4 py-3 font-medium text-slate-900">' + pct + ' %</td>' +
                 '<td class="px-4 py-3 text-slate-700">+' + formatMoney(augBrut) + '</td>' +
                 '<td class="px-4 py-3 text-slate-700">' + formatMoney(nouveauBrut) + '</td>' +
-                '<td class="px-4 py-3 font-semibold text-brand-700">' + formatMoney(apres.netApresImpot) + '</td>' +
+                '<td class="px-4 py-3 font-semibold text-brand-700">' + formatMoney(après.netApresImpot) + '</td>' +
                 '<td class="px-4 py-3 font-semibold text-emerald-700">+' + formatMoney(gainMensuel) + '</td>' +
                 '<td class="px-4 py-3 font-semibold text-emerald-700">+' + formatMoney(gainAnnuel) + '</td>' +
                 '<td class="px-4 py-3 text-slate-700">' + taux + ' %</td>';
@@ -498,7 +498,7 @@
                     <li><strong>41%</strong> : de 83 823 EUR à 180 294 EUR</li>
                     <li><strong>45%</strong> : au-delà de 180 294 EUR</li>
                 </ul>
-                <p>Une augmentation peut vous faire entrer dans la tranche supérieure, mais <strong>seule la fraction dépassant le seuil</strong> est imposée au taux supérieur. L'impôt français est progressif : vous ne serez jamais perdant avec une augmentation. Par exemple, si votre revenu imposable passe de 28 000 EUR à 31 000 EUR, seuls les 1 685 EUR au-delà de 29 315 EUR seront imposés à 30% au lieu de 11%.</p>
+                <p>Une augmentation peut vous faire entrer dans la tranche supérieure, mais <strong>seule la fraction dépassant le seuil</strong> est imposée au taux supérieur. L'impôt français est progressif : vous ne serez jamais perdant avec une augmentation. Par exemple, si votre revenu imposable passé de 28 000 EUR à 31 000 EUR, seuls les 1 685 EUR au-delà de 29 315 EUR seront imposés à 30% au lieu de 11%.</p>
 
                 <h2 class="text-xl font-semibold text-slate-900 mt-8">Augmentation vs primes : quelle différence fiscale ?</h2>
                 <p>Il est important de distinguer une augmentation pérenne de salaire d'une prime ponctuelle :</p>
@@ -568,11 +568,11 @@
         <!-- Contenu enrichi -->
         <section class="bg-white border-t border-slate-200 py-12 px-4">
             <div class="mx-auto max-w-4xl prose prose-slate">
-                <h2 class="text-xl font-semibold text-slate-900">Impact reel d'une augmentation sur votre salaire net</h2>
-                <p>Une augmentation de salaire brut ne se traduit pas integralement en gain de salaire net. Plus votre salaire est eleve, plus le taux marginal de prelevement (cotisations + impot) reduit l'impact reel. Par exemple, pour un non-cadre gagnant 2 500 euros brut qui obtient une augmentation de 200 euros brut, le gain net avant impot est d'environ 156 euros (apres 22 % de cotisations). Si ce salarie est dans la tranche marginale d'imposition a 30 %, le gain net apres impot tombe a environ 109 euros, soit seulement 54,5 % de l'augmentation brute. Pour un cadre superieur a 5 000 euros brut avec un TMI de 41 %, une augmentation de 500 euros brut ne genere qu'environ 221 euros de gain net apres impot (44,2 %). De plus, le franchissement du Plafond de la Securite Sociale (3 864 euros en 2026) modifie les taux de cotisation retraite complementaire (passage en tranche 2 a 8,64 % au lieu de 3,15 %), ce qui reduit encore le gain net pour les augmentations qui font depasser ce seuil.</p>
+                <h2 class="text-xl font-semibold text-slate-900">Impact réel d'une augmentation sur votre salaire net</h2>
+                <p>Une augmentation de salaire brut ne se traduit pas integralement en gain de salaire net. Plus votre salaire est élevé, plus le taux marginal de prélèvement (cotisations + impôt) réduit l'impact réel. Par exemple, pour un non-cadre gagnant 2 500 euros brut qui obtient une augmentation de 200 euros brut, le gain net avant impôt est d'environ 156 euros (après 22 % de cotisations). Si ce salarié est dans la tranche marginale d'imposition à 30 %, le gain net après impôt tombe a environ 109 euros, soit seulement 54,5 % de l'augmentation brute. Pour un cadre supérieur à 5 000 euros brut avec un TMI de 41 %, une augmentation de 500 euros brut ne génère qu'environ 221 euros de gain net après impôt (44,2 %). De plus, le franchissement du Plafond de la Sécurité Sociale (3 864 euros en 2026) modifié les taux de cotisation retraite complémentaire (passage en tranche 2 a 8,64 % au lieu de 3,15 %), ce qui réduit encore le gain net pour les augmentations qui font dépasser ce seuil.</p>
 
-                <h2 class="text-xl font-semibold text-slate-900 mt-8">Strategie de negociation : quand et comment demander une augmentation</h2>
-                <p>Le timing et la preparation sont determinants pour reussir une negociation salariale. Le <strong>meilleur moment</strong> pour demander une augmentation est generalement l'entretien annuel d'evaluation, la fin d'un projet reussi, ou l'obtention d'une nouvelle responsabilite. En France, les augmentations individuelles interviennent le plus souvent en janvier (40 % des cas) ou en avril (20 % des cas selon l'enquete de remuneration Mercer 2024). Pour preparer votre argumentaire, rassemblez des donnees objectives : vos realisations quantifiables (chiffre d'affaires genere, economies realisees, projets livres), les salaires du marche pour votre poste (enquetes APEC, Glassdoor, Indeed), et l'evolution de votre perimetre de responsabilites. Formulez votre demande en montant brut annuel, qui est la reference des employeurs, tout en connaissant l'impact net grace a notre simulateur. Si l'augmentation brute est refusee, explorez les alternatives fiscalement avantageuses pour l'employeur : prime d'interessement (exoneree de cotisations patronales), titres-restaurant, forfait mobilites durables, abondement PEE, jours de teletravail supplementaires ou formation qualifiante. Selon l'INSEE, la mobilite externe (changement d'employeur) genere en moyenne une augmentation de 10 a 15 %, contre 2 a 4 % pour les augmentations internes, ce qui peut etre un argument de negociation puissant.</p>
+                <h2 class="text-xl font-semibold text-slate-900 mt-8">Stratégie de négociation : quand et comment demander une augmentation</h2>
+                <p>Le timing et la preparation sont determinants pour reussir une négociation salariale. Le <strong>meilleur moment</strong> pour demander une augmentation est généralement l'entretien annuel d'evaluation, la fin d'un projet reussi, ou l'obtention d'une nouvelle responsabilité. En France, les augmentations individuelles interviennent le plus souvent en janvier (40 % des cas) ou en avril (20 % des cas selon l'enquête de rémunération Mercer 2024). Pour préparer votre argumentaire, rassemblez des données objectives : vos realisations quantifiables (chiffre d'affaires génère, economies realisees, projets livres), les salaires du marché pour votre poste (enquetes APEC, Glassdoor, Indeed), et l'évolution de votre perimetre de responsabilités. Formulez votre demande en montant brut annuel, qui est la référence des employeurs, tout en connaissant l'impact net grâce à notre simulateur. Si l'augmentation brute est refusee, explorez les alternatives fiscalement avantageuses pour l'employeur : prime d'intéressement (exoneree de cotisations patronales), titres-restaurant, forfait mobilites durables, abondement PEE, jours de télétravail supplémentaires ou formation qualifiante. Selon l'INSEE, la mobilité externe (changement d'employeur) génère en moyenne une augmentation de 10 à 15 %, contre 2 à 4 % pour les augmentations internes, ce qui peut être un argument de négociation puissant.</p>
             </div>
         </section>
 
