@@ -262,7 +262,7 @@ def build_liens_proches(montant, direction="brut-en-net"):
     liens = []
     all_m = get_main_montants()
     idx = all_m.index(montant) if montant in all_m else -1
-    offsets_idx = [-2, -1, 1, 2]
+    offsets_idx = [-4, -3, -2, -1, 1, 2, 3, 4]
     for oi in offsets_idx:
         ni = idx + oi
         if 0 <= ni < len(all_m):
@@ -452,6 +452,7 @@ def generate_sitemap():
 
     urls = [
         {"loc": f"{BASE_URL}/", "priority": "1.0", "changefreq": "monthly"},
+        {"loc": f"{BASE_URL}/tous-les-salaires/", "priority": "0.9", "changefreq": "monthly"},
         {"loc": f"{BASE_URL}/simulateur-impot-sur-le-revenu/", "priority": "0.9", "changefreq": "monthly"},
         {"loc": f"{BASE_URL}/mission/", "priority": "0.5", "changefreq": "monthly"},
         {"loc": f"{BASE_URL}/mentions-legales/", "priority": "0.3", "changefreq": "yearly"},
@@ -544,6 +545,146 @@ REDIRECT_TEMPLATE = """<!DOCTYPE html>
 </html>"""
 
 
+def generate_tous_les_salaires_page():
+    """Generate a comprehensive hub page listing all salary amounts."""
+    montants = get_main_montants()
+    today = date.today().isoformat()
+
+    # Build the links grid for brut-en-net
+    brut_net_links = []
+    for m in montants:
+        nc = calculer_brut_vers_net(m, "non-cadre")
+        brut_net_links.append(
+            f'<a href="/{m}-euros-brut-en-net/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all">'
+            f'<span class="block text-lg font-bold text-slate-900">{fmt(m)} &euro;</span>'
+            f'<span class="block text-xs text-slate-500">= {fmt(nc["net_avant_impot"])} &euro; net</span></a>'
+        )
+
+    # Build the links grid for net-en-brut
+    net_brut_links = []
+    for m in montants:
+        nc = calculer_net_vers_brut(m, "non-cadre")
+        net_brut_links.append(
+            f'<a href="/{m}-euros-net-en-brut/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all">'
+            f'<span class="block text-lg font-bold text-slate-900">{fmt(m)} &euro;</span>'
+            f'<span class="block text-xs text-slate-500">net &rarr; {fmt(nc["brut_mensuel"])} &euro; brut</span></a>'
+        )
+
+    html = f"""<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tous les salaires brut en net 2026 : 1 000 &euro; a 10 000 &euro;</title>
+    <meta name="description" content="Table complete de conversion salaire brut en net de 1 000 a 10 000 euros. Trouvez instantanement votre salaire net pour chaque montant brut, cadre et non-cadre, mis a jour 2026.">
+    <link rel="canonical" href="{BASE_URL}/tous-les-salaires/">
+    <link rel="icon" type="image/svg+xml" href="/img/logo.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png">
+    <meta name="robots" content="index, follow">
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZCT3WCT9D"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}};gtag('js',new Date());gtag('config','G-PZCT3WCT9D');</script>
+    <script type="application/ld+json">
+    {{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {{ "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "{BASE_URL}/" }},
+            {{ "@type": "ListItem", "position": 2, "name": "Tous les salaires", "item": "{BASE_URL}/tous-les-salaires/" }}
+        ]
+    }}
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-600 antialiased flex flex-col min-h-screen">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-600 focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Aller au contenu</a>
+    <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md">
+        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <a href="/" class="flex items-center gap-2">
+                <img src="/img/logo.svg" alt="SalaireBrutNet" class="h-8 w-8">
+                <span class="text-base font-semibold tracking-tight text-slate-900">SalaireBrutNet</span>
+            </a>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="/" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Calcul Brut Net</a>
+                <a href="/tous-les-salaires/" class="text-sm font-medium text-brand-600">Tous les salaires</a>
+                <a href="/simulateur-impot-sur-le-revenu/" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Simulateur Impots</a>
+                <a href="/mission/" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Notre Mission</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="flex-grow" role="main">
+        <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
+            <ol class="flex items-center gap-2 text-sm text-slate-500">
+                <li><a href="/" class="hover:text-brand-600 transition-colors">Accueil</a></li>
+                <li><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></li>
+                <li class="text-slate-900 font-medium">Tous les salaires brut en net</li>
+            </ol>
+        </nav>
+
+        <section class="px-4 pb-10">
+            <div class="mx-auto max-w-5xl text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Tous les salaires brut en net 2026</h1>
+                <p class="text-lg text-slate-600 mb-8">Retrouvez la conversion brut-net pour tous les montants de 1 000 a 10 000 euros. Cliquez sur un montant pour voir le detail complet des cotisations.</p>
+            </div>
+        </section>
+
+        <section class="bg-white border-t border-slate-200 py-12 px-4">
+            <div class="mx-auto max-w-5xl">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Conversion brut en net (non-cadre)</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-12">
+                    {''.join(brut_net_links)}
+                </div>
+
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Conversion net en brut (non-cadre)</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    {''.join(net_brut_links)}
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 px-4">
+            <div class="mx-auto max-w-4xl">
+                <h2 class="text-xl font-bold text-slate-900 mb-6">Guides et outils</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    <a href="/salaire-brut-net-cadre/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">Cadre</span></a>
+                    <a href="/salaire-brut-net-non-cadre/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">Non-cadre</span></a>
+                    <a href="/salaire-brut-net-fonction-publique/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">Fonction publique</span></a>
+                    <a href="/smic-brut-net-2026/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">SMIC 2026</span></a>
+                    <a href="/salaire-moyen-france/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">Salaire moyen</span></a>
+                    <a href="/difference-salaire-brut-net/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">Difference brut/net</span></a>
+                    <a href="/cotisations-sociales-salariales/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">Cotisations sociales</span></a>
+                    <a href="/simulateur-impot-sur-le-revenu/" class="block rounded-xl border border-slate-200 bg-white p-3 text-center hover:border-brand-300 hover:shadow-sm transition-all"><span class="block text-sm font-medium text-slate-900">Simulateur impots</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-10">
+        <div class="mx-auto max-w-7xl px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <a href="/" class="flex items-center gap-2">
+                <img src="/img/logo.svg" alt="SalaireBrutNet" class="h-6 w-6">
+                <span class="text-sm font-semibold text-slate-900">SalaireBrutNet</span>
+            </a>
+            <p class="text-xs text-slate-500">&copy; 2026 SalaireBrutNet &middot; Estimation indicative</p>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="/" class="text-xs text-slate-500 hover:text-slate-900">Calcul Brut Net</a>
+                <a href="/tous-les-salaires/" class="text-xs text-slate-500 hover:text-slate-900">Tous les salaires</a>
+                <a href="/mentions-legales/" class="text-xs text-slate-500 hover:text-slate-900">Mentions legales</a>
+                <a href="/a-propos/" class="text-xs text-slate-500 hover:text-slate-900">A propos</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>"""
+
+    folder = os.path.join(BASE_DIR, "tous-les-salaires")
+    os.makedirs(folder, exist_ok=True)
+    with open(os.path.join(folder, "index.html"), "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"  ✓ tous-les-salaires/index.html (hub page with {len(montants)} brut + {len(montants)} net links)")
+
+
 def generate_redirect_pages():
     """Generate noindex redirect pages for X50 montants → nearest X00."""
     montants_x50 = get_redirect_montants()
@@ -587,6 +728,9 @@ def main():
 
     print("\nGénération redirects X50...")
     generate_redirect_pages()
+
+    print("\nGénération page hub tous-les-salaires...")
+    generate_tous_les_salaires_page()
 
     print("\nGénération sitemap.xml...")
     generate_sitemap()

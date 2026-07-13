@@ -151,7 +151,7 @@ def add_article_schema(html, title, description, canonical_url):
         return html
 
     schéma = {
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "Article",
         "headline": title,
         "description": description,

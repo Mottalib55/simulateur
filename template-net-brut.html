@@ -50,7 +50,7 @@
 
     <script type="application/ld+json">
     {
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "https://salairebrutonet.com/" },
@@ -60,7 +60,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "Organization",
         "name": "SalaireBrutNet",
         "url": "https://salairebrutonet.com",
@@ -75,7 +75,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "Person",
         "name": "Mottalib Radif",
         "url": "https://salairebrutonet.com/a-propos/",
@@ -88,7 +88,7 @@
     </script>
     <script type="application/ld+json">
     {
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
             {
@@ -346,6 +346,18 @@
             </div>
         </section>
 
+        <!-- Conversion inverse -->
+        <section class="bg-slate-50 border-t border-slate-200 py-8 px-4">
+            <div class="mx-auto max-w-4xl text-center">
+                <h2 class="text-lg font-bold text-slate-900 mb-3">Conversion inverse</h2>
+                <p class="text-sm text-slate-600 mb-4">Vous connaissez votre salaire brut et souhaitez calculer le net correspondant ?</p>
+                <a href="/{{MONTANT}}-euros-brut-en-net/" class="inline-flex items-center gap-2 rounded-xl border-2 border-brand-500 bg-white px-6 py-3 text-sm font-semibold text-brand-600 shadow-sm hover:bg-brand-50 transition-all">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+                    {{MONTANT_FORMATE}} € brut en net
+                </a>
+            </div>
+        </section>
+
         <!-- Liens maillage -->
         <section class="bg-white border-t border-slate-200 py-12 px-4">
             <div class="mx-auto max-w-4xl">
@@ -384,6 +396,7 @@
             <p class="text-xs text-slate-500">© 2026 SalaireBrutNet · Estimation indicative</p>
             <div class="flex flex-wrap gap-4 justify-center">
                 <a href="/" class="text-xs text-slate-500 hover:text-slate-900">Calcul Brut Net</a>
+                <a href="/tous-les-salaires/" class="text-xs text-slate-500 hover:text-slate-900">Tous les salaires</a>
                 <a href="/mentions-legales/" class="text-xs text-slate-500 hover:text-slate-900">Mentions légales</a>
                 <a href="/a-propos/" class="text-xs text-slate-500 hover:text-slate-900">À propos</a>
                 <a href="/mission/" class="text-xs text-slate-500 hover:text-slate-900">Notre Mission</a>

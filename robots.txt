@@ -2,7 +2,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /*?*
 
 # Sitemap
 Sitemap: https://salairebrutonet.com/sitemap.xml

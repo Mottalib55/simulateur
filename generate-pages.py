@@ -44,7 +44,7 @@ def page_head(title, description, canonical, keywords=""):
     <script type="text/javascript">(function(c,l,a,r,i,t,y){{c[a]=c[a]||function(){{(c[a].q=c[a].q||[]).push(arguments)}};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)}})(window,document,"clarity","script","xanyylalio");</script>
     <script type="application/ld+json">
     {{
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             {{ "@type": "ListItem", "position": 1, "name": "Calculateur Salaire Brut Net", "item": "{BASE_URL}/" }},
@@ -54,7 +54,7 @@ def page_head(title, description, canonical, keywords=""):
     </script>
     <script type="application/ld+json">
     {{
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "Organization",
         "name": "SalaireBrutNet",
         "url": "https://salairebrutonet.com",
@@ -71,7 +71,7 @@ def page_head(title, description, canonical, keywords=""):
     </script>
     <script type="application/ld+json">
     {{
-        "@context": "https://schéma.org",
+        "@context": "https://schema.org",
         "@type": "Person",
         "name": "Mottalib Radif",
         "url": "https://salairebrutonet.com/a-propos/",
@@ -338,7 +338,7 @@ def generate_conversion_table(amounts, statut="non-cadre"):
 
 
 def generate_faq_section(faqs):
-    """Generate FAQ accordion with schéma.org markup."""
+    """Generate FAQ accordion with schema.org markup."""
     chevron_svg = '<svg class="h-5 w-5 text-slate-400 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>'
     items_html = ""
     schema_items = []
@@ -368,7 +368,7 @@ def generate_faq_section(faqs):
             </div>
         </section>
         <script type="application/ld+json">
-        {{"@context":"https://schéma.org","@type":"FAQPage","mainEntity":[{schema_json}]}}
+        {{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{schema_json}]}}
         </script>'''
 
 
