@@ -81,5 +81,42 @@ AddDefaultCharset UTF-8
 # --- Prevent directory listing ---
 Options -Indexes
 
+# --- 301 Redirects: removed content pages → homepage ---
+# All *-euros-brut-en-net/ pages (all removed)
+RewriteRule ^[0-9]+-euros-brut-en-net(/.*)?$ / [R=301,L]
+
+# All *-euros-net-en-brut/ pages EXCEPT the 5 kept ones
+RewriteCond %{REQUEST_URI} !^/1500-euros-net-en-brut(/.*)?$
+RewriteCond %{REQUEST_URI} !^/1900-euros-net-en-brut(/.*)?$
+RewriteCond %{REQUEST_URI} !^/3300-euros-net-en-brut(/.*)?$
+RewriteCond %{REQUEST_URI} !^/4400-euros-net-en-brut(/.*)?$
+RewriteCond %{REQUEST_URI} !^/5000-euros-net-en-brut(/.*)?$
+RewriteRule ^[0-9]+-euros-net-en-brut(/.*)?$ / [R=301,L]
+
+# All salaire-brut-net-* pages EXCEPT interim
+RewriteCond %{REQUEST_URI} !^/salaire-brut-net-interim(/.*)?$
+RewriteRule ^salaire-brut-net-[a-z].*$ / [R=301,L]
+
+# Individual removed pages
+RewriteRule ^13eme-mois-brut-net(/.*)?$ / [R=301,L]
+RewriteRule ^avantages-en-nature(/.*)?$ / [R=301,L]
+RewriteRule ^calculateur-cout-employeur(/.*)?$ / [R=301,L]
+RewriteRule ^calculateur-heures-supplementaires(/.*)?$ / [R=301,L]
+RewriteRule ^calculateur-temps-partiel(/.*)?$ / [R=301,L]
+RewriteRule ^cotisations-sociales-salariales(/.*)?$ / [R=301,L]
+RewriteRule ^cout-employeur(/.*)?$ / [R=301,L]
+RewriteRule ^difference-salaire-brut-net(/.*)?$ / [R=301,L]
+RewriteRule ^glossaire(/.*)?$ / [R=301,L]
+RewriteRule ^heures-supplementaires-brut-net(/.*)?$ / [R=301,L]
+RewriteRule ^lire-fiche-de-paie(/.*)?$ / [R=301,L]
+RewriteRule ^negocier-salaire(/.*)?$ / [R=301,L]
+RewriteRule ^salaire-moyen-france(/.*)?$ / [R=301,L]
+RewriteRule ^salaire-net-avant-apres-impot(/.*)?$ / [R=301,L]
+RewriteRule ^salaire-net-imposable(/.*)?$ / [R=301,L]
+RewriteRule ^simulateur-augmentation(/.*)?$ / [R=301,L]
+RewriteRule ^smic-brut-net-2026(/.*)?$ / [R=301,L]
+RewriteRule ^taux-horaire-brut-net(/.*)?$ / [R=301,L]
+RewriteRule ^tous-les-salaires(/.*)?$ / [R=301,L]
+
 # --- Custom error page ---
 ErrorDocument 404 /404.html
