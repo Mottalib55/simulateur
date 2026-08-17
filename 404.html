@@ -41,9 +41,34 @@
                 <img src="/img/logo.svg" alt="SalaireBrutNet" class="h-8 w-8">
                 <span class="text-base font-semibold tracking-tight text-slate-900">SalaireBrutNet</span>
             </a>
-            <nav class="hidden md:flex gap-8 items-center">
+                        <nav class="hidden md:flex gap-8 items-center">
                 <a href="/" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Calcul Brut Net</a>
-                <a href="/simulateur-impot-sur-le-revenu/" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Simulateur Impots</a>
+                <div class="relative nav-guides">
+                    <button id="btn-guides-desktop" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors inline-flex items-center gap-1">
+                        Guides
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="mega-menu">
+                        <div class="mega-menu-grid" style="grid-template-columns: repeat(2, 1fr);">
+                            <div class="mega-menu-col">
+                                <h3>Guides</h3>
+                                <a href="/cadre-vs-non-cadre/">Cadre vs Non-cadre</a>
+                                <a href="/prime-brut-en-net/">Prime brut en net</a>
+                                <a href="/salaire-brut-net-interim/">Salaire intérim</a>
+                                <a href="/comparateur-salaire-net-par-pays/">Comparateur par pays</a>
+                            </div>
+                            <div class="mega-menu-col">
+                                <h3>Conversions populaires</h3>
+                                <a href="/1500-euros-net-en-brut/">1 500 € net en brut</a>
+                                <a href="/1900-euros-net-en-brut/">1 900 € net en brut</a>
+                                <a href="/3300-euros-net-en-brut/">3 300 € net en brut</a>
+                                <a href="/4400-euros-net-en-brut/">4 400 € net en brut</a>
+                                <a href="/5000-euros-net-en-brut/">5 000 € net en brut</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/simulateur-impot-sur-le-revenu/" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Simulateur Impôts</a>
                 <a href="/mission/" class="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">Notre Mission</a>
             </nav>
             <div class="flex items-center gap-3">
@@ -53,8 +78,27 @@
                 </button>
             </div>
         </div>
-        <div id="mobile-nav" class="mobile-nav">
-            <div class="mobile-nav-main"><a href="/">Calcul Brut Net</a><a href="/simulateur-impot-sur-le-revenu/">Simulateur Impots</a><a href="/mission/">Notre Mission</a></div>
+                <div id="mobile-nav" class="mobile-nav">
+            <div class="mobile-nav-main"><a href="/">Calcul Brut Net</a><a href="/simulateur-impot-sur-le-revenu/">Simulateur Impôts</a><a href="/mission/">Notre Mission</a></div>
+            <div class="mobile-nav-section">
+                <h3>Guides</h3>
+                <div class="mobile-nav-links">
+                    <a href="/cadre-vs-non-cadre/">Cadre vs Non-cadre</a>
+                    <a href="/prime-brut-en-net/">Prime brut en net</a>
+                    <a href="/salaire-brut-net-interim/">Salaire intérim</a>
+                    <a href="/comparateur-salaire-net-par-pays/">Comparateur par pays</a>
+                </div>
+            </div>
+            <div class="mobile-nav-section">
+                <h3>Conversions populaires</h3>
+                <div class="mobile-nav-links">
+                    <a href="/1500-euros-net-en-brut/">1 500 € net en brut</a>
+                    <a href="/1900-euros-net-en-brut/">1 900 € net en brut</a>
+                    <a href="/3300-euros-net-en-brut/">3 300 € net en brut</a>
+                    <a href="/4400-euros-net-en-brut/">4 400 € net en brut</a>
+                    <a href="/5000-euros-net-en-brut/">5 000 € net en brut</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -96,10 +140,11 @@
             <p class="text-xs text-slate-500">&#169; 2026 SalaireBrutNet. Données à titre indicatif.</p>
             <div class="flex flex-wrap gap-4 justify-center">
                 <a href="/" class="text-xs text-slate-500 hover:text-slate-900">Calculateur</a>
+                <a href="/simulateur-impot-sur-le-revenu/" class="text-xs text-slate-500 hover:text-slate-900">Simulateur Impôts</a>
+                <a href="/cadre-vs-non-cadre/" class="text-xs text-slate-500 hover:text-slate-900">Cadre vs Non-cadre</a>
                 <a href="/mentions-legales/" class="text-xs text-slate-500 hover:text-slate-900">Mentions légales</a>
                 <a href="/a-propos/" class="text-xs text-slate-500 hover:text-slate-900">À propos</a>
                 <a href="/mission/" class="text-xs text-slate-500 hover:text-slate-900">Notre Mission</a>
-                <a href="/cadre-vs-non-cadre/" class="text-xs text-slate-500 hover:text-slate-900">Cadre vs Non-cadre</a>
             </div>
         </div>
     </footer>
